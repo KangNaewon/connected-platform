@@ -34,22 +34,29 @@
 
 본 시스템에서 제공하는 주요 기능은 다음과 같다:
 
-1. 🌟 *미쉐린 가이드 레스토랑 정보 제공*<br><br>
-2. 🔍 *키워드 기반 레스토랑 추천*<br><br>
-3. 📝 *키워드 중심 레스토랑 검색*<br><br>
-4. 🎥 *레스토랑 관련 영상 컨텐츠 제공*<br><br>
-5. 📌 *찜목록 및 방문 기록 관리 기능*<br><br>
-6. 🎯 *사용자 데이터 기반 맞춤형 추천*<br><br>
-7. 👤 *사용자 프로필 및 다중 사용자 지원*<br><br>
-8. 🔒 *로그인을 통한 데이터 동기화*<br><br>
+1. *미쉐린 가이드 레스토랑 정보 제공*<br><br>
+2. *키워드 기반 레스토랑 추천*<br><br>
+3. *키워드 중심 레스토랑 검색*<br><br>
+4. *레스토랑 관련 영상 컨텐츠 제공*<br><br>
+5. *찜목록 및 방문 기록 관리 기능*<br><br>
+6. *사용자 데이터 기반 맞춤형 추천*<br><br>
+7. *사용자 프로필 및 다중 사용자 지원*<br><br>
+8. *로그인을 통한 데이터 동기화*<br><br>
 
 상세한 기능 요구사항은 [2. Architectural Drivers](#2-architectural-drivers)에서 확인할 수 있다.
 
 </div>
 
 ### 1.3. 개발 환경 (Development Environment)
+**OS** : Linux, MacOS<br>
+**IDE** : Visual Studio Code<br>
+**Framework** : EnactJS, Express.js, mongoose, mongoDB<br>
+**Language** : JavaScript<br>
+**Version Control** : Git, GitHub<br>
+**Platform** : LG StandbyMe
 
 ## 2. Architectural Drivers
+이 절에서는 개발 과제의 유스케이스 다이어그램, 기능 요구사항, 비기능 요구사항을 기술한다.
 ### 2.1. 유스케이스 다이어그램 (Use Case Diagram)
 ### 2.2. 기능 요구사항 (Functional Requirements)
 ### 2.3. 비기능 요구사항 (Non-Functional Requirements)
