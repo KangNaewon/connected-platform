@@ -1,11 +1,11 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" version="24.8.3">
   <diagram name="페이지-1" id="tYAYw7bZhUkZVnhBotZr">
-    <mxGraphModel dx="2963" dy="1629" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2390" dy="1300" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="xM9EX0mC2QQyahu_kBzQ-100" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="111" y="10" width="839" height="1250" as="geometry" />
+          <mxGeometry x="111" y="10" width="839" height="1330" as="geometry" />
         </mxCell>
         <mxCell id="xM9EX0mC2QQyahu_kBzQ-1" value="레스토랑 검색" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="510" y="130" width="130" height="60" as="geometry" />
@@ -73,6 +73,9 @@
         </mxCell>
         <mxCell id="xM9EX0mC2QQyahu_kBzQ-8" value="로그인" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="510" y="1040" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xM9EX0mC2QQyahu_kBzQ-102" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="xM9EX0mC2QQyahu_kBzQ-9" target="xM9EX0mC2QQyahu_kBzQ-101">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="xM9EX0mC2QQyahu_kBzQ-9" value="사용자 프로필 전환" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="231" y="1171" width="130" height="60" as="geometry" />
@@ -165,6 +168,21 @@
         </mxCell>
         <mxCell id="xM9EX0mC2QQyahu_kBzQ-96" value="프로필 별 정보 불러오기" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="500" y="1171" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xM9EX0mC2QQyahu_kBzQ-101" value="프로필 정보 관리" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="1260" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xM9EX0mC2QQyahu_kBzQ-107" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=none;endFill=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="xM9EX0mC2QQyahu_kBzQ-103" target="xM9EX0mC2QQyahu_kBzQ-101">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xM9EX0mC2QQyahu_kBzQ-103" value="프로필 정보 추가" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="750" y="1169" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xM9EX0mC2QQyahu_kBzQ-106" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=none;endFill=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="xM9EX0mC2QQyahu_kBzQ-104" target="xM9EX0mC2QQyahu_kBzQ-101">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xM9EX0mC2QQyahu_kBzQ-104" value="프로필 정보 제거" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="750" y="1260" width="150" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
