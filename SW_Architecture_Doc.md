@@ -69,10 +69,9 @@
 
 ### 2.3. 비기능 요구사항 (Non-Functional Requirements)
 
-## 3. Arthitectural Overview
-### 3.1. 시스템 구조도 (System Context)
-### 3.2. Static Perspective
-### 3.2. Dynamic Perspective
+## 3. Arthitecture Overview
+### 3.1. Frontend architecture
+### 3.2. Backend architecture
 
 ## 4. Data Design
-### 4.1. Database Schema
+### 4.1. Database Schema/Data model
