@@ -9,7 +9,7 @@
 - [2. Architectural Drivers](#2-architectural-drivers)
     - [2.1. 유스케이스 다이어그램 (Use Case Diagram)](#21-유스케이스-다이어그램-use-case-diagram)
     - [2.2. 기능 요구사항 (Functional Requirements)](#22-기능-요구사항-functional-requirements)
-    - [2.3. 비기능 요구사항 (Non-Functional Requirements)](#23-비기능-요구사항-non-functional-requirements)
+    <!-- - [2.3. 비기능 요구사항 (Non-Functional Requirements)](#23-비기능-요구사항-non-functional-requirements) -->
 - [3. Architectural Overview](#3-arthitectural-overview)
     - [3.1. 시스템 구조도 (System Context)](#31-시스템-구조도-system-context)
     - [3.2. Static Perspective](#32-static-perspective)
@@ -67,11 +67,11 @@
 | FR09 | 사용자 프로필 전환 | <ol><li>사용자가 프로필 전환 기능을 통해 동일한 기기에서 여러 사용자 프로필 간의 빠른 전환이 가능하다.</li><br><li>프로필 전환 시 각 사용자에 대한 관심 목록, 방문 기록, 선호도 설정 등 개인화된 데이터를 불러온다.</li><br><li>어플리케이션은 각 프로필에 맞춘 UI와 추천 목록을 제공한다.</li></ol><br>  | Mandatory  |
 | FR10 | 실시간 시스템 자원현황 시각화 | <ol><li>애플리케이션 내에서 현재 시스템 자원의 상태를 실시간으로 시각화하여 제공한다.</li><br><li>시각화되는 자원 정보는 CPU 사용량, 메모리 사용량 등을 포함하며, 시스템 성능을 모니터링할 수 있다.</li><br><li>시스템 자원 현황은 그래프 또는 차트 형태로 제공되며, 임베디드 환경 상에서의 시스템 활용 정보를 제공한다.</li></ol><br>  | Mandatory  |
 
-### 2.3. 비기능 요구사항 (Non-Functional Requirements)
+<!-- ### 2.3. 비기능 요구사항 (Non-Functional Requirements) -->
 
 ## 3. Arthitecture Overview
-### 3.1. Frontend architecture
-### 3.2. Backend architecture
+### 3.1. Frontend Architecture
+### 3.2. Backend Architecture
 
 ## 4. Data Design
 ### 4.1. Database Schema/Data model
