@@ -11,9 +11,8 @@
     - [2.2. 기능 요구사항 (Functional Requirements)](#22-기능-요구사항-functional-requirements)
     <!-- - [2.3. 비기능 요구사항 (Non-Functional Requirements)](#23-비기능-요구사항-non-functional-requirements) -->
 - [3. Architectural Overview](#3-arthitectural-overview)
-    - [3.1. 시스템 구조도 (System Context)](#31-시스템-구조도-system-context)
-    - [3.2. Static Perspective](#32-static-perspective)
-    - [3.2. Dynamic Perspective](#32-dynamic-perspective)
+    - [3.1. Frontend Architecture](#31-frontend-architecture)
+    - [3.2. Backend Architecture](#32-backend-architecture)
 - [4. Data Design](#4-data-design)
     - [4.1. Database Schema](#41-database-schema)
 
