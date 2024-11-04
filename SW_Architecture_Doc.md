@@ -49,7 +49,7 @@
 ## 2. Architectural Drivers
 이 절에서는 개발 과제의 유스케이스 다이어그램, 기능 요구사항, 비기능 요구사항을 기술한다.
 ### 2.1. 유스케이스 다이어그램 (Use Case Diagram)
-<img src="./usecase_diagram/usecase_diagram.png" width="80%" />
+<img src="./resource/usecase_diagram.png" width="80%" />
 
 ### 2.2. 기능 요구사항 (Functional Requirements)
 
@@ -69,8 +69,11 @@
 <!-- ### 2.3. 비기능 요구사항 (Non-Functional Requirements) -->
 
 ## 3. Arthitecture Overview
-### 3.1. Frontend Architecture
-### 3.2. Backend Architecture
+q### 3.1. 시스템 컨텍스트 (System Context)
+본 절에서는 App의 system context에 대해 기술한다.
+
+
+
 
 ## 4. Data Design
 ### 4.1. Database Schema/Data model
