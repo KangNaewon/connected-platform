@@ -71,7 +71,7 @@
 ## 3. Arthitecture Overview
 ### 3.1. 시스템 컨텍스트 (System Context)
 본 절에서는 App의 system context에 대해 기술한다.
-<img src="./resource/system_context_diagram.png" width="80%" />
+<img src="./resource/system_context_diagram.png" width="60%" />
 
 ### 3.2. Static View
 <img src="./resource/component_diagram.png" width="80%" />
