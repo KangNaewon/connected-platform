@@ -75,7 +75,7 @@
 <img src="./resource/system_context_diagram.png" width="60%" />
 
 ### 3.2. Static View
-<img src="./resource/component_diagram.png" width="80%" />
+<img src="./resource/component_diagram.png" width="90%" />
 
 
 ## 4. Data Design
