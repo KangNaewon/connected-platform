@@ -69,10 +69,12 @@
 <!-- ### 2.3. 비기능 요구사항 (Non-Functional Requirements) -->
 
 ## 3. Arthitecture Overview
-q### 3.1. 시스템 컨텍스트 (System Context)
+### 3.1. 시스템 컨텍스트 (System Context)
 본 절에서는 App의 system context에 대해 기술한다.
+<img src="./resource/system_context_diagram.png" width="80%" />
 
-
+### 3.2. Static View
+<img src="./resource/context_diagram.png" width="80%" />
 
 
 ## 4. Data Design
