@@ -77,10 +77,9 @@
 ### 3.2. Static View
 <img src="./resource/component_diagram.png" width="90%" />
 
-## 4. Data Design
-### 4.1 Database Schema
-<img src="./resource/erd_diagram.png" width = 60%" />
+
 
 
 ## 4. Data Design
 ### 4.1. Database Schema/Data model
+<img src="./resource/erd_diagram.png" width = "60%" />
