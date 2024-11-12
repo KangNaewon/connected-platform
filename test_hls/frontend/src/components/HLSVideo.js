@@ -7,6 +7,7 @@ const HLSVideo = (props) => {
 	const hlsRef = useRef(null);
 
 	useEffect(() => {
+		console.log(props.src)
 		if (Hls.isSupported()) {
 			const video = videoRef.current;
 			const hls = new Hls();

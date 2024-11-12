@@ -13,3 +13,11 @@ dist
 # misc
 .DS_Store
 npm-debug.log
+
+# video files except test video
+**/*.mp4
+**/*.ts
+**/*.m3u8
+!**/test_video.mp4
+!**/test_video.ts
+!**/test_video.m3u8

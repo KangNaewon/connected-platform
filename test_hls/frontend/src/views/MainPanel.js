@@ -9,7 +9,7 @@ const MainPanel = kind({
 	render: (props) => (
 		<Panel {...props}>
 			<Header title="HLS Video" type="compact" />
-			<HLSVideo src="https://cdn-vos-ppp-01.vos360.video/Content/HLS_HLSCLEAR/Live/channel(PPP-LL-2HLS)/index.m3u8" />
+			<HLSVideo src="http://localhost:6060/videos/test/index.m3u8" />
 		</Panel>
 	)
 });
