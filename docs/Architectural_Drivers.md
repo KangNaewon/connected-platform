@@ -41,9 +41,6 @@ Michelin in TV 시스템은 사용자가 미쉐린 가이드에 등재된 레스
 
 ![system context diagram](../resource/system_context_diagram.png)
 
-![component_diagram](../resource/component_diagram.png)
-
-
 
 ## 3. 요구사항
 
