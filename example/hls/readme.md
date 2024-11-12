@@ -1,5 +1,5 @@
 ## Usage
-1. Install the package
+1. Install packages
 ```bash
 npm install @ffmpeg-installer/ffmpeg fluent-ffmpeg cors express hls-server hls.js 
 ```
@@ -9,7 +9,7 @@ npm install @ffmpeg-installer/ffmpeg fluent-ffmpeg cors express hls-server hls.j
 cd backend
 node server.js
 ```
-- &How to add a new video?*
+- *How to add a new video?*
 
     a. If you want to add a new video, make a directory named as same as the video's name in the `backend/videos` directory and put the video file in it.
 
