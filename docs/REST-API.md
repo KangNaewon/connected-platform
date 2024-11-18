@@ -2,7 +2,7 @@
 
 ### 1. 키워드 기반 레스토랑 추천목록 가져오기
 
-키워드 기반 레스토랑 추천목록 가져오기는 backend 서버의 데이터베이스에 저장되어 있는 레스토랑의 id, name, rating, city, img를 가져오는 API입니다.
+키워드 기반 레스토랑 추천목록 가져오기는 backend 서버의 데이터베이스에 저장되어 있는 레스토랑의 id, restaurant_name, rating, city, img를 가져오는 API입니다.
 
 웹 애플리케이션의 메인 화면에서 frontend에서 backend 서버의 키워드 기반 레스토랑 추천목록 가져오기 API를 호출하면 데이터베이스에 저장된 레스토랑 중 랜덤하게 선택한 키워드를 기반으로 분류된 레스토랑들의 목록을 응답합니다.
 
@@ -27,7 +27,40 @@
 
 ---
 
+### 2. 레스토랑 상세 정보 가져오기
 
+레스토랑 상세 정보 가져오기는 backend 서버의 데이터베이스에 저장되어 있는 레스토랑의 restaurant_name, location, rating, type, phone, price를 가져오는 API입니다.
+
+웹 애플리케이션에서 하나의 레스토랑을 선택하여 frontend에서 backend 서버의 레스토랑 상세 정보 가져오기 API를 호출하면 데이터베이스에 저장된 해당 레스토랑의 상세 정보를 응답합니다.
+
+#### Request
+
+| ID     | URL                        | HOST                        | METHOD |
+| ------ | -------------------------- | --------------------------- | ------ |
+|        | /restaurants/:restaurant_id|                             | GET    |
+
+---
+
+#### Parameter
+
+| Name | Type   | Description                      | Required |
+| ---- | ------ | -------------------------------- | -------- |
+| restaurant_id | String | 사용자가 요청한 restaurant의 Object id | TRUE     |
+
+---
+
+#### Response
+
+| Name            | Type     | Description                     |
+| --------------- | -------- | ------------------------------  |
+| restaurant_name | String   | restaurant의 이름                |
+| location        | String   | restaurant의 상세 주소            |
+| rating          | String   | restaurant의 미슐랭 등급            |
+| type            | String   | restaurant의 종류               |
+| phone            | String   | restaurant의 전화번호          |
+| price            | String   | restaurant의 가격대          |
+
+---
 
 object id와 content_info 가져오기는 backend 서버의 데이터베이스에 저장되어 있는 품질 정보 세션의 object id와 content_info를 가져오는 API입니다.
 
