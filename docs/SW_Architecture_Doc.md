@@ -95,29 +95,9 @@
 - **기능**:
   - MongoDB를 사용하여 레스토랑 정보, 사용자 정보, 방문 기록, 선호도 데이터 등을 저장.
 
-## 3. Dynamic Perspective
+### 3. Dynamic Perspective
 
-### 3.1 State Diagram
-<img src="./images/state.png" width="600" height="400"/>
-
--   로그인 이전 상태에서 **Login** 을 통해 로그인 이후 상태로 변경할 수 있다. 이 때, 서버에서 **Login** 에서 입력받은 id값이 등록되어 있어야 로그인 상태로 변경될 수 있다. 등록되지 않은 id인 경우 로그인에 실패한다.
--   로그인 이후 상태에서는 **Logout**을 통해 로그인 이전 상태가 된다.
-
-### 3.2 Sequence Diagram
-
-
-<img src="./images/rr_system.png" width="500" height="700"/>
-
-사용자의 요청에 따라 서버와 통신을 필요로하는 경우 수행되는 동작이다. 
--   main_thread는 가장먼저 콜백함수를 등록하는 **init**을 수행한다.
--   main_thread에서 **send_to_server**를 통해 server에 필요한 정보를 요청하고, **g_cond_wait**을 통해 콜백함수에서 풀어주기를 기다린다.
--   **receive_from_server**를 통해 recv_thread가 server로부터 오는 데이터를  수신하고, **recv_response**를 호출한다.
--   **recv_response**는 수신한 데이터를 파싱하고, 필요한 정보를 콜백함수에 전달한다.
--   **callback_function**은 모듈 별 해야할 동작을 수행하고 **g_cond_signal**을 통해 main_thread에 걸려있던 **g_cond_wait**을 해제한다.
--   recv_thread는 다시 server로부터 오는 데이터 수신을 기다리고, main_thread는 이후 동작을 수행한다.
-
-
-<!-->
+<!--
 ### 3.3 Module
 
 본 문서에서 모듈은 사용자에게 제공되는 기능을 수행하는 단위를 의미한다. 해당 문서에서는 총 8개의 모듈을 포함한다. 이는 [3.1 State Diagram](#31-state-diagram) 의 function과 일대일 대응된다. 
