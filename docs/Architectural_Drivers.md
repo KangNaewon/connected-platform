@@ -47,7 +47,7 @@
 - 시스템은 webOS 기반의 TV에서 동작하며, 사용자는 터치 인터페이스 및 리모컨을 통해 시스템을 제어할 수 있다.
 
 ### 2.2. 시스템 컨텍스트 (System Context)
-![system context diagram](../resource/system_context_diagram.png)
+![system context diagram](./resource/system_context_diagram.png)
 
 **User**
 - 클라이언트 프로그램을 사용하는 사용자를 의미한다. 사용자는 클라이언트 프로그램에서 제공하는 인터페이스를 통해 지원하는 기능을 사용할 수 있다.

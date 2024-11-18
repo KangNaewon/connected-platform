@@ -3,77 +3,97 @@
 - [목차](#목차)
 - [1. System Context](#1-system-context)
 - [2. Static Perspective](#2-static-perspective)
-- [3. Dynamic Perspective](#3-dynamic-perspective)
-  - [3.1 State Diagram](#31-state-diagram)
-  - [3.2 Sequence Diagram](#32-sequence-diagram)
-  - [3.3 Module](#33-module)
 
-
+---
 
 ## 1. System Context
 
-<img src="./images/system_context2.png" width="500" height="300"/>
+<img src="./resource/system_context_diagram.png" width="500" height="300"/>
+
+### 주요 구성 요소
 
 **User**
+- 애플리케이션을 사용하는 최종 사용자.
+- 레스토랑 검색, 추천, 정보 조회와 같은 기능을 사용할 수 있다.
 
-클라이언트 프로그램을 사용하는 사용자를 의미한다. 사용자는 클라이언트 프로그램에서 제공하는 인터페이스를 통해 지원하는 기능을 사용할 수 있다.
+**Frontend**
+- 사용자의 요청을 처리하고 인터페이스를 통해 데이터를 표시하는 시스템.
+- 사용자의 요청에 따라 Backend 서버와 상호작용하여 필요한 데이터를 요청하거나 전송한다.
 
-**Client**
+**Backend**
+- Frontend에서 요청한 데이터를 처리하고, 데이터베이스와의 상호작용을 통해 필요한 정보를 제공한다.
+- 주요 역할:
+  - 레스토랑 데이터 처리
+  - 사용자 선호도 및 방문 기록 관리
+  - 추천 데이터 생성 및 제공
 
- 클라이언트 프로그램의 주 기능은 사용자 별 미디어의 이어보기 기능을 지원하는 것이다. 이어보기 기능을 위해 이전에 재생한 미디어 기록 정보를 요청하거나 재생한 미디어 기록 정보를 갱신하기 위해 서버와 소켓을 통해 상호작용한다. 
-
-
-**Server**
-
-클라이언트 프로그램에서 요청하는 정보를 제공하기 위한 서버이다. 사용자 정보와 미디어 정보를 데이터베이스에 저장하여 관리하는 주체이다.
-
-
-_사용자 정보 : ID, Name, Age, Sex_
-
-_미디어 정보 : file name, file size_
-
-_사용자 별 미디어 정보 : last play time_
+---
 
 ## 2. Static Perspective
 
-<img src="./images/static_diagram.png" width="500" height="500"/>
+<img src="./resource/component_diagram.png" width="1000"/>
 
-**interface**
+### 주요 모듈
 
--   _to_server(): account, playback에서 서버로 데이터를 전송하기 위한 함수이다. account, playback에서 받은 정보를 인터페이스 규격에 맞는 구조로 합쳐서 전송하게 된다.
--   receive_from_server(): 별도의 수신 쓰레드로 동작한다. 데이터가 수신이 되면 recv_response를 호출한다.
--   recv_response(): 인자로 들어온 버퍼에서 cmd값에 따라 account, playback의 콜백함수를 호출한다.
-- install_callbacks(): account, playback에서 callback 함수를 등록하기 위한 함수이다.
+#### **Frontend**
+- **기능**:
+  - 사용자의 요청에 따라 Backend와 통신하고 결과를 화면에 표시.
+  - 메인 페이지, 레스토랑 상세 페이지, 관심 목록, 방문 기록, 사용자 페이지, 프로필 전환, 시스템 자원 현황 등 다양한 UI를 제공.
+- **하위 컴포넌트**:
+  - `main page`: 검색 및 추천 레스토랑 목록을 표시.
+  - `restaurant page`: 특정 레스토랑의 상세 정보를 제공.
+  - `interest`: 관심 목록 레스토랑 조회 및 관리.
+  - `visit history`: 사용자의 방문 기록 조회 및 관리.
+  - `profile switch`: 사용자 프로필을 전환할 수 있는 기능 제공.
+  - `media player`: 레스토랑 관련 미디어 콘텐츠 재생.
+  - `system resource`: 시스템 자원 상태를 시각화.
 
-**media_list**
+#### **restaurant API**
+- **기능**:
+  - 특정 키워드나 조건에 따라 레스토랑 데이터를 검색 및 조회.
+  - 데이터베이스와 상호작용하여 레스토랑 목록, 상세 정보 등을 제공.
 
--   print_playlist(): 로컬에 존재하는 특정 위치의 파일 목록을 출력한다.
--   meida_name_choice(): 파일 목록을 출력하고, 출력된 파일 목록에서 번호를 입력받아 파일경로/파일이름을 반환한다.
+- **인터페이스**:
+  - `search`: 특정 키워드나 조건에 따라 레스토랑 데이터를 검색 및 반환.
+  - `get_info`: 특정 레스토랑의 상세 정보를 반환.
 
-**account**
+#### **recommendation API**
+- **기능**:
+  - 사용자 선호도 기반 맞춤형 레스토랑 추천 데이터 생성.
+  - 키워드 기반 레스토랑 추천 데이터 생성.
+- **인터페이스**:
+  - `get_recommendation`: 사용자 선호도 기반 맞춤형 레스토랑 추천 데이터를 반환.
+  - `get_keyword_recommendation`: 키워드 기반 레스토랑 추천 데이터를 반환.
 
--   register_user(): 사용자 정보를 입력하고, 서버로부터 ID를 발급받는다.
--   login(): ID를 입력하고, 로그인 성공여부를 수신한다. 승인되면 로그인 후 상태로 변경된다.
--   request_userinfo(): 서버로 사용자 정보를 요청한다. 
--   request_recent_list(): 서버로 사용자의 최근 재생 목록을 요청한다.
--   request_popular_list(): 서버로 인기 미디어 목록을 요청한다.
--   logout(): 로그아웃 상태로 변경한다.
--   get_user_state(): main에서 로그인 이전, 로그인 이후 상태를 판단하기 위해 user_state를 반환하는 함수이다.
--  get_user_id(): 로그인 이후에 playback에서 서버에 사용자에 따른 정보를 요청하기 위해 id를 필요로하는 경우에 user_id를 반환하는 함수이다.
+#### **media API**
+- **기능**:
+  - 레스토랑 관련 미디어 콘텐츠(사진, 동영상 등)의 스트리밍 제공.
+  - 미디어 콘텐츠 재생 기록 저장.
+- **인터페이스**:
+  - `stream`: 미디어 콘텐츠 스트리밍 제공.
+  - `save_playback_history`: 미디어 콘텐츠 재생 기록 저장.
+  - `get_playback_history`: 미디어 콘텐츠 재생 기록 조회.
 
-**playback**
+#### **user data API**
+- **기능**:
+  - 사용자 정보 및 데이터를 관리.
+  - 관심 목록, 방문 기록 등 사용자와 관련된 데이터를 반환.
+- **인터페이스**:
+  - `get_profile_list` : 사용자 프로필 목록을 반환.
+  - `get_user_info`: 사용자 정보를 반환.
+  - `get_interest_list`: 사용자의 관심 목록을 반환.
+  - `get_visit_history`: 사용자의 방문 기록을 반환.
 
--   playback_media(): 서버로부터 재생을 원하는 미디어의 이전 기록을 받아와 해당 위치에서 미디어를 재생한다. 재생이 끝나면 최종 재생위치를 서버로 전송해 갱신을 요청한다.
--   재생창에서 GUI를 통해 재생상태를 제어할 수 있다.
+#### **login API**
+- **기능**:
+  - 사용자 로그인 및 인증.
+  - 사용자 세션을 관리하여 데이터 접근 제어.
+- **인터페이스**:
+  - `login`: 사용자 로그인 및 인증.
 
-**discover**
-
--   is_playable(): 파일이 재생가능한 미디어인지 확인한다.
--   print_media_info(): 해당 미디어의 정보를 출력한다.
-
-**main**
-
--   connect_to_server(): 서버와 소켓통신으로 연결하기 위한 함수이다. 연결된 소켓의 파일디스크립션을 반환한다.
+#### **database**
+- **기능**:
+  - MongoDB를 사용하여 레스토랑 정보, 사용자 정보, 방문 기록, 선호도 데이터 등을 저장.
 
 ## 3. Dynamic Perspective
 
@@ -97,7 +117,7 @@ _사용자 별 미디어 정보 : last play time_
 -   recv_thread는 다시 server로부터 오는 데이터 수신을 기다리고, main_thread는 이후 동작을 수행한다.
 
 
-
+<!-->
 ### 3.3 Module
 
 본 문서에서 모듈은 사용자에게 제공되는 기능을 수행하는 단위를 의미한다. 해당 문서에서는 총 8개의 모듈을 포함한다. 이는 [3.1 State Diagram](#31-state-diagram) 의 function과 일대일 대응된다. 
@@ -155,3 +175,5 @@ _사용자 별 미디어 정보 : last play time_
 
 8. Logout
 -  로그인 이후 상태에서 로그인 이전 상태로 변경한다.
+
+-->

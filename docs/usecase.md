@@ -2,7 +2,7 @@
 
 ## Use Case 다이어그램
 
-![use case diagram](../resource/usecase_diagram.png)
+![use case diagram](./resource/usecase_diagram.png)
 
 ## 1. 레스토랑 검색
 
