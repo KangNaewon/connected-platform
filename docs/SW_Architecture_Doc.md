@@ -97,63 +97,86 @@
 
 ### 3. Dynamic Perspective
 
-<!--
-### 3.3 Module
+#### 3.1. State Diagram
 
-본 문서에서 모듈은 사용자에게 제공되는 기능을 수행하는 단위를 의미한다. 해당 문서에서는 총 8개의 모듈을 포함한다. 이는 [3.1 State Diagram](#31-state-diagram) 의 function과 일대일 대응된다. 
-모든 기능은 사용자의 요청으로부터 시작한다.
+<img src="./resource/state_diagram.png"/>
 
+<br>
+
+- 로그인 이전 상태에서 `Login`을 통해 로그인 이후 상태로 변경할 수 있다. 이 때, 서버에서 `Login`에서 입력받은 ID값이 등록되어 있어야 로그인 상태로 변경될 수 있다. 등록되지 않은 id인 경우 로그인에 실패한다.
+- 로그인 이후 `Switch Profile Page`로 이동하며, 프로필을 선택하여 Main Page`로 이동할 수 있다.
+- `Main Page`에서는 추천된 레스토랑의 목록을 확인할 수 있으며, `Search`,`System System Resource` 등의 기능을 제공한다. 또한, `Restaurant Page` 및 `MyPage`로 이동할 수 있다.
+- `Restaurant Page`에서는 특정 레스토랑의 상세 정보를 확인할 수 있으며, `Select Media`를 통해 미디어 콘텐츠를 선택하고 재생할 수 있다.
+- `MyPage`에서는 사용자의 관심 목록 및 방문 기록을 확인할 수 있으며, `Profile Switch`를 통해 사용자 프로필을 전환할 수 있다. 또한, `Logout`을 통해 로그아웃 상태로 변경할 수 있다.
+
+#### 3.2. Sequence Diagram
+
+#### 3.3. Module
+
+본 문서에서 모듈은 사용자에게 제공되는 기능을 수행하는 단위를 의미한다. 해당 문서에서는 총 19개의 모듈을 포함한다. 이는 [3.1 State Diagram](#31-state-diagram) 의 function과 일대일 대응된다.
+
+##### Before Login
 
 1. Register
--  사용자 정보를 입력받아 서버로부터 ID를 발급받는 기능
--  사용자 정보의 포맷을 검증하고, 서버로 요청한다.
--  서버로부터 수신한 정보는 recv_thread에서 수행되는 callback 함수에서 사용자에게 출력한다.
+- 사용자 정보를 입력받아 서버로부터 ID를 발급받는 기능
+- 사용자 정보의 포맷을 검증하고, 서버로 요청한다.
 
-<img src="./images/register_process.png" width="600" height="450"/>
+2. Login
+- ID를 입력받아 서버에 등록되어 있는 ID인 경우 로그인 이후 상태로 변경하는 기능
+- 사용자 정보의 포맷을 검증하고, 서버로 요청한다.
 
-2. Print userinfo
--  서버에 저장된 사용자의 정보를 요청 및 수신하고, 출력하는 기능
--  서버로부터 수신한 정보는 recv_thread에서 수행되는 callback 함수에서 사용자에게 출력한다.  
+###### After Login
 
-<img src="./images/request_userinfo.png" width="600" height="350"/>
+1. Switch Profile
+- 사용자 프로필을 전환할 수 있는 기능 제공
+- 로컬에 저장된 사용자 프로필 목록을 조회하고, 선택한 프로필로 전환한다.
 
-3. Print recent list
--  서버에 저장된 사용자의 최근 재생 목록을 요청 및 수신하고, 출력하는 기능
--  서버로부터 수신한 정보는 recv_thread에서 수행되는 callback 함수에서 사용자에게 출력한다.  
+2. Show Restaurant List
+- 레스토랑 목록을 조회하는 기능
+- 서버로부터 레스토랑 추천 목록을 요청하고, 사용자에게 출력한다.
 
+3. Search
+- 특정 키워드나 조건에 따라 레스토랑 데이터를 검색하는 기능
+- 사용자로부터 검색 키워드를 입력받고, 서버로 검색 요청을 전송한다.
+- 서버로부터 수신한 정보는 실시간으로 사용자에게 출력한다.
 
-<img src="./images/activity_print_recentlist.png" width="600" height="450"/>
+4. Show System Resource
+- 시스템 자원 상태를 시각화하는 기능
+- WebOS로부터 시스템 자원 상태를 수신하고, 사용자에게 출력한다.
 
-4. Print popular list
--  서버에 저장된 모든 사용자의 데이터를 바탕으로 산출한 인기 목록을 요청 및 수신하고, 출력하는 기능
--  성별을 옵션으로 입력받아 인기 목록을 요청한다.
--  서버로부터 수신한 정보는 recv_thread에서 수행되는 callback 함수에서 사용자에게 출력한다.  
+5. Enter MyPage
+- 사용자의 관심 목록 및 방문 기록을 조회하는 기능
+- 서버로부터 사용자의 관심 목록 및 방문 기록을 요청하여 로컬에 저장한다.
 
+6. Enter Restaurant Page
+- 특정 레스토랑의 상세 정보를 조회하는 기능
+- 사용자가 선택한 레스토랑의 상세 정보와 미디어 콘텐츠 목록을 서버로부터 요청하여 local에 저장한다.
 
-<img src="./images/activity_print_popularlist.png" width="600" height="450"/>
+7. Show Restaurant Info
+- 특정 레스토랑의 상세 정보를 출력하는 기능
+- 로컬에 저장된 특정 레스토랑의 상세 정보를 사용자에게 출력한다.
 
+8. Select Media
+- 레스토랑 관련 미디어 콘텐츠를 선택하고 재생하는 기능
+- 사용자가 선택한 미디어 콘텐츠의 index파일을 서버로부터 요청하여 local에 저장한다.
 
-5. Login
--  ID를 입력받아 서버에 등록되어 있는 ID인 경우 로그인 이후 상태로 변경하는 기능
--  ID가 양의 정수인지 검증하고, 서버로 요청한다. 
+9. Show Interest List
+- 사용자의 관심 목록을 조회하는 기능
+- 로컬에 저장된 사용자의 관심 목록을 사용자에게 출력한다.
 
-<img src="./images/activity_login.png" width="600" height="450"/>
+10. Modify Interest List
+- 사용자의 관심 목록을 수정하는 기능
+- 사용자로부터 추가/삭제할 레스토랑의 index를 입력받아 서버로 전송한다.
+- 변경된 관심 목록은 서버로부터 다시 요청하여 로컬에 저장하며, 사용자에게 출력한다.
 
+11. Show Visit History
+- 사용자의 방문 기록을 조회하는 기능
+- 로컬에 저장된 사용자의 방문 기록을 사용자에게 출력한다.
 
-6. Playback media
--  재생을 원하는 미디어 이름을 입력받고, 미디어를 재생하는 기능
--  미디어가 재생가능한지 확인 후, 서버로 마지막 재생 위치를 요청한다.
--  미디어가 종료될 시, 서버로 마지막 재생 위치 갱신을 요청한다.
+12. Modify Visit History
+- 사용자의 방문 기록을 수정하는 기능
+- 사용자로부터 추가/삭제할 레스토랑의 index를 입력받아 서버로 전송한다.
+- 변경된 방문 기록은 서버로부터 다시 요청하여 로컬에 저장하며, 사용자에게 출력한다.
 
-<img src="./images/activity_playback.png" width="600" height="450"/>
-
-
-
-7. Print media info
--  원하는 미디어의 메타데이터를 출력하는 기능
--  서버와의 통신을 필요로하지 않으므로 main_thread에서만 사용자와 상호작용한다.
-
-8. Logout
--  로그인 이후 상태에서 로그인 이전 상태로 변경한다.
-
--->
+13. Logout
+- 로그인 이후 상태에서 로그인 이전 상태로 변경하는 기능
