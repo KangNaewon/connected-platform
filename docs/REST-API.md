@@ -18,9 +18,10 @@
 
 | Name            | Type     | Description                     |
 | --------------- | -------- | ------------------------------  |
+| restaurants     | Object[] | restaurant_id, restaurant_name, rating, city, img  |
 | restaurant_id   | ObjectId | restaurant document의 ObjectId  |
 | restaurant_name | String   | restaurant의 이름                |
-| rating          | String   | restaurant의 미슐랭 등급            |
+| rating          | Number   | restaurant의 미슐랭 등급            |
 | city            | String   | restaurant이 위치한 도시          |
 | img             | String   | restaurant의 이미지 주소          |
  
