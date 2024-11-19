@@ -57,7 +57,7 @@
 | --------------- | -------- | ------------------------------  |
 | restaurant_name | String   | restaurant의 이름                |
 | location        | String   | restaurant의 상세 주소            |
-| rating          | String   | restaurant의 미슐랭 등급            |
+| rating          | Number   | restaurant의 미슐랭 등급            |
 | type            | String   | restaurant의 종류               |
 | phone            | String   | restaurant의 전화번호          |
 | price            | String   | restaurant의 가격대          |
