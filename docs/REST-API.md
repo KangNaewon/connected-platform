@@ -18,6 +18,7 @@
 
 | Name            | Type     | Description                     |
 | --------------- | -------- | ------------------------------  |
+| type            | String   | restaurant의 종류                |
 | restaurants     | Object[] | restaurant_id, restaurant_name, rating, city, img  |
 | restaurant_id   | ObjectId | restaurant document의 ObjectId  |
 | restaurant_name | String   | restaurant의 이름                |
