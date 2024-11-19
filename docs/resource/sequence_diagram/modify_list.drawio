@@ -1,0 +1,56 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" version="24.8.6">
+  <diagram name="페이지-1" id="HObtC5oPkVgvrynjsulA">
+    <mxGraphModel dx="1434" dy="780" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="wxyRs1XQf3C56py_Pnzs-2" value="Client" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="299" y="50" width="230" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="dVgs3Lkw4lIHIIyf5qNj-53" value="Request modify list" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="wxyRs1XQf3C56py_Pnzs-2">
+          <mxGeometry x="40" y="90" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="dVgs3Lkw4lIHIIyf5qNj-56" value="Show modified list" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="wxyRs1XQf3C56py_Pnzs-2">
+          <mxGeometry x="40" y="170" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="wxyRs1XQf3C56py_Pnzs-3" value="User" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="559" y="50" width="230" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="dVgs3Lkw4lIHIIyf5qNj-45" value="Request Modify" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="wxyRs1XQf3C56py_Pnzs-3">
+          <mxGeometry x="40" y="90" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="dVgs3Lkw4lIHIIyf5qNj-49" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="wxyRs1XQf3C56py_Pnzs-3" source="dVgs3Lkw4lIHIIyf5qNj-48" target="dVgs3Lkw4lIHIIyf5qNj-45">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dVgs3Lkw4lIHIIyf5qNj-48" value="" style="ellipse;fillColor=strokeColor;html=1;" vertex="1" parent="wxyRs1XQf3C56py_Pnzs-3">
+          <mxGeometry x="100" y="30" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dVgs3Lkw4lIHIIyf5qNj-51" value="Server" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="50" width="230" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="dVgs3Lkw4lIHIIyf5qNj-52" value="Modify list" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="dVgs3Lkw4lIHIIyf5qNj-51">
+          <mxGeometry x="40" y="90" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="dVgs3Lkw4lIHIIyf5qNj-54" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="dVgs3Lkw4lIHIIyf5qNj-45" target="dVgs3Lkw4lIHIIyf5qNj-53">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dVgs3Lkw4lIHIIyf5qNj-55" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="dVgs3Lkw4lIHIIyf5qNj-53" target="dVgs3Lkw4lIHIIyf5qNj-52">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dVgs3Lkw4lIHIIyf5qNj-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="dVgs3Lkw4lIHIIyf5qNj-52" target="dVgs3Lkw4lIHIIyf5qNj-56">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="145" y="245" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dVgs3Lkw4lIHIIyf5qNj-58" value="" style="ellipse;html=1;shape=endState;fillColor=strokeColor;" vertex="1" parent="1">
+          <mxGeometry x="400" y="300" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dVgs3Lkw4lIHIIyf5qNj-59" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="dVgs3Lkw4lIHIIyf5qNj-56" target="dVgs3Lkw4lIHIIyf5qNj-58">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
