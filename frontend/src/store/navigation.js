@@ -2,6 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
   path: '/login',
+  data: null,
 };
 
 const navigationSlice = createSlice({
@@ -9,7 +10,8 @@ const navigationSlice = createSlice({
   initialState,
   reducers: {
     navigate: (state, action) => {
-      state.path = action.payload; 
+      state.path = action.payload.path;
+      state.data = action.payload.data; 
     },
   },
 });

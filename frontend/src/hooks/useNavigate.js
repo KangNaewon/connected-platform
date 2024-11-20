@@ -6,8 +6,8 @@ import { navigate } from '../store/navigation';
 export const useNavigate = () => {
   const dispatch = useDispatch();
 
-  return useCallback((path) => {
-    debugLog('NAVIGATE[I]', {path});
-    dispatch(navigate(path));
+  return useCallback((path, data=null) => {
+    debugLog('NAVIGATE[I]', { path, data });
+    dispatch(navigate({ path, data }));
   }, [dispatch]);
 };
