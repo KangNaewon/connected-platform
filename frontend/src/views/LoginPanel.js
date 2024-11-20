@@ -2,8 +2,6 @@ import { Panel, Header } from '@enact/sandstone/Panels';
 import Button from '@enact/ui/Button';
 import InputField from '@enact/sandstone/Input';
 import {Cell, Column, Row} from '@enact/ui/Layout';
-import Layout from '@enact/ui/Layout';
-import ri from '@enact/ui/resolution';
 import { useState } from 'react';
 
 import { useLogin, useSignUP } from "../hooks/useLogin";
@@ -18,7 +16,6 @@ const LoginPanel = () => {
     <Panel>
       <Header title={PROJECT_NAME} centered={true} />
       <Column align='center'>
-        <Cell shrink={true} size="20%" />
         <Cell size={180}>
           <InputField
             type="text"
@@ -49,7 +46,6 @@ const LoginPanel = () => {
             </Cell>
           </Row>
         </Cell>
-        <Cell shrink={true} size="20%" />
       </Column>
     </Panel>
   )
