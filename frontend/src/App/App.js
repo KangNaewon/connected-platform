@@ -1,26 +1,38 @@
-import kind from '@enact/core/kind';
+import {useState} from 'react';
 import ThemeDecorator from '@enact/sandstone/ThemeDecorator';
 import Panels from '@enact/sandstone/Panels';
+import Main from '../views/Main';
+import {useBackHandler, useCloseHandler, useDocumentEvent} from './AppState';
+import {isDevServe} from '../libs/utils';
 
-import MainPanel from '../views/MainPanel';
+/* istanbul ignore next*/
+if (isDevServe()) {
+	window.webOSSystem = {
+		highContrast: 'off',
+		close: () => {},
+		platformBack: () => {},
+		PmLogString: () => {},
+		screenOrientation: 'landscape',
+		setWindowOrientation: () => {}
+	};
+}
 
-import css from './App.module.less';
+const App = props => {
+	const [skinVariants, setSkinVariants] = useState({highContrast: false});
+	const handleBack = useBackHandler();
+	const handleClose = useCloseHandler();
+	useDocumentEvent(setSkinVariants);
 
-const App = kind({
-	name: 'App',
-
-	styles: {
-		css,
-		className: 'app'
-	},
-
-	render: (props) => (
-		<div {...props}>
-			<Panels>
-				<MainPanel />
-			</Panels>
-		</div>
-	)
-});
+	return (
+		<Panels
+			{...props}
+			skinVariants={skinVariants}
+			onBack={handleBack}
+			onClose={handleClose}
+		>
+			<Main />
+		</Panels>
+	);
+};
 
 export default ThemeDecorator(App);
