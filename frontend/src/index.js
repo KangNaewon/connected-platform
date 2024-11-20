@@ -1,10 +1,17 @@
 /* global ENACT_PACK_ISOMORPHIC */
 import {createRoot, hydrateRoot} from 'react-dom/client';
+import React from 'react';
+import { Provider } from 'react-redux';
+import store from './store/index';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const appElement = (<App />);
+const appElement = (
+	<Provider store={store}>
+		<App />
+	</Provider>
+);
 
 // In a browser environment, render instead of exporting
 if (typeof window !== 'undefined') {

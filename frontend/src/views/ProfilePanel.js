@@ -2,7 +2,7 @@ import Button from '@enact/sandstone/Button';
 import kind from '@enact/core/kind';
 import {Panel, Header} from '@enact/sandstone/Panels';
 
-const SelectPanel = kind({
+const ProfilePanel = kind({
 	name: 'MainPanel',
 
 	render: (props) => (
@@ -13,4 +13,4 @@ const SelectPanel = kind({
 	)
 });
 
-export default SelectPanel;
+export default ProfilePanel;
