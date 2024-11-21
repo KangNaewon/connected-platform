@@ -1,6 +1,6 @@
 import {useDispatch} from 'react-redux';
 import {setUser} from '../store/user';
-import {login} from '../request/api';
+import {login, signUp} from '../request/api';
 import * as PATH from '../constants/path';
 import {useNavigate} from './useNavigate';
 import debugLog from '../libs/log';

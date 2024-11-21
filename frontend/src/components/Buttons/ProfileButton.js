@@ -16,6 +16,7 @@ const ProfileButton = kind({
   },
 
   render: ({onClick, children, bgColor}) => {
+    console.log(children);
     <Button icon="profile" color={bgColor} onClick={onClick}>
       {children}
     </Button>
