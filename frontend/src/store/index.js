@@ -1,10 +1,10 @@
 import {configureStore} from '@reduxjs/toolkit';
-import navigationReducer from './navigation';
+import navigatorReducer from './navigator';
 import userReducer from './user';
 
 const store = configureStore({
   reducer: {
-    navigation: navigationReducer,
+    navigator: navigatorReducer,
     user: userReducer,
   },
 });

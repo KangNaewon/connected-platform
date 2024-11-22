@@ -4,28 +4,23 @@ import Button from '@enact/sandstone/Button';
 import { useSelector } from 'react-redux';
 
 import {PROJECT_NAME} from '../constants/strings';
-import {useNavigate} from '../hooks/useNavigate';
-import * as PATH from '../constants/path';
+import {useSelectProfile} from './LoginState';
 
 const SelectPanel = () => {
-	const { data: profiles } = useSelector((state) => state.navigation);
-	const navigate = useNavigate();
-
-	const handleSelect = (profile) => {
-		console.log("handle select")
-	};
+	const profiles = useSelector((state) => state.user.profiles);
+	const {handleSelectProfile} = useSelectProfile();
 
 	return (
 		<Panel>
 			<Header title={PROJECT_NAME} centered={true} />
 			<Column align='center'>
 				{profiles.map((profile) => (
-					<Cell key={profile.key} size={180}>
+					<Cell key={profile.profile_id} size={180}>
 						<Button 
 							key={profile.key}
 							icon='profile'
 							color='red'
-							onClick={handleSelect}
+							onClick={() => handleSelectProfile(profile.id)}
 						>
 							{profile.name}
 						</Button>

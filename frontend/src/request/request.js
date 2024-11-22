@@ -1,19 +1,7 @@
 import axios from 'axios';
 import { isDevServe } from '../libs/utils';
-import { login } from '../../__mocks__/api/login';
-import { signup } from '../../__mocks__/api/signup';
-
-const mockRequest = async (url, method, parameters) => {
-  const routes = {
-    '/api/login': login,
-    '/api/signup': signup,
-    // Add more mock routes as needed
-  }
-  const mockHandler = routes[url];
-  if (mockHandler) {
-    return await mockHandler(url, method, parameters);
-  }
-}
+import debugLog from '../libs/log';
+import { mockAPI } from '../../__mocks__/api/request';
 
 /**
  * General API request function
@@ -23,24 +11,26 @@ const mockRequest = async (url, method, parameters) => {
  * @param {Object} parameters - Request payload or query parameters
  * @returns {Promise<Object>} - API response
  */
-
 export const request = async (url, method = 'GET', parameters = {}) => {
-  // Use mock data in development
-  if (isDevServe()) {
-    return await mockRequest(url, method, parameters);
-  }
-
-  // Use axios for real API requests
   try {
+    if (isDevServe()) {
+      debugLog("Mock Request[I]]", {url, method, parameters});
+      return await mockAPI(url, method, parameters);
+    }
+
     const config = {
       url,
       method,
       data: method === 'POST' ? parameters : null,
       params: method === 'GET' ? parameters : null,
     };
+
+    debugLog("API Request[I]", config);
     const response = await axios(config);
     return response.data;
+
   } catch (error) {
+    debugLog("API Request[E]", {error});
     throw error.response?.data || error.message;
   }
 };

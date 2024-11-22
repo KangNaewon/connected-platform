@@ -1,5 +1,0 @@
-export const main = "main"
-export const login = "login"
-export const select_profile = "select_profile"
-export const profile = "profile"
-export const video = "video"

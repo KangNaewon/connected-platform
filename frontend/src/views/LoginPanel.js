@@ -4,14 +4,14 @@ import InputField from '@enact/sandstone/Input';
 import {Cell, Column, Row} from '@enact/ui/Layout';
 import { useState } from 'react';
 
-import { useLogin, useSignUP } from "../hooks/useLogin";
+import { useLogin, useSignUP } from './LoginState';
 import {PROJECT_NAME} from '../constants/strings';
 
 const LoginPanel = () => {
   const [state, setState] = useState({id: '', password: ''});
-  const {handleLogin, loginError} = useLogin();
-  const {handleSignUp, signUpError} = useSignUP();
-
+  const {handleLogin} = useLogin();
+  const {handleSignUp} = useSignUP();
+  
   return (
     <Panel>
       <Header title={PROJECT_NAME} centered={true} />

@@ -3,6 +3,8 @@ import * as domEvents from '../constants/domEvents';
 import debugLog from '../libs/log';
 import {closeApp, isTVBrowser, reload} from '../libs/utils';
 import { useProcStat } from '../hooks/useTVData';
+import { useSelector, useDispatch } from 'react-redux';
+import { navigate, selectPanelName } from '../store/navigator';
 
 const useVisibleChangeHandler = () =>
 	useCallback(() => {
@@ -24,10 +26,29 @@ const useHighContrastChangeHandler = setSkinVariants =>
 		});
 	}, [setSkinVariants]);
 
-export const useBackHandler = () =>
-	useCallback(() => {
-		debugLog('BACK[I]', {});
-	}, []);
+export const useBackHandler = () => {
+	const dispatch = useDispatch();
+	const panelName = useSelector(selectPanelName);
+
+	return useCallback(() => {
+		debugLog('BACK[I]', {currentPanel: panelName});
+
+		let backPanel = null;
+		switch (backPanel) {
+			case 'select':
+				backPanel = 'login'; break;
+			case 'profile':
+			case 'video':
+				backPanel = 'main'; break;
+			default:
+				backPanel = null;
+		}
+
+		if (backPanel) {
+			dispatch(navigate({panelName: backPanel}));
+		}
+	}, [dispatch, panelName])
+}
 
 export const useCloseHandler = () =>
 	useCallback(() => {

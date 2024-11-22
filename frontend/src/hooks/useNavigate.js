@@ -1,13 +1,13 @@
 import { useDispatch } from "react-redux";
 import debugLog from "../libs/log";
 import { useCallback } from "react";
-import { navigate } from '../store/navigation';
+import { navigate } from '../store/navigator';
 
 export const useNavigate = () => {
   const dispatch = useDispatch();
 
-  return useCallback((path, data=null) => {
-    debugLog('NAVIGATE[I]', { path, data });
-    dispatch(navigate({ path, data }));
+  return useCallback((panelName, panelData=null) => {
+    debugLog('NAVIGATE[I]', { panelName, panelData });
+    dispatch(navigate({ panelName, panelData }));
   }, [dispatch]);
 };
