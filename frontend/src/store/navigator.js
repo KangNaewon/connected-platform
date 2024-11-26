@@ -5,11 +5,11 @@ const mapper = {
   select: 1,
   main: 2,
   profile: 3,
-  video:4,
+  info:4,
 }
 
 const initialState = {
-  panelName: 'login',
+  panelName: 'info',
   panelData: null,
 };
 
