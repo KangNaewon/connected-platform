@@ -6,6 +6,7 @@ const mapper = {
   main: 2,
   profile: 3,
   video:4,
+  dashboard: 5,
 }
 
 const initialState = {
