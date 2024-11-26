@@ -8,7 +8,6 @@ import MainPanel from '../views/MainPanel';
 import LoginPanel from '../views/LoginPanel';
 import ProfilePanel from '../views/ProfilePanel';
 import SelectPanel from '../views/SelectPanel';
-import VideoPanel from '../views/VideoPanel';
 import DashBoard from '../views/DashBoard';
 import InfoPanel from '../views/InfoPanel';
 
@@ -48,9 +47,8 @@ const AppBase = (props) => {
 			<SelectPanel/>
 			<MainPanel/>
 			<ProfilePanel/>
-			<VideoPanel/>
-			<DashBoard/>
 			<InfoPanel/>
+			<DashBoard/>
 		</Panels>
 	);
 };

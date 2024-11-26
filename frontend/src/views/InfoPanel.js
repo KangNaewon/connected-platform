@@ -12,7 +12,7 @@ const InfoPanel = () => {
         <HLSVideo src="https://standbyme.tv/hls/standbyme.m3u8" />
         <Content />
       </div>
-    </Panel >
+    </Panel>
   )
 }
 
