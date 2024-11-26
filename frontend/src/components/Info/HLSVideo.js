@@ -1,6 +1,6 @@
-import {useRef, useEffect, useCallback} from 'react';
-import Button from '@enact/sandstone/Button'
+import { useRef, useEffect, useCallback } from 'react';
 import Hls from 'hls.js';
+import ri from '@enact/ui/resolution';
 
 const HLSVideo = (props) => {
 	const videoRef = useRef(null);
@@ -17,8 +17,8 @@ const HLSVideo = (props) => {
 			hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
 				console.log(
 					'>>>>>>>>>>>> manifest loaded, found ' +
-						data.levels.length +
-						' quality level'
+					data.levels.length +
+					' quality level'
 				);
 				video.play();
 			});
@@ -27,10 +27,27 @@ const HLSVideo = (props) => {
 	}, [props.src]);
 
 	return (
-		<>
-			<video ref={videoRef} controls height={720} />
-		</>
+		<div style={styles.videoContainer}>
+			<video ref={videoRef} controls style={styles.video} />
+		</div >
 	);
 };
+
+const styles = {
+	videoContainer: {
+		position: 'relative',
+		width: '100%',
+		paddingTop: '56.25%', // 16:9 비율을 위한 9/16 * 100
+		backgroundColor: 'White', // 비디오 로딩 전 배경색
+		overflow: 'hidden',
+	},
+	video: {
+		position: 'absolute',
+		top: '0',
+		left: '0',
+		width: '100%',
+		height: '100%',
+	},
+}
 
 export default HLSVideo;

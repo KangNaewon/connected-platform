@@ -6,12 +6,6 @@ import ri from '@enact/ui/resolution';
 
 import test_img from './test_img.png';
 
-/* Todo: Test on Standbyme TV and adjust the size */
-const imgSize = {
-  width: ri.scale(300),
-  height: ri.scale(300),
-}
-
 /**
  * Each Item in the list should be an object with the following properties:
  * src: the image or thumbnail to display
@@ -20,27 +14,42 @@ const imgSize = {
  */
 const sampleItem = [
   {
+    id: 1,
     src: test_img,
     title: 'Video 1',
     label: '3:20',
   },
   {
+    id: 2,
     src: test_img,
     title: 'Video 2',
     label: '3:20',
   },
   {
+    id: 3,
     src: test_img,
     title: 'Video 3',
+    label: '3:20',
+  },
+  {
+    id: 4,
+    src: test_img,
+    title: 'Video 4',
     label: '3:20',
   },
 ]
 
 const VideoList = () => {
-  console.log(imgSize.width, imgSize.height)
+  /* Todo: Test on Standbyme TV and adjust the size */
+  const imgSize = {
+    width: ri.scale(600),
+    height: ri.scale(600),
+  }
+
   const renderItem = useCallback(({ index }) => (
 
     <ImageItem
+      id={sampleItem[index].id}
       label={sampleItem[index].label}
       src={test_img}
       style={imgSize}
