@@ -6,12 +6,9 @@ import ri from '@enact/ui/resolution';
 
 import test_img from './test_img.png';
 
-/**
- * To get the 16:9 ratio, we need to set the ratio of the image to 6:5,
- * since the width and height for label and caption are reserved.
- */
+/* Todo: Test on Standbyme TV and adjust the size */
 const imgSize = {
-  width: ri.scale(360),
+  width: ri.scale(300),
   height: ri.scale(300),
 }
 
@@ -58,9 +55,6 @@ const VideoList = () => {
       itemSize={imgSize.height}
       dataSize={sampleItem.length}
       itemRenderer={renderItem}
-      style={{
-        width: imgSize.width,
-      }}
 
     />
   )
