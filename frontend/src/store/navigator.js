@@ -7,10 +7,11 @@ const mapper = {
   profile: 3,
   video:4,
   dashboard: 5,
+  info:4,
 }
 
 const initialState = {
-  panelName: 'login',
+  panelName: 'info',
   panelData: null,
 };
 
