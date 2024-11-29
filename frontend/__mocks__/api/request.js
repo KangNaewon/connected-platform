@@ -60,13 +60,13 @@ export const mockAPI = async (url, method, parameters = {}) => {
         ],
       },
     },
-    'user/login': {
+    '/user/login': {
       POST: {
         access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA4IiwiaWQiOiJrbjEyNSIsImFjdGl2ZV9wcm9maWxlX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA5IiwiaWF0IjoxNzMyNzEyMjEyLCJleHAiOjE3MzI3MTU4MTJ9.DUxJJWEnSmRn-H7c6Cya3pWg2T1fWwxfpQ-gZFXVNco",
         refresh_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA4IiwiaWQiOiJrbjEyNSIsImFjdGl2ZV9wcm9maWxlX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA5IiwiaWF0IjoxNzMyNzEyMjEyLCJleHAiOjE3MzMzMTcwMTJ9.H28WhNjGmDvY1XYqBKjvOXqRtngxZHvi7FcA-XYn2RQ"
       }
     },
-    'user/signup': {
+    '/user/signup': {
       POST: {
         message: "User signed in successfully",
       }

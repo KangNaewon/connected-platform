@@ -1,14 +1,13 @@
 /* global ENACT_PACK_ISOMORPHIC */
 import {createRoot, hydrateRoot} from 'react-dom/client';
 import React from 'react';
-import { Provider } from 'react-redux';
-import store from './store/index';
+import { Provider } from './views/Context';
 
-import App from './App';
+import App from './App/App';
 import reportWebVitals from './reportWebVitals';
 
 const appElement = (
-	<Provider store={store}>
+	<Provider>
 		<App />
 	</Provider>
 );

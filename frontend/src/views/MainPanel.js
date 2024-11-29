@@ -24,8 +24,8 @@ const MainPanel = () => {
 				title={PROJECT_NAME}
 				slotAfter={(
 					<>
-					 	<Button icon='search' size='small' onClick={()=>console.log("search")}/>
-						<Button icon='profile' size='small' onClick={()=>console.log("profile")}/>
+					 	<Button icon='search' size='small' onClick={()=> console.log("search")}/>
+						<Button icon='profile' size='small' onClick={()=> navigate("profile")}/>
 						<Button icon='board' size='small' onClick={() => navigate('dashboard')}/>
 						<Switch onClick={toggle} />
 					</>
