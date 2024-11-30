@@ -4,7 +4,8 @@ import {Panels} from '@enact/sandstone/Panels';
 import {useBackHandler, useCloseHandler, useDocumentEvent} from './AppState';
 import {isDevServe} from '../libs/utils';
 
-import { PanelContext, PanelName } from '../views/Context';
+import { PanelContext } from '../context/PanelContext';
+import { panelName } from '../constants/panelName';
 import debugLog from '../libs/log';
 
 import LoginPanel from '../views/LoginPanel';
@@ -31,17 +32,17 @@ const PanelMapper = item => {
   debugLog('PanelMapper[I]', item);
 
   switch (name) {
-    case PanelName.login: 
+    case panelName.login: 
       return <LoginPanel key={name} />;
-    case PanelName.select:
+    case panelName.select:
       return <SelectPanel key={name} data={data} />;
-    case PanelName.main:
+    case panelName.main:
       return <MainPanel key={name} data={data} />;
-    case PanelName.profile:
+    case panelName.profile:
       return <ProfilePanel key={name} data={data} />;
-    case PanelName.info:
+    case panelName.info:
       return <InfoPanel key={name} data={data} />;
-    case PanelName.dashboard:
+    case panelName.dashboard:
       return <DashBoard key={name} data={data} />;
     default:
       return <LoginPanel key={name}/>;

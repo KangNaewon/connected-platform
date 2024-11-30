@@ -2,40 +2,14 @@ import { Panel, Header } from '@enact/sandstone/Panels';
 import Button from '@enact/ui/Button';
 import InputField from '@enact/sandstone/Input';
 import {Cell, Column, Row} from '@enact/ui/Layout';
-import { useCallback, useContext, useState, useEffect } from 'react';
-import { PanelName, PanelContext } from './Context';
+import { useState } from 'react';
 import {PROJECT_NAME} from '../constants/strings';
-import { request } from '../request/request';
-import debugLog from '../libs/log';
+import useLoginHandler from '../handlers/Login/LoginHandler';
 
 const LoginPanel = () => {
   const [state, setState] = useState({id: '', password: ''});
-  const {setPanelData} = useContext(PanelContext);
 
-  const handleLogin = useCallback( async () => {
-    try {
-      const response = await request('/user/login', 'POST', {
-        id: state.id,
-        password: state.password,
-      })
-      
-      debugLog('LoginResult[I]', response);
-
-      setPanelData(prev => [
-        ...prev,
-        {
-          name: PanelName.select,
-          data: {
-            access_token: response.access_token,
-            refresh_token: response.refresh_token,
-            userId: state.id,
-          }
-        }
-      ]);
-    } catch (error) {
-      console.error('fuck you!', error);
-    }
-  }, [setPanelData, state]);  
+  const handleLoginClick = useLoginHandler(state);
 
   return (
     <Panel>
@@ -63,12 +37,12 @@ const LoginPanel = () => {
             </Cell>
             <Row align='center'>
               <Cell align='start'>
-                <Button onClick={handleLogin}>
+                <Button onClick={handleLoginClick}>
                   Login
                 </Button>
               </Cell>
               <Cell align='end'>
-                <Button onClick={handleLogin}>
+                <Button onClick={handleLoginClick}>
                   Sign Up
                 </Button>
               </Cell>

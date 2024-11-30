@@ -77,8 +77,8 @@ export const mockAPI = async (url, method, parameters = {}) => {
       },
     },
     'user/refresh-token': {
-        access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA4IiwiaWQiOiJrbjEyNSIsImFjdGl2ZV9wcm9maWxlX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA5IiwiaWF0IjoxNzMyNzEyMjEyLCJleHAiOjE3MzI3MTU4MTJ9.DUxJJWEnSmRn-H7c6Cya3pWg2T1fWwxfpQ-gZFXVNco",
-        refresh_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA4IiwiaWQiOiJrbjEyNSIsImFjdGl2ZV9wcm9maWxlX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA5IiwiaWF0IjoxNzMyNzEyMjEyLCJleHAiOjE3MzMzMTcwMTJ9.H28WhNjGmDvY1XYqBKjvOXqRtngxZHvi7FcA-XYn2RQ"
+      access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA4IiwiaWQiOiJrbjEyNSIsImFjdGl2ZV9wcm9maWxlX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA5IiwiaWF0IjoxNzMyNzEyMjEyLCJleHAiOjE3MzI3MTU4MTJ9.DUxJJWEnSmRn-H7c6Cya3pWg2T1fWwxfpQ-gZFXVNco",
+      refresh_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA4IiwiaWQiOiJrbjEyNSIsImFjdGl2ZV9wcm9maWxlX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA5IiwiaWF0IjoxNzMyNzEyMjEyLCJleHAiOjE3MzMzMTcwMTJ9.H28WhNjGmDvY1XYqBKjvOXqRtngxZHvi7FcA-XYn2RQ"
     },
     '/user/{user_id}/profile': {
       GET: {
@@ -136,7 +136,7 @@ export const mockAPI = async (url, method, parameters = {}) => {
   for (const path of dynamicPaths) {
     const regex = new RegExp(
       '^' + path.replace(/{[^}]+}/g, '([^/]+)') + '$'
-    ); 
+    ); // {변수명}을 매칭
     const match = url.match(regex);
     if (match && method in response[path]) {
       return response[path][method];
