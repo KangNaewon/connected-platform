@@ -6,6 +6,7 @@ import {PROJECT_NAME} from '../constants/strings';
 import { request } from '../request/request';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import debugLog from '../libs/log';
+import Loading from '../components/Loading/Loading';
 
 const SelectPanel = props => {
 	const {data, ...rest} = props;
@@ -54,10 +55,7 @@ const SelectPanel = props => {
 
 	if (loading) {
 		return (
-			<Panel>
-				<Header title={PROJECT_NAME} centered/>
-				<div>Loading...</div>
-			</Panel>
+			<Loading />
 		);
 	}
 
