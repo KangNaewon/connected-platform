@@ -8,20 +8,6 @@ import {PROJECT_NAME} from '../constants/strings';
 import { request } from '../request/request';
 import debugLog from '../libs/log';
 
-const requestLogin = async(id, password) => {
-  try {
-    const response = await request('/user/login', 'POST', {
-      id: id,
-      password: password,
-    })
-    
-    debugLog('LoginResult[I]', response);
-    return response;
-  } catch (error) {
-    console.error('fuck you');
-  }
-};
-
 const LoginPanel = () => {
   const [state, setState] = useState({id: '', password: ''});
   const {setPanelData} = useContext(PanelContext);

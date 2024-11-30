@@ -133,10 +133,12 @@ export const mockAPI = async (url, method, parameters = {}) => {
 
   // Handle dynamic paths
   const dynamicPaths = Object.keys(response).filter((key) => key.includes('{'));
-
   for (const path of dynamicPaths) {
-    const regex = new RegExp('^' + path.replace(/{[^}]+}/g, '[^/]+') + '$');
-    if (regex.test(url) && method in response[path]) {
+    const regex = new RegExp(
+      '^' + path.replace(/{[^}]+}/g, '([^/]+)') + '$'
+    ); 
+    const match = url.match(regex);
+    if (match && method in response[path]) {
       return response[path][method];
     }
   }

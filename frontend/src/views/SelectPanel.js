@@ -5,24 +5,32 @@ import { PanelContext, PanelName } from './Context';
 import {PROJECT_NAME} from '../constants/strings';
 import { request } from '../request/request';
 import { useCallback, useContext, useEffect, useState } from 'react';
+import debugLog from '../libs/log';
 
 const SelectPanel = props => {
-	const {data} = props.data;
-	const {profiles, setProfiles} = useState();
+	const {data, ...rest} = props;
+	const [profiles, setProfiles] = useState([]);
+	const [loading, setLoading] = useState(true);
 	const {setPanelData} = useContext(PanelContext);
+
+	debugLog('Select[I]', data);
 
 	const fetchProfiles = useCallback(async () => {
 		try {
-			const result = await request('/user/${data.userId}/profile', 'GET', {
+			const result = await request(`/user/${data.userId}/profile`, 'GET', {
 				headers: {
 					Authorization: `Bearer ${data.access_token}`
 				}
 			});
-			setProfiles(result.profiles || []);
+			debugLog('Select[I]: fetched data', result);
+			setProfiles(result.profiles);
+			setLoading(false);
+			debugLog('Select[I]: loaded profiles', profiles);
 		} catch (error) {
-			console.error('Fail to fetch profiles', error);
+			debugLog('Select[E]: fail to load profiles');
+			setLoading(true);
 		};
-	}, [data, setProfiles]);
+	}, [data]);
 
 	useEffect(() => {
 		fetchProfiles();
@@ -44,14 +52,23 @@ const SelectPanel = props => {
 		]);
 	}, [data, profiles, setPanelData]);
 
+	if (loading) {
+		return (
+			<Panel>
+				<Header title={PROJECT_NAME} centered/>
+				<div>Loading...</div>
+			</Panel>
+		);
+	}
+
 	return (
 		<Panel>
 			<Header title={PROJECT_NAME} centered />
 			<Row>
-				<Column>
+				<Column align='center'>
 					{profiles.map(profile => (
 						<Cell key={profile.profile_id}>
-							<Button onClick={handleProfileSelect(profile)}>
+							<Button onClick={() => handleProfileSelect(profile)}>
 								{profile.name}
 							</Button>
 						</Cell>
