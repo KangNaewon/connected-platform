@@ -7,12 +7,14 @@ import { request } from '../request/request';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import debugLog from '../libs/log';
 import Loading from '../components/Loading/Loading';
+import Toast from '../components/Toast/Toast';
 
 const SelectPanel = props => {
 	const {data, ...rest} = props;
 	const [profiles, setProfiles] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const {setPanelData} = useContext(PanelContext);
+	const [showToast, setShowToast] = useState(false);
 
 	debugLog('Select[I]', data);
 
@@ -23,6 +25,7 @@ const SelectPanel = props => {
 					Authorization: `Bearer ${data.access_token}`
 				}
 			});
+			setShowToast(true);
 			debugLog('Select[I]: fetched data', result);
 			setProfiles(result.profiles);
 			setLoading(false);
@@ -73,6 +76,12 @@ const SelectPanel = props => {
 					))}
 				</Column>
 			</Row>
+			{showToast && (
+				<Toast 
+					message="This is test"
+					onClose={() => setShowToast(false)}
+				/>
+			)}
 		</Panel>
 	)
 }
