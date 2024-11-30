@@ -8,6 +8,7 @@ import MediaList from '../components/MediaList/MediaList';
 import Loading from '../components/Loading/Loading';
 import debugLog from '../libs/log';
 import FetchMediaList from '../handlers/Main/FetchMediaList';
+import SearchBar from '../components/SearchBar/SearchBar';
 
 const MainPanel = props => {
 	const {data} = props.data;
@@ -27,7 +28,8 @@ const MainPanel = props => {
 				title={PROJECT_NAME}
 				slotAfter={(
 					<>
-					 	<Button icon='search' size='small' onClick={()=> console.log("search")}/>
+						{showSearch && (<SearchBar setShowSearch={setShowSearch} />)}
+					 	<Button icon='search' size='small' onClick={()=> setShowSearch(true)}/>
 						<Button icon='profile' size='small' onClick={()=> console.log('profile')}/>
 						<Button icon='dashboard1' size='small' onClick={() => console.log('dashboard')}/>
 					</>

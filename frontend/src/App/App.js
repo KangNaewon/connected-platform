@@ -57,8 +57,7 @@ const AppBase = props => {
 	useDocumentEvent(setSkinVariants);
 
 	const {panelData} = useContext(PanelContext);
-	debugLog('APP[I]', panelData);
-	
+
 	return (
 		<Panels
 			{...props}

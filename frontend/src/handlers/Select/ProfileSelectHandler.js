@@ -20,9 +20,7 @@ const ProfileSelectHandler = (userId) => {
   return useCallback(
     async (profiles, profileId) => {
       try {
-        const response = await request(`/profile/switch/${profileId}`, "POST", {}, {
-          token_type: "user"
-        });
+        const response = await request(`/profile/switch/${profileId}`, "POST", {}, 'user');
 
         debugLog("ProfileSelect[I]: switched profile", response);
 

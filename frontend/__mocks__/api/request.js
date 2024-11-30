@@ -40,6 +40,11 @@ export const mockAPI = async (url, method, parameters = {}) => {
         price: '$$$$',
       },
     },
+    '/restaurant/search': {
+      GET: {
+        restaurant_id: 1
+      }
+    },
     '/restaurant': {
       GET: {
         restaurants: [
@@ -90,6 +95,11 @@ export const mockAPI = async (url, method, parameters = {}) => {
     },
 
     /* 미확정 Mocks */
+    '/profile/switch/{profile_id}': {
+      POST: {
+        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA4IiwiaWQiOiJrbjEyNSIsImFjdGl2ZV9wcm9maWxlX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA5IiwiaWF0IjoxNzMyNDU5OTExLCJleHAiOjE3MzI0NjM1MTF9.j31IIV02WPlzmd10KqQ1aWAJxgDBE1_Oszy2RVZ6NHo"
+      },
+    },
     '/profile/{profile_id}': {
       GET: {
         favorites: [
@@ -127,8 +137,11 @@ export const mockAPI = async (url, method, parameters = {}) => {
 
   await new Promise((resolve) => setTimeout(resolve, 500));
 
-  if (response[url] && response[url][method]) {
-    return response[url][method];
+  const queryIdx = url.indexOf('?');
+  const baseUrl = queryIdx > -1 ? url.slice(0, queryIdx) : url;
+
+  if (response[baseUrl] && response[baseUrl][method]) {
+    return response[baseUrl][method];
   }
 
   // Handle dynamic paths
@@ -136,7 +149,7 @@ export const mockAPI = async (url, method, parameters = {}) => {
   for (const path of dynamicPaths) {
     const regex = new RegExp(
       '^' + path.replace(/{[^}]+}/g, '([^/]+)') + '$'
-    ); // {변수명}을 매칭
+    );
     const match = url.match(regex);
     if (match && method in response[path]) {
       return response[path][method];

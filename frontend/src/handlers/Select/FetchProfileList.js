@@ -14,9 +14,7 @@ const useFetchProfileList = (userId) => {
 
   const fetchProfiles = useCallback(async () => {
     try {
-      const result = await request(`/user/${userId}/profile`, "GET", {}, {
-        token_type: 'user'
-      });
+      const result = await request(`/user/${userId}/profile`, "GET", {}, 'user');
 
       debugLog("ProfileList[I]: fetched data", result);
       setProfiles(result.profiles);
