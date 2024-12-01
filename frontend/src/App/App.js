@@ -1,8 +1,8 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import ThemeDecorator from '@enact/sandstone/ThemeDecorator';
-import {Panels} from '@enact/sandstone/Panels';
-import {useBackHandler, useCloseHandler, useDocumentEvent} from './AppState';
-import {isDevServe} from '../libs/utils';
+import { Panels } from '@enact/sandstone/Panels';
+import { useBackHandler, useCloseHandler, useDocumentEvent } from './AppState';
+import { isDevServe } from '../libs/utils';
 
 import MainPanel from '../views/MainPanel';
 import LoginPanel from '../views/LoginPanel';
@@ -18,17 +18,17 @@ import { panelIndex } from '../store/navigator';
 if (isDevServe()) {
 	window.webOSSystem = {
 		highContrast: 'off',
-		close: () => {},
-		platformBack: () => {},
-		PmLogString: () => {},
+		close: () => { },
+		platformBack: () => { },
+		PmLogString: () => { },
 		screenOrientation: 'landscape',
-		setWindowOrientation: () => {}
+		setWindowOrientation: () => { }
 	};
 }
 
 const AppBase = (props) => {
 	/* This is code from enact-template */
-	const [skinVariants, setSkinVariants] = useState({highContrast: false});
+	const [skinVariants, setSkinVariants] = useState({ highContrast: false });
 	const handleBack = useBackHandler();
 	const handleClose = useCloseHandler();
 	useDocumentEvent(setSkinVariants);
@@ -43,12 +43,12 @@ const AppBase = (props) => {
 			onBack={handleBack}
 			onClose={handleClose}
 		>
-			<LoginPanel/>
-			<SelectPanel/>
-			<MainPanel/>
-			<ProfilePanel/>
-			<InfoPanel/>
-			<DashBoard/>
+			<LoginPanel />
+			<SelectPanel />
+			<MainPanel />
+			<ProfilePanel />
+			<InfoPanel restaurant_id={1} />
+			<DashBoard />
 		</Panels>
 	);
 };

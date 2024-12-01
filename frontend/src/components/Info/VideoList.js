@@ -81,7 +81,7 @@ const VideoList = () => {
     <div style={styles.listContainer}>
       <VirtualList
         verticalScrollbar="hidden"
-        itemSize={imgSize.height + 20}
+        itemSize={imgSize.height + 30}
         dataSize={sampleItem.length}
         itemRenderer={renderItem}
       />

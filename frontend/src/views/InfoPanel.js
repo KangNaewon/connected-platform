@@ -5,7 +5,27 @@ import Content from '../components/Info/Content';
 import Scroller from '@enact/sandstone/Scroller';
 import ri from '@enact/ui/resolution';
 
-const InfoPanel = () => {
+import { request } from '../request/request';
+import { useEffect, useState } from 'react';
+
+const InfoPanel = ({ restaurant_id }) => {
+  const [restaurantData, setRestaurantData] = useState(null);
+
+
+  useEffect(() => {
+    const fetchRestaurant = async () => {
+      await request(`/restaurant/${restaurant_id}`, 'GET')
+        .catch((err) => console.error(err))
+        .then((res) => {
+          setRestaurantData(res)
+        });
+    };
+
+    fetchRestaurant();
+  }, [restaurant_id]);
+
+  console.log(restaurantData);
+
   return (
     <Panel>
       <div style={styles.container}>
@@ -13,7 +33,15 @@ const InfoPanel = () => {
           <Scroller>
             <div style={styles.contentsContainer}>
               <HLSVideo src="https://standbyme.tv/hls/standbyme.m3u8" />
-              <Content />
+              {restaurantData &&
+                <Content
+                  name={restaurantData.restaurant_name}
+                  location={restaurantData.location}
+                  description={restaurantData.description}
+                  price={restaurantData.price}
+                  phone={restaurantData.phone}
+                  type={restaurantData.type}
+                />}
             </div>
           </Scroller>
         </div>
