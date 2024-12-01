@@ -6,10 +6,11 @@ const mapper = {
   main: 2,
   profile: 3,
   info:4,
+  dashboard: 5,
 }
 
 const initialState = {
-  panelName: 'info',
+  panelName: 'login',
   panelData: null,
 };
 

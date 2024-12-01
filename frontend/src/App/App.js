@@ -8,6 +8,7 @@ import MainPanel from '../views/MainPanel';
 import LoginPanel from '../views/LoginPanel';
 import ProfilePanel from '../views/ProfilePanel';
 import SelectPanel from '../views/SelectPanel';
+import DashBoard from '../views/DashBoard';
 import InfoPanel from '../views/InfoPanel';
 
 import { useSelector } from 'react-redux';
@@ -47,6 +48,7 @@ const AppBase = (props) => {
 			<MainPanel/>
 			<ProfilePanel/>
 			<InfoPanel/>
+			<DashBoard/>
 		</Panels>
 	);
 };

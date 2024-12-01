@@ -38,7 +38,8 @@ export const useBackHandler = () => {
 			case 'select':
 				backPanel = 'login'; break;
 			case 'profile':
-			case 'video':
+			case 'info':
+			case 'dashboard':
 				backPanel = 'main'; break;
 			default:
 				backPanel = null;

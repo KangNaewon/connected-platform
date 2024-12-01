@@ -40,8 +40,6 @@ export const useProcStat = () => {
 	return value;
 };
 
-
-
 export const useUnitList = () => {
 	const ref = useRef(null);
 	const [value, setValue] = useState({returnValue: false});

@@ -6,11 +6,15 @@ import Button from '@enact/sandstone/Button';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { PROJECT_NAME } from '../constants/strings';
-import MediaList from '../components/MediaList';
+import MediaList from '../components/MediaList/MediaList';
+import { useProcStat } from '../hooks/useTVData';
+import { useNavigate } from '../hooks/useNavigate';
 
 const MainPanel = () => {
 	const restaurants = useSelector((state) => state.user.recommendations);
 	const [showTVStat, setShowTVStat] = useState(false);
+	const procStat = useProcStat();
+	const navigate = useNavigate();
 
 	const toggle = () => setShowTVStat(!showTVStat);
 
@@ -18,11 +22,11 @@ const MainPanel = () => {
 		<Panel>
 			<Header 
 				title={PROJECT_NAME}
-				style={{paddingRight: '50px'}}
 				slotAfter={(
 					<>
 					 	<Button icon='search' size='small' onClick={()=>console.log("search")}/>
 						<Button icon='profile' size='small' onClick={()=>console.log("profile")}/>
+						<Button icon='board' size='small' onClick={() => navigate('dashboard')}/>
 						<Switch onClick={toggle} />
 					</>
 				)}
@@ -46,9 +50,11 @@ const MainPanel = () => {
 						))}
 					</Scroller>
 				</Cell>
-				{showTVStat && (
-					<Cell shrink>
-						hello
+				{showTVStat && procStat.returnValue && (
+					<Cell style={{flexGrow: 1, overflow: 'hidden'}} shrink>
+						<Scroller direction='vertical'>
+							hello
+						</Scroller>
 					</Cell>
 				)}
 			</Row>
