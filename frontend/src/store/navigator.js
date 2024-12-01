@@ -10,7 +10,7 @@ const mapper = {
 }
 
 const initialState = {
-  panelName: 'info',
+  panelName: 'profile',
   panelData: null,
 };
 
