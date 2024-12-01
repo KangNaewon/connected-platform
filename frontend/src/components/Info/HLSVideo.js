@@ -37,9 +37,11 @@ const styles = {
 	videoContainer: {
 		position: 'relative',
 		width: '100%',
-		paddingTop: '56.25%', // 16:9 비율을 위한 9/16 * 100
-		backgroundColor: 'White', // 비디오 로딩 전 배경색
+		paddingTop: '56.25%', // 16:9 비율 유지
 		overflow: 'hidden',
+		borderRadius: ri.scale(20),
+		backgroundColor: '#000',
+		boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
 	},
 	video: {
 		position: 'absolute',
@@ -47,7 +49,9 @@ const styles = {
 		left: '0',
 		width: '100%',
 		height: '100%',
+		borderRadius: ri.scale(20),
 	},
-}
+};
+
 
 export default HLSVideo;
