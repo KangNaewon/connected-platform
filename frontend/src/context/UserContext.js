@@ -1,4 +1,4 @@
-import React, { Children, createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 export const UserContext = createContext(null);
 
@@ -7,6 +7,8 @@ export const UserProvider = props => {
     user_id: '',
     profile_list: [],
     profile_id: null,
+    favorite_list: [],
+    visited_list: [],
   });
 
   const setUserID = (id) => {
@@ -21,6 +23,14 @@ export const UserProvider = props => {
     setUserInfo((prev) => ({...prev, profile_list: profile_list}));
   };
 
+  const setFavoriteList = (favorite_list) => {
+    setUserInfo((prev) => ({...prev, favorite_list: favorite_list}));
+  };
+
+  const setVisitedList = (visited_list) => {
+    setUserInfo((prev) => ({...prev, visited_list: visited_list}));
+  };
+
   return (
     <UserContext.Provider 
       value={{ 
@@ -28,6 +38,8 @@ export const UserProvider = props => {
         setUserID,
         setProfileID,
         setProfileList,
+        setFavoriteList,
+        setVisitedList,
       }}
     >
       {props.children}
