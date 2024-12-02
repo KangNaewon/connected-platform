@@ -1,8 +1,8 @@
-import {useContext, useState} from 'react';
+import {useState, useContext} from 'react';
 import ThemeDecorator from '@enact/sandstone/ThemeDecorator';
-import {Panels} from '@enact/sandstone/Panels';
-import {useBackHandler, useCloseHandler, useDocumentEvent} from './AppState';
-import {isDevServe} from '../libs/utils';
+import { Panels } from '@enact/sandstone/Panels';
+import { useBackHandler, useCloseHandler, useDocumentEvent } from './AppState';
+import { isDevServe } from '../libs/utils';
 
 import { PanelContext } from '../context/PanelContext';
 import { panelName } from '../constants/panelName';
@@ -19,11 +19,11 @@ import DashBoard from '../views/DashBoard';
 if (isDevServe()) {
 	window.webOSSystem = {
 		highContrast: 'off',
-		close: () => {},
-		platformBack: () => {},
-		PmLogString: () => {},
+		close: () => { },
+		platformBack: () => { },
+		PmLogString: () => { },
 		screenOrientation: 'landscape',
-		setWindowOrientation: () => {}
+		setWindowOrientation: () => { }
 	};
 }
 
@@ -51,7 +51,7 @@ const PanelMapper = item => {
 
 const AppBase = props => {
 	/* This is code from enact-template */
-	const [skinVariants, setSkinVariants] = useState({highContrast: false});
+	const [skinVariants, setSkinVariants] = useState({ highContrast: false });
 	const handleBack = useBackHandler();
 	const handleClose = useCloseHandler();
 	useDocumentEvent(setSkinVariants);
