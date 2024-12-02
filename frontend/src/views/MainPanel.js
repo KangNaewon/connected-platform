@@ -1,22 +1,26 @@
 import {Panel, Header} from '@enact/sandstone/Panels';
 import Scroller from '@enact/sandstone/Scroller';
 import {Row, Cell} from '@enact/ui/Layout';
-import Switch from '@enact/sandstone/Switch';
 import Button from '@enact/sandstone/Button';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { PROJECT_NAME } from '../constants/strings';
 import MediaList from '../components/MediaList/MediaList';
-import { useProcStat } from '../hooks/useTVData';
-import { useNavigate } from '../hooks/useNavigate';
+import Loading from '../components/Loading/Loading';
+import debugLog from '../libs/log';
+import FetchMediaList from '../handlers/Main/FetchMediaList';
+import SearchBar from '../components/SearchBar/SearchBar';
 
-const MainPanel = () => {
-	const restaurants = useSelector((state) => state.user.recommendations);
-	const [showTVStat, setShowTVStat] = useState(false);
-	const procStat = useProcStat();
-	const navigate = useNavigate();
+const MainPanel = props => {
+	const {data} = props.data;
+	const {mediaList, loading, error} = FetchMediaList();
+	const [showSearch, setShowSearch] = useState(false);
 
-	const toggle = () => setShowTVStat(!showTVStat);
+	if (loading) return <Loading />;
+	if (error) {
+		debugLog('Main[E]', {error: error});
+	}
+
+	debugLog('Main[I]', mediaList);
 
 	return (
 		<Panel>
@@ -24,17 +28,17 @@ const MainPanel = () => {
 				title={PROJECT_NAME}
 				slotAfter={(
 					<>
-					 	<Button icon='search' size='small' onClick={()=>console.log("search")}/>
-						<Button icon='profile' size='small' onClick={()=>console.log("profile")}/>
-						<Button icon='board' size='small' onClick={() => navigate('dashboard')}/>
-						<Switch onClick={toggle} />
+						{showSearch && (<SearchBar setShowSearch={setShowSearch} />)}
+					 	<Button icon='search' size='small' onClick={()=> setShowSearch(true)}/>
+						<Button icon='profile' size='small' onClick={()=> console.log('profile')}/>
+						<Button icon='dashboard1' size='small' onClick={() => console.log('dashboard')}/>
 					</>
 				)}
 			/>
 			<Row style={{height: '100%'}}>
 				<Cell style={{flexGrow: 1, overflow: 'hidden'}}>
 					<Scroller direction='vertical'>
-						{restaurants.map((category, index) => (
+						{mediaList.map((category, index) => (
 							<MediaList
 								key={index}
 								category={category.type}
@@ -50,13 +54,6 @@ const MainPanel = () => {
 						))}
 					</Scroller>
 				</Cell>
-				{showTVStat && procStat.returnValue && (
-					<Cell style={{flexGrow: 1, overflow: 'hidden'}} shrink>
-						<Scroller direction='vertical'>
-							hello
-						</Scroller>
-					</Cell>
-				)}
 			</Row>
 		</Panel>
 	)

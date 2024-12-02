@@ -1,10 +1,9 @@
-import {useCallback, useEffect} from 'react';
+import {useCallback, useEffect, useContext} from 'react';
 import * as domEvents from '../constants/domEvents';
 import debugLog from '../libs/log';
 import {closeApp, isTVBrowser, reload} from '../libs/utils';
 import { useProcStat } from '../hooks/useTVData';
-import { useSelector, useDispatch } from 'react-redux';
-import { navigate, selectPanelName } from '../store/navigator';
+import {PanelContext} from '../context/PanelContext';
 
 const useVisibleChangeHandler = () =>
 	useCallback(() => {
@@ -27,28 +26,17 @@ const useHighContrastChangeHandler = setSkinVariants =>
 	}, [setSkinVariants]);
 
 export const useBackHandler = () => {
-	const dispatch = useDispatch();
-	const panelName = useSelector(selectPanelName);
+	const {setPanelData} = useContext(PanelContext);
 
 	return useCallback(() => {
-		debugLog('BACK[I]', {currentPanel: panelName});
-
-		let backPanel = null;
-		switch (backPanel) {
-			case 'select':
-				backPanel = 'login'; break;
-			case 'profile':
-			case 'info':
-			case 'dashboard':
-				backPanel = 'main'; break;
-			default:
-				backPanel = null;
-		}
-
-		if (backPanel) {
-			dispatch(navigate({panelName: backPanel}));
-		}
-	}, [dispatch, panelName])
+		debugLog('BACK[I]');
+		setPanelData((prev) => {
+			if (prev.length > 1) {
+				return prev.slice(0, -1);
+			}
+			return prev;
+		})
+	}, [setPanelData])
 }
 
 export const useCloseHandler = () =>
