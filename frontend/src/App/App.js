@@ -1,18 +1,19 @@
-import { useState } from 'react';
+import {useState, useContext} from 'react';
 import ThemeDecorator from '@enact/sandstone/ThemeDecorator';
 import { Panels } from '@enact/sandstone/Panels';
 import { useBackHandler, useCloseHandler, useDocumentEvent } from './AppState';
 import { isDevServe } from '../libs/utils';
 
-import MainPanel from '../views/MainPanel';
-import LoginPanel from '../views/LoginPanel';
-import ProfilePanel from '../views/ProfilePanel';
-import SelectPanel from '../views/SelectPanel';
-import DashBoard from '../views/DashBoard';
-import InfoPanel from '../views/InfoPanel';
+import { PanelContext } from '../context/PanelContext';
+import { panelName } from '../constants/panelName';
+import debugLog from '../libs/log';
 
-import { useSelector } from 'react-redux';
-import { panelIndex } from '../store/navigator';
+import LoginPanel from '../views/LoginPanel';
+import SelectPanel from '../views/SelectPanel';
+import MainPanel from '../views/MainPanel';
+import ProfilePanel from '../views/ProfilePanel';
+import InfoPanel from '../views/InfoPanel';
+import DashBoard from '../views/DashBoard';
 
 /* istanbul ignore next */
 if (isDevServe()) {
@@ -26,29 +27,46 @@ if (isDevServe()) {
 	};
 }
 
-const AppBase = (props) => {
+const PanelMapper = item => {
+  const {name, data} = item;
+  debugLog('PanelMapper[I]', item);
+
+  switch (name) {
+    case panelName.login: 
+      return <LoginPanel key={name} />;
+    case panelName.select:
+      return <SelectPanel key={name} data={data} />;
+    case panelName.main:
+      return <MainPanel key={name} data={data} />;
+    case panelName.profile:
+      return <ProfilePanel key={name} data={data} />;
+    case panelName.info:
+      return <InfoPanel key={name} data={data} />;
+    case panelName.dashboard:
+      return <DashBoard key={name} data={data} />;
+    default:
+      return <LoginPanel key={name}/>;
+  }
+}
+
+const AppBase = props => {
 	/* This is code from enact-template */
 	const [skinVariants, setSkinVariants] = useState({ highContrast: false });
 	const handleBack = useBackHandler();
 	const handleClose = useCloseHandler();
 	useDocumentEvent(setSkinVariants);
 
-	const index = useSelector(panelIndex);
+	const {panelData} = useContext(PanelContext);
 
 	return (
 		<Panels
 			{...props}
-			index={index}
+			index={panelData.length - 1}
 			skinVariants={skinVariants}
 			onBack={handleBack}
 			onClose={handleClose}
 		>
-			<LoginPanel />
-			<SelectPanel />
-			<MainPanel />
-			<ProfilePanel />
-			<InfoPanel restaurant_id={1} />
-			<DashBoard />
+			{panelData.map(PanelMapper)}
 		</Panels>
 	);
 };

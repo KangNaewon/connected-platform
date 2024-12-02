@@ -48,6 +48,11 @@ export const mockAPI = async (url, method, parameters = {}) => {
         ]
       },
     },
+    '/restaurant/search': {
+      GET: {
+        restaurant_id: 1
+      }
+    },
     '/restaurant': {
       GET: {
         restaurants: [
@@ -68,13 +73,13 @@ export const mockAPI = async (url, method, parameters = {}) => {
         ],
       },
     },
-    'user/login': {
+    '/user/login': {
       POST: {
         access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA4IiwiaWQiOiJrbjEyNSIsImFjdGl2ZV9wcm9maWxlX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA5IiwiaWF0IjoxNzMyNzEyMjEyLCJleHAiOjE3MzI3MTU4MTJ9.DUxJJWEnSmRn-H7c6Cya3pWg2T1fWwxfpQ-gZFXVNco",
         refresh_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA4IiwiaWQiOiJrbjEyNSIsImFjdGl2ZV9wcm9maWxlX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA5IiwiaWF0IjoxNzMyNzEyMjEyLCJleHAiOjE3MzMzMTcwMTJ9.H28WhNjGmDvY1XYqBKjvOXqRtngxZHvi7FcA-XYn2RQ"
       }
     },
-    'user/signup': {
+    '/user/signup': {
       POST: {
         message: "User signed in successfully",
       }
@@ -85,8 +90,8 @@ export const mockAPI = async (url, method, parameters = {}) => {
       },
     },
     'user/refresh-token': {
-        access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA4IiwiaWQiOiJrbjEyNSIsImFjdGl2ZV9wcm9maWxlX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA5IiwiaWF0IjoxNzMyNzEyMjEyLCJleHAiOjE3MzI3MTU4MTJ9.DUxJJWEnSmRn-H7c6Cya3pWg2T1fWwxfpQ-gZFXVNco",
-        refresh_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA4IiwiaWQiOiJrbjEyNSIsImFjdGl2ZV9wcm9maWxlX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA5IiwiaWF0IjoxNzMyNzEyMjEyLCJleHAiOjE3MzMzMTcwMTJ9.H28WhNjGmDvY1XYqBKjvOXqRtngxZHvi7FcA-XYn2RQ"
+      access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA4IiwiaWQiOiJrbjEyNSIsImFjdGl2ZV9wcm9maWxlX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA5IiwiaWF0IjoxNzMyNzEyMjEyLCJleHAiOjE3MzI3MTU4MTJ9.DUxJJWEnSmRn-H7c6Cya3pWg2T1fWwxfpQ-gZFXVNco",
+      refresh_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA4IiwiaWQiOiJrbjEyNSIsImFjdGl2ZV9wcm9maWxlX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA5IiwiaWF0IjoxNzMyNzEyMjEyLCJleHAiOjE3MzMzMTcwMTJ9.H28WhNjGmDvY1XYqBKjvOXqRtngxZHvi7FcA-XYn2RQ"
     },
     '/user/{user_id}/profile': {
       GET: {
@@ -98,6 +103,11 @@ export const mockAPI = async (url, method, parameters = {}) => {
     },
 
     /* 미확정 Mocks */
+    '/profile/switch/{profile_id}': {
+      POST: {
+        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA4IiwiaWQiOiJrbjEyNSIsImFjdGl2ZV9wcm9maWxlX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA5IiwiaWF0IjoxNzMyNDU5OTExLCJleHAiOjE3MzI0NjM1MTF9.j31IIV02WPlzmd10KqQ1aWAJxgDBE1_Oszy2RVZ6NHo"
+      },
+    },
     '/profile/{profile_id}': {
       GET: {
         favorites: [
@@ -135,16 +145,21 @@ export const mockAPI = async (url, method, parameters = {}) => {
 
   await new Promise((resolve) => setTimeout(resolve, 500));
 
-  if (response[url] && response[url][method]) {
-    return response[url][method];
+  const queryIdx = url.indexOf('?');
+  const baseUrl = queryIdx > -1 ? url.slice(0, queryIdx) : url;
+
+  if (response[baseUrl] && response[baseUrl][method]) {
+    return response[baseUrl][method];
   }
 
   // Handle dynamic paths
   const dynamicPaths = Object.keys(response).filter((key) => key.includes('{'));
-
   for (const path of dynamicPaths) {
-    const regex = new RegExp('^' + path.replace(/{[^}]+}/g, '[^/]+') + '$');
-    if (regex.test(url) && method in response[path]) {
+    const regex = new RegExp(
+      '^' + path.replace(/{[^}]+}/g, '([^/]+)') + '$'
+    );
+    const match = url.match(regex);
+    if (match && method in response[path]) {
       return response[path][method];
     }
   }

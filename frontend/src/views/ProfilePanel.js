@@ -1,16 +1,72 @@
-import Button from '@enact/sandstone/Button';
-import kind from '@enact/core/kind';
-import {Panel, Header} from '@enact/sandstone/Panels';
+import { Panel, Header } from '@enact/sandstone/Panels';
+import VideoList from '../components/Info/VideoList';
+import HLSVideo from '../components/Info/HLSVideo';
+import Content from '../components/Info/Content';
+import Scroller from '@enact/sandstone/Scroller';
+import ri from '@enact/ui/resolution';
 
-const ProfilePanel = kind({
-	name: 'MainPanel',
+import { request } from '../request/request';
+import { useEffect, useState } from 'react';
 
-	render: (props) => (
-		<Panel {...props}>
-			<Header title="Hello world!" />
-			<Button>Click me</Button>
+const ProfilePanel = () => {
+	return (
+		<Panel>
+			<Header title="프로필" type="compact" style={styles.headerStyle} />
+			< div style={styles.container}>
+				<div style={styles.leftDiv}>
+					<Scroller>
+					</Scroller>
+				</div>
+				<div style={styles.rightDiv}>
+					<Scroller>
+					</Scroller>
+				</div>
+			</div>
 		</Panel>
-	)
-});
+	);
+};
 
-export default ProfilePanel;
+const styles = {
+	container: {
+		display: 'flex',
+		width: '1920px', // 고정된 너비
+		height: '80vh',
+		padding: '20px',
+		backgroundColor: '#f7f7f7',
+		justifyContent: 'space-between', // 좌우 공간 균등 분배
+		borderRadius: ri.scale(10),
+	},
+	leftDiv: {
+		height: '100%',
+		width: '49%', // 너비를 약간 줄여 중앙 공간 확보
+		backgroundColor: '#fff',
+		border: '2px solid rgba(0, 0, 0, 0.3)',
+		borderRadius: ri.scale(10),
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	rightDiv: {
+		height: '100%',
+		width: '49%', // 너비를 약간 줄여 중앙 공간 확보
+		backgroundColor: '#fff',
+		border: '2px solid rgba(0, 0, 0, 0.3)',
+		borderRadius: ri.scale(10),
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	contentsContainer: {
+		margin: 'auto',
+		marginTop: '20px',
+		marginBottom: '50px',
+		width: '95%',
+	},
+	headerStyle: {
+		marginBottom: -ri.scale(50)
+	}
+}
+
+
+
+export default ProfilePanel

@@ -1,32 +1,38 @@
 import {Panel, Header} from '@enact/sandstone/Panels';
-import {Column, Cell} from '@enact/ui/Layout';
+import {Row, Column, Cell} from '@enact/ui/Layout';
 import Button from '@enact/sandstone/Button';
-import { useSelector } from 'react-redux';
-
+import { PanelContext } from '../context/PanelContext';
 import {PROJECT_NAME} from '../constants/strings';
-import {useSelectProfile} from './LoginState';
+import { useContext } from 'react';
+import debugLog from '../libs/log';
+import Loading from '../components/Loading/Loading';
+import useFetchProfileList from '../handlers/Select/FetchProfileList';
+import ProfileSelectHandler from '../handlers/Select/ProfileSelectHandler';
 
-const SelectPanel = () => {
-	const profiles = useSelector((state) => state.user.profiles);
-	const {handleSelectProfile} = useSelectProfile();
+const SelectPanel = props => {
+	const {data, ...rest} = props;
+	const {profiles, loading, error} = useFetchProfileList(data.userId);
+	const handleProfileSelect = ProfileSelectHandler(data.userId);
+
+	if (loading) return <Loading />;
+	if (error) {
+		debugLog('Select[E]: fail to fetch profile list');
+	}
 
 	return (
 		<Panel>
-			<Header title={PROJECT_NAME} centered={true} />
-			<Column align='center'>
-				{profiles.map((profile) => (
-					<Cell key={profile.profile_id} size={180}>
-						<Button 
-							key={profile.key}
-							icon='profile'
-							color='red'
-							onClick={() => handleSelectProfile(profile.id)}
-						>
-							{profile.name}
-						</Button>
-					</Cell>
-				))}
-			</Column>
+			<Header title={PROJECT_NAME} centered />
+			<Row>
+				<Column align='center'>
+					{profiles.map(profile => (
+						<Cell key={profile.profile_id}>
+							<Button onClick={() => handleProfileSelect(profiles, profile)}>
+								{profile.name}
+							</Button>
+						</Cell>
+					))}
+				</Column>
+			</Row>
 		</Panel>
 	)
 }
