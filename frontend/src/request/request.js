@@ -12,7 +12,7 @@ import { useAuth } from '../context/AuthContext';
  * @param {Object} options - Additional options (token_type, headers)
  * @returns {Promise<Object>} - API response
  */
-export const request = async (url, method = 'GET', parameters = {}, options = {}, token=null) => {
+export const request = async (url, method = 'GET', parameters = {}, options = {}, token = null) => {
 
   const makeRequest = async () => {
     if (isDevServe()) {
@@ -21,12 +21,12 @@ export const request = async (url, method = 'GET', parameters = {}, options = {}
     }
 
     const config = {
-      url,
+      url: "http://192.168.0.46:3000" + url,
       method,
       data: method === 'POST' ? parameters : null,
       params: method === 'GET' ? parameters : null,
       headers: {
-        ...(token && { Authorization: `Bearer ${token}` }), 
+        ...(token && { Authorization: `Bearer ${token}` }),
         ...options.headers,
       },
     };

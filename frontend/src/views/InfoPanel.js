@@ -2,6 +2,7 @@ import { Panel, Header } from '@enact/sandstone/Panels';
 import VideoList from '../components/Info/VideoList';
 import HLSVideo from '../components/Info/HLSVideo';
 import Content from '../components/Info/Content';
+import Action from '../components/Info/Action';
 import Scroller from '@enact/sandstone/Scroller';
 import ri from '@enact/ui/resolution';
 
@@ -10,7 +11,9 @@ import { useEffect, useState } from 'react';
 
 const InfoPanel = ({ restaurant_id }) => {
   const [restaurantData, setRestaurantData] = useState(null);
-
+  const [like, setLike] = useState(false);
+  const [visit, setVisit] = useState(false);
+  const [media, setMedia] = useState(null);
 
   useEffect(() => {
     const fetchRestaurant = async () => {
@@ -21,10 +24,20 @@ const InfoPanel = ({ restaurant_id }) => {
         });
     };
 
-    fetchRestaurant();
-  }, [restaurant_id]);
+    // const fetchUser = async () => {
+    //   await request(`/porilfe/${profileid}/favorite`, 'GET')
+    //     .catch((err) => console.error(err))
+    //     .then((res) => {
+    //       setLike(res.like);
+    //       setVisit(res.visit);
+    //     });
+    // };
 
-  console.log(restaurantData);
+    fetchRestaurant();
+    // fetchUser();
+  }, []);
+
+
 
   return (
     <Panel>
@@ -32,7 +45,14 @@ const InfoPanel = ({ restaurant_id }) => {
         <div style={styles.leftDiv}>
           <Scroller>
             <div style={styles.contentsContainer}>
-              <HLSVideo src="https://standbyme.tv/hls/standbyme.m3u8" />
+              <HLSVideo src={media ? media : "https://standbyme.tv/hls/standbyme.m3u8"} />
+              <Action
+                like={true}
+                visit={false}
+                likeHandler={() => console.log('like')}
+                unlikeHandler={() => console.log('unlike')}
+                visitHandler={() => console.log('visit')}
+              />
               {restaurantData &&
                 <Content
                   name={restaurantData.restaurant_name}
@@ -56,7 +76,7 @@ const InfoPanel = ({ restaurant_id }) => {
 const styles = {
   container: {
     display: 'flex',
-    width: '1920px', // 고정된 너비
+    width: '80%', // 고정된 너비
     height: '100vh',
     padding: '20px',
     backgroundColor: '#f7f7f7',
