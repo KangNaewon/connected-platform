@@ -1,7 +1,4 @@
 
-export const handleSearchClick = () => {
-
-};
 
 export const handleProfileClick = () => {
 
