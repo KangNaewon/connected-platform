@@ -38,20 +38,28 @@ export const mockAPI = async (url, method, parameters = {}) => {
         type: 'Contemporary',
         phone: '+82-10-1234-5678',
         price: '$$$$',
+        media: [
+          {
+            media_id: '67473b04c12b4df30870272a',
+            src: 'https://example.com/mosu.jpg',
+            title: 'Mosu review',
+            label: '15:10',
+          }
+        ]
       },
     },
     '/restaurant': {
       GET: {
         restaurants: [
           {
-            restaurant_id: 1,
+            restaurant_id: '67473b04c12b4df30870272a',
             name: 'Mosu',
             location: 'Seoul, Korea',
             rating: 4,
             img: 'https://example.com/mosu.jpg',
           },
           {
-            restaurant_id: 2,
+            restaurant_id: '67473b04c12b4df30870272a',
             name: 'Sukiyabashi Jiro',
             location: 'Tokyo, Japan',
             rating: 3,
@@ -83,8 +91,8 @@ export const mockAPI = async (url, method, parameters = {}) => {
     '/user/{user_id}/profile': {
       GET: {
         profiles: [
-          { profile_id: 1, name: 'John Doe' },
-          { profile_id: 2, name: 'Jane Smith' },
+          { profile_id: '67473b04c12b4df30870272a', name: 'John Doe' },
+          { profile_id: '67473b04c12b4df30870272a', name: 'Jane Smith' },
         ],
       },
     },
@@ -93,10 +101,10 @@ export const mockAPI = async (url, method, parameters = {}) => {
     '/profile/{profile_id}': {
       GET: {
         favorites: [
-          { restaurant_id: 3, restaurant_name: 'Gourmet Spot' },
+          { restaurant_id: '67473b04c12b4df30870272a', restaurant_name: 'Gourmet Spot' },
         ],
         visited: [
-          { restaurant_id: 1, restaurant_name: 'Mosu' },
+          { restaurant_id: '67473b04c12b4df30870272a', restaurant_name: 'Mosu' },
         ],
       },
     },
@@ -117,13 +125,13 @@ export const mockAPI = async (url, method, parameters = {}) => {
     },
     '/media/{media_id}': {
       GET: {
-        media_id: 123,
+        media_id: '67473b04c12b4df30870272a',
         title: 'Cooking Masterclass',
         duration: '2 hours',
         url: 'https://example.com/media/cooking.mp4',
       },
     },
-  };
+  };2
 
   await new Promise((resolve) => setTimeout(resolve, 500));
 
