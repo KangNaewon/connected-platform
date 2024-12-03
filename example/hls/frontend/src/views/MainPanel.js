@@ -12,7 +12,7 @@ const MainPanel = kind({
 		return (
 			<Panel {...props}>
 				<Header title="HLS Video" type="compact" />
-				<HLSVideo src="http://localhost:6060/videos/test/master.m3u8" onQualityChange={(setQualityCallback) => {setQuality = setQualityCallback;}}/>
+				<HLSVideo src="http://localhost:3000/media/test/master.m3u8" onQualityChange={(setQualityCallback) => {setQuality = setQualityCallback;}}/>
 				<div style={{marginTop: '20px', display: 'flex', gap: '10px', justifyContent: 'center'}}>
 					<Button onClick={() => setQuality(0)}>360p</Button>
 					<Button onClick={() => setQuality(1)}>720p</Button>
