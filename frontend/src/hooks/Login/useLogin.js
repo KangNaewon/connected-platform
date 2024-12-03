@@ -20,8 +20,8 @@ const useLogin = (handlePopupOpen) => {
 
       debugLog('LoginResult[I]', response);
 
-      setUserAccessToken(response.access_token);
-      setRefreshToken(response.refresh_token);
+      setUserAccessToken(response.accessToken);
+      setRefreshToken(response.refreshToken);
       setUserID(id);
 
       navigate(panelName.select, {});

@@ -1,5 +1,4 @@
 import {Row, Column, Cell} from '@enact/ui/Layout';
-import { ResourceViewerState } from '../components/ResourceViewer/ResourceViewerState';
 import AreaChart from "../components/Charts/AreaChart";
 import BarGraph from "../components/Charts/BarGraph";
 import LineChart from "../components/Charts/LineChart";
@@ -10,9 +9,10 @@ import { usePopup } from '../components/Popup/usePopup';
 import Popup from '../components/Popup/Popup';
 import { Header, Panel } from '@enact/sandstone/Panels';
 import { PROJECT_NAME } from '../constants/strings';
+import { useSystemStatistics } from '../hooks/useSystemStatistics';
 
 const DashBoard = () => {
-  const {cpuTrend, cpuUsage, memTrend, procMem, loading, error} = ResourceViewerState();
+  const {cpuTrend, cpuUsage, memTrend, procMem, loading, error} = useSystemStatistics();
 	const { isPopupOpen, handlePopupOpen, handlePopupClose, msg } = usePopup();
 
   if (loading) {
