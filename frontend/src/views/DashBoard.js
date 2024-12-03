@@ -10,9 +10,10 @@ import { usePopup } from '../components/Popup/usePopup';
 import Popup from '../components/Popup/Popup';
 import { Header, Panel } from '@enact/sandstone/Panels';
 import { PROJECT_NAME } from '../constants/strings';
+import { useSystemStatistics } from '../hooks/useSystemStatistics';
 
 const DashBoard = () => {
-  const {cpuTrend, cpuUsage, memTrend, procMem, loading, error} = ResourceViewerState();
+  const {cpuTrend, cpuUsage, memTrend, procMem, loading, error} = useSystemStatistics();
 	const { isPopupOpen, handlePopupOpen, handlePopupClose, msg } = usePopup();
 
   if (loading) {

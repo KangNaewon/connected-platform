@@ -12,6 +12,8 @@ const useFetchProfileList = () => {
 
   const fetchProfiles = useCallback(async () => {
     try {
+      debugLog('Select[I]', authTokens);
+      
       const result = await request(`/user/${userInfo.user_id}/profile`, "GET", {}, authTokens.access_token);
 
       debugLog("ProfileList[I]", result);
