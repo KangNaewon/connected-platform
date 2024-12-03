@@ -15,13 +15,13 @@ import { useAuth } from '../context/AuthContext';
 export const request = async (url, method = 'GET', parameters = {}, options = {}, token = null) => {
 
   const makeRequest = async () => {
-    if (isDevServe()) {
-      debugLog("Mock Request[I]", { url, method, parameters });
-      return await mockAPI(url, method, parameters);
-    }
+    // if (isDevServe()) {
+    //   debugLog("Mock Request[I]", { url, method, parameters });
+    //   return await mockAPI(url, method, parameters);
+    // }
 
     const config = {
-      url: "http://192.168.0.46:3000" + url,
+      url: "http://10.1.20.94:3000" + url,
       method,
       data: method === 'POST' ? parameters : null,
       params: method === 'GET' ? parameters : null,
