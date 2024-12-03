@@ -4,12 +4,17 @@ import InputField from '@enact/sandstone/Input';
 import {Cell, Column, Row} from '@enact/ui/Layout';
 import { useState } from 'react';
 import {PROJECT_NAME} from '../constants/strings';
-import useLoginHandler from '../handlers/Login/LoginHandler';
+import useLoginHandler from '../hooks/Login/useLogin';
+import useSignupHandler from '../hooks/Login/useSignup';
+import { usePopup } from '../components/Popup/usePopup';
+import Popup from '../components/Popup/Popup';
 
 const LoginPanel = () => {
   const [state, setState] = useState({id: '', password: ''});
+  const {isPopupOpen, handlePopupOpen, handlePopupClose, msg} = usePopup();
 
-  const handleLoginClick = useLoginHandler(state);
+  const handleLoginClick = useLoginHandler(handlePopupOpen);
+  const handleSignupClick = useSignupHandler(handlePopupOpen);
 
   return (
     <Panel>
@@ -37,12 +42,12 @@ const LoginPanel = () => {
             </Cell>
             <Row align='center'>
               <Cell align='start'>
-                <Button onClick={handleLoginClick}>
+                <Button onClick={() => handleLoginClick(state.id, state.password)}>
                   Login
                 </Button>
               </Cell>
               <Cell align='end'>
-                <Button onClick={handleLoginClick}>
+                <Button onClick={() => handleSignupClick(state.id, state.password)}>
                   Sign Up
                 </Button>
               </Cell>
@@ -51,6 +56,11 @@ const LoginPanel = () => {
         </Cell>
         <Cell size="33%" />
       </Row>
+      <Popup 
+        isPopupOpen={isPopupOpen}
+        handlePopupClose={handlePopupClose}
+        msg={msg}
+      />
     </Panel>
   )
 };

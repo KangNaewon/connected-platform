@@ -3,15 +3,18 @@ import {createRoot, hydrateRoot} from 'react-dom/client';
 import React from 'react';
 import { PanelProvider } from './context/PanelContext';
 import { AuthProvider } from './context/AuthContext';
+import { UserProvider } from './context/UserContext';
 
 import App from './App/App';
 import reportWebVitals from './reportWebVitals';
 
 const appElement = (
 	<PanelProvider>
-		<AuthProvider>
-			<App />
-		</AuthProvider>
+		<UserProvider>
+			<AuthProvider>
+				<App />
+			</AuthProvider>
+		</UserProvider>
 	</PanelProvider>
 );
 

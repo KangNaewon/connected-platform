@@ -6,7 +6,7 @@ import { useAuth } from "../../context/AuthContext";
 import {useNavigate} from '../../hooks/useNavigate';
 import { useUserInfo } from "../../context/UserContext";
 
-const useLogin = () => {
+const useLogin = (handlePopupOpen) => {
   const { setUserAccessToken, setRefreshToken } = useAuth();
   const navigate = useNavigate();
   const {setUserID} = useUserInfo();
@@ -24,10 +24,11 @@ const useLogin = () => {
       setRefreshToken(response.refresh_token);
       setUserID(id);
 
-      navigate(panelName.select, {userId: state.id});
+      navigate(panelName.select, {});
 
     } catch (error) {
-      console.error('Login Failed:', error.message || error);
+      debugLog('Login[F]', {error: error});
+      handlePopupOpen('Login fail');
     }
   }, [setUserAccessToken, setRefreshToken]);
 };
