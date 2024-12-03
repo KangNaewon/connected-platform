@@ -2,7 +2,7 @@ const ffmpeg = require('fluent-ffmpeg');
 const ffmpegInstaller = require('@ffmpeg-installer/ffmpeg');
 const fs = require('fs');
 
-const videoName = 'test'
+const videoName = 'test2'
 
 ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
