@@ -44,6 +44,18 @@ export const mockAPI = async (url, method, parameters = {}) => {
             src: 'https://example.com/mosu.jpg',
             title: 'Mosu review',
             label: '15:10',
+          },
+          {
+            media_id: '67473b04c12b4df30870272a',
+            src: 'https://example.com/mosu.jpg',
+            title: 'Mosu review',
+            label: '15:10',
+          },
+          {
+            media_id: '67473b04c12b4df30870272a',
+            src: 'https://example.com/mosu.jpg',
+            title: 'Mosu review',
+            label: '15:10',
           }
         ]
       },
@@ -141,7 +153,7 @@ export const mockAPI = async (url, method, parameters = {}) => {
         url: 'https://example.com/media/cooking.mp4',
       },
     },
-  };2
+  }; 2
 
   await new Promise((resolve) => setTimeout(resolve, 500));
 
