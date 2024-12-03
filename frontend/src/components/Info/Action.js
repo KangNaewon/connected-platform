@@ -1,49 +1,56 @@
-import Button from '@enact/ui/Button';
+import Button from '@enact/sandstone/Button';
+import ri from '@enact/ui/resolution';
 
-const Action = ({ like, visit, likeHandler, unlikeHandler, visitHandler }) => {
-    like = true
-    const styles = {
-        container: {
-            fontFamily: "Arial, sans-serif",
-            marginTop: '10px',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'right',
+const styles = {
+    container: {
+        fontFamily: "Arial, sans-serif",
+        marginTop: '10px',
+        marginRight: -ri.scale(15),
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
 
-        },
-        button: {
-            backgroundColor: "#ffffff", // 버튼 배경색: 흰색
-            color: "#000000", // 버튼 텍스트 색상: 검정
-            fontSize: '20px',
-            padding: `10px 10px`,
-            border: '1px solid rgba(0, 0, 0, 0.2)', // 얇은 회색 테두리
-            borderRadius: '30px',
-            cursor: 'pointer',
-            marginLeft: '10px'
-        },
-        buttonText: {
-            fontWeight: 'bold', // 텍스트 강조
-        },
-    };
+    },
+    buttonText: {
+        fontWeight: 'bold', // 텍스트 강조
+        fontSize: ri.scale(20),
+    },
+};
 
+const Action = ({ like, unlike, visit, likeHandler, unlikeHandler, visitHandler }) => {
     return (
         <div style={styles.container}>
-            <Button style={{
-                ...styles.button,
-                backgroundColor: like ? "#f0f0f0" : "#ffffff",
-            }} pressed={likeHandler}>
+            <Button
+                css={{
+                    ...styles.button,
+                }}
+                onClick={likeHandler}
+                size='small'
+                color='red'
+                selected={like}
+            >
                 <span style={styles.buttonText}>👍 좋아요</span>
             </Button>
-            <Button style={{
-                ...styles.button,
-                backgroundColor: !like ? "#f0f0f0" : "#ffffff",
-            }} pressed={unlikeHandler}>
+            <Button
+                css={{
+                    ...styles.button,
+                }}
+                onClick={unlikeHandler}
+                size='small'
+                color='blue'
+                selected={unlike}
+            >
                 <span style={styles.buttonText}>👎 별로예요</span>
             </Button>
-            <Button style={{
-                ...styles.button,
-                backgroundColor: visit ? "#f0f0f0" : "#ffffff",
-            }} pressed={visitHandler}>
+            <Button
+                css={{
+                    ...styles.button,
+                }}
+                onClick={visitHandler}
+                size='small'
+                color='yellow'
+                select={visit}
+            >
                 <span style={styles.buttonText}>🚶 방문</span>
             </Button>
         </div>
