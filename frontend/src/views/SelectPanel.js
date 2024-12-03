@@ -22,17 +22,17 @@ const SelectPanel = () => {
 		handlePopupOpen('fail to load profiles');
 	}
 	
-	debugLog('Select[I]: profile list', userInfo.profile_list);
+	debugLog('Select[I]: profile list',{profiles: userInfo.profile_list});
 
 	return (
 		<Panel>
 			<Header title={PROJECT_NAME} centered />
 			<Row>
 				<Column align='center'>
-					{userInfo.profile_list.map(profile => (
+					{userInfo.profile_list.map((profile) => (
 						<Cell key={profile.profile_id}>
-							<Button onClick={() => handleProfileSelect(profile)}>
-								{profile.name}
+							<Button onClick={() => handleProfileSelect(profile.profile_id)}>
+								{profile.profile_name}
 							</Button>
 						</Cell>
 					))}

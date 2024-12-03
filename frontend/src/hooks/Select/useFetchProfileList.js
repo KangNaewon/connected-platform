@@ -14,19 +14,21 @@ const useFetchProfileList = () => {
     try {
       debugLog('Select[I]', authTokens);
       
-      const result = await request(`/user/${userInfo.user_id}/profile`, "GET", {}, authTokens.access_token);
+      const result = await request(`/user/${userInfo.user_id}/profile`, "GET", {}, {}, authTokens.access_token);
 
       debugLog("ProfileList[I]", result);
       setProfileList(result.profiles);
+      
     } catch (err) {
       debugLog("ProfileList[E]: failed to fetch profiles", {error: err});
       setError(err);
     } finally {
       setLoading(false);
     }
-  }, [authTokens.access_token, userInfo.user_id, setProfileList]);
+  }, [authTokens, userInfo.user_id, setProfileList]);
 
   useEffect(() => {
+    if (!loading) return; 
     fetchProfiles();
   }, [fetchProfiles]);
 

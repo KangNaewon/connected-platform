@@ -14,7 +14,7 @@ const useProfileSelect = (handlePopupOpen) => {
   return useCallback(
     async (profileId) => {
       try {
-        const response = await request(`/profile/switch/${profileId}`, "POST", {}, authTokens.access_token);
+        const response = await request(`/profile/switch/${profileId}`, "POST", {}, {}, authTokens.access_token);
 
         debugLog("ProfileSelect[I]: switched profile", response);
 
