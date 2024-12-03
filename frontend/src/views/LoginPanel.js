@@ -1,5 +1,5 @@
 import { Panel, Header } from '@enact/sandstone/Panels';
-import Button from '@enact/ui/Button';
+import Button from '@enact/sandstone/Button';
 import InputField from '@enact/sandstone/Input';
 import {Cell, Column, Row} from '@enact/ui/Layout';
 import { useState } from 'react';
