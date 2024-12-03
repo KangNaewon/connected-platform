@@ -23,23 +23,14 @@ const MediaList = kind({
     onClick: PropTypes.func,
   },
 
-  computed: {
-    items: ({mediaList}) => 
-      mediaList.map((media) => ({
-        ...media,
-        key: media.id,
-      })),
-  },
-
-  render: ({category, items, onClick, ...rest}) => {
+  render: ({category, mediaList, onClick, ...rest}) => {
     const renderMediaItem = ({ index, ...props}) => {
-      const item = items[index];
+      const item = mediaList[index];
       return (
         <ImageItem
           {...props}
           src={item.img}
           label={`${item.city} (${item.rating})`}
-          placeholder="../../resources/loading.jpg"
           onClick={() => onClick(item.restaurant_id)}
         >
           {item.restaurant_name}
@@ -54,7 +45,7 @@ const MediaList = kind({
           direction='horizontal'
           verticalScrollbar='hidden'
           horizontalScrollbar='hidden'
-          dataSize={items.length}
+          dataSize={mediaList.length}
           itemSize={{minWidth: ITEM_WIDTH, minHeight: ITEM_HEIGHT}}
           itemRenderer={renderMediaItem}
         />
