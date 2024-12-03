@@ -13,13 +13,14 @@ const InfoPanel = ({ restaurant_id }) => {
   const [restaurantData, setRestaurantData] = useState(null);
   const [like, setLike] = useState(false);
   const [visit, setVisit] = useState(false);
-  const [media, setMedia] = useState(null);
+  const [mediaId, setMediaId] = useState(null);
 
   useEffect(() => {
     const fetchRestaurant = async () => {
       await request(`/restaurant/${restaurant_id}`, 'GET')
         .catch((err) => console.error(err))
         .then((res) => {
+          console.log(res)
           setRestaurantData(res)
         });
     };
@@ -38,14 +39,13 @@ const InfoPanel = ({ restaurant_id }) => {
   }, []);
 
 
-
   return (
     <Panel>
       <div style={styles.container}>
         <div style={styles.leftDiv}>
           <Scroller>
             <div style={styles.contentsContainer}>
-              <HLSVideo src={media ? media : "https://standbyme.tv/hls/standbyme.m3u8"} />
+              <HLSVideo src={mediaId ? mediaId : "dummy"} />
               <Action
                 like={true}
                 visit={false}

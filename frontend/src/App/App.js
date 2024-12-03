@@ -1,4 +1,4 @@
-import {useState, useContext} from 'react';
+import { useState, useContext } from 'react';
 import ThemeDecorator from '@enact/sandstone/ThemeDecorator';
 import { Panels } from '@enact/sandstone/Panels';
 import { useBackHandler, useCloseHandler, useDocumentEvent } from './AppState';
@@ -28,25 +28,25 @@ if (isDevServe()) {
 }
 
 const PanelMapper = item => {
-  const {name, data} = item;
-  debugLog('PanelMapper[I]', item);
+	const { name, data } = item;
+	debugLog('PanelMapper[I]', item);
 
-  switch (name) {
-    case panelName.login: 
-      return <LoginPanel key={name} />;
-    case panelName.select:
-      return <SelectPanel key={name} data={data} />;
-    case panelName.main:
-      return <MainPanel key={name} data={data} />;
-    case panelName.profile:
-      return <ProfilePanel key={name} data={data} />;
-    case panelName.info:
-      return <InfoPanel key={name} data={data} />;
-    case panelName.dashboard:
-      return <DashBoard key={name} data={data} />;
-    default:
-      return <LoginPanel key={name}/>;
-  }
+	switch (name) {
+		case panelName.login:
+			return <LoginPanel key={name} />;
+		case panelName.select:
+			return <SelectPanel key={name} data={data} />;
+		case panelName.main:
+			return <MainPanel key={name} data={data} />;
+		case panelName.profile:
+			return <ProfilePanel key={name} data={data} />;
+		case panelName.info:
+			return <InfoPanel restaurant_id={'673b6e6bd3c4f817b188ae7a'} />;
+		case panelName.dashboard:
+			return <DashBoard key={name} data={data} />;
+		default:
+			return <LoginPanel key={name} />;
+	}
 }
 
 const AppBase = props => {
@@ -56,7 +56,7 @@ const AppBase = props => {
 	const handleClose = useCloseHandler();
 	useDocumentEvent(setSkinVariants);
 
-	const {panelData} = useContext(PanelContext);
+	const { panelData } = useContext(PanelContext);
 
 	return (
 		<Panels
