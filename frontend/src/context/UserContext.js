@@ -7,33 +7,31 @@ export const UserProvider = props => {
     user_id: '',
     profile_list: [],
     profile_id: null,
-    favorite_list: [],
-    visited_list: [],
   });
 
   const setUserID = (id) => {
-    setUserInfo((prev) => ({...prev, user_id: id}));
+    setUserInfo((prev) => ({ ...prev, user_id: id }));
   };
 
   const setProfileID = (id) => {
-    setUserInfo((prev) => ({...prev, profile_id: id}));
+    setUserInfo((prev) => ({ ...prev, profile_id: id }));
   };
 
   const setProfileList = (profile_list) => {
-    setUserInfo((prev) => ({...prev, profile_list: profile_list}));
+    setUserInfo((prev) => ({ ...prev, profile_list: profile_list }));
   };
 
   const setFavoriteList = (favorite_list) => {
-    setUserInfo((prev) => ({...prev, favorite_list: favorite_list}));
+    setUserInfo((prev) => ({ ...prev, favorite_list: favorite_list }));
   };
 
   const setVisitedList = (visited_list) => {
-    setUserInfo((prev) => ({...prev, visited_list: visited_list}));
+    setUserInfo((prev) => ({ ...prev, visited_list: visited_list }));
   };
 
   return (
-    <UserContext.Provider 
-      value={{ 
+    <UserContext.Provider
+      value={{
         userInfo,
         setUserID,
         setProfileID,
@@ -46,5 +44,6 @@ export const UserProvider = props => {
     </UserContext.Provider>
   );
 };
+
 
 export const useUserInfo = () => useContext(UserContext);

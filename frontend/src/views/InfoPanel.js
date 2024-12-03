@@ -9,11 +9,16 @@ import ri from '@enact/ui/resolution';
 import { request } from '../request/request';
 import { useEffect, useState } from 'react';
 
+import { useUserInfo } from '../context/UserContext';
+
 const InfoPanel = ({ restaurant_id }) => {
   const [restaurantData, setRestaurantData] = useState(null);
   const [like, setLike] = useState(false);
+  const [unlike, setUnlike] = useState(false);
   const [visit, setVisit] = useState(false);
   const [mediaId, setMediaId] = useState(null);
+
+
 
   useEffect(() => {
     const fetchRestaurant = async () => {
@@ -25,19 +30,8 @@ const InfoPanel = ({ restaurant_id }) => {
         });
     };
 
-    // const fetchUser = async () => {
-    //   await request(`/porilfe/${profileid}/favorite`, 'GET')
-    //     .catch((err) => console.error(err))
-    //     .then((res) => {
-    //       setLike(res.like);
-    //       setVisit(res.visit);
-    //     });
-    // };
-
     fetchRestaurant();
-    // fetchUser();
   }, []);
-
 
   return (
     <Panel>
@@ -47,11 +41,18 @@ const InfoPanel = ({ restaurant_id }) => {
             <div style={styles.contentsContainer}>
               <HLSVideo src={mediaId ? mediaId : "dummy"} />
               <Action
-                like={true}
-                visit={false}
-                likeHandler={() => console.log('like')}
-                unlikeHandler={() => console.log('unlike')}
-                visitHandler={() => console.log('visit')}
+                like={like}
+                unlike={unlike}
+                visit={visit}
+                likeHandler={() => {
+                  setLike(!like)
+                  if (like) setUnlike(false)
+                }}
+                unlikeHandler={() => {
+                  setUnlike(!unlike)
+                  if (unlike) setLike(false)
+                }}
+                visitHandler={() => setVisit(!visit)}
               />
               {restaurantData &&
                 <Content
