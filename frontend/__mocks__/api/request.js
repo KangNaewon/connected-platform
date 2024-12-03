@@ -126,7 +126,7 @@ export const mockAPI = async (url, method, parameters = {}) => {
     },
     '/profile/{profile_id}': {
       GET: {
-        favorites: [
+        likes: [
           { restaurant_id: '67473b04c12b4df30870272a', restaurant_name: 'Gourmet Spot' },
         ],
         visited: [
@@ -146,6 +146,12 @@ export const mockAPI = async (url, method, parameters = {}) => {
     },
     '/profile/{profile_id}/like': {
       DELETE: { message: 'restaurant successfully deleted from like list' },
+    },
+    '/profile/{profile_id}/dislike': {
+      POST: { message: "restaurant successfully added to dislike list" },
+    },
+    '/profile/{profile_id}/dislike': {
+      DELETE: { message: 'restaurant successfully deleted from dislike list' },
     },
     '/profile/{profile_id}/visit': {
       POST: { message: 'restaurant successfully added to visited list' },
