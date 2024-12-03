@@ -10,6 +10,7 @@ import Popup from '../components/Popup/Popup';
 import { Header, Panel } from '@enact/sandstone/Panels';
 import { PROJECT_NAME } from '../constants/strings';
 import { useSystemStatistics } from '../hooks/useSystemStatistics';
+import BackButton from '../components/Buttons/BackButton';
 
 const DashBoard = () => {
   const {cpuTrend, cpuUsage, memTrend, procMem, loading, error} = useSystemStatistics();
@@ -25,7 +26,11 @@ const DashBoard = () => {
 
   return (
     <Panel>
-      <Header title={PROJECT_NAME} />
+      <Header title={PROJECT_NAME} slotAfter={(
+        <>
+          <BackButton />
+        </>
+      )} />
       <Row className={css.resourceViewer}>
         <Column className={css.resourceColumn}>
           <Cell className={css.resourceCell}>

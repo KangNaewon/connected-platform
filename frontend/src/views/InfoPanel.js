@@ -7,18 +7,21 @@ import Scroller from '@enact/sandstone/Scroller';
 import ri from '@enact/ui/resolution';
 
 import { request } from '../request/request';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { useUserInfo } from '../context/UserContext';
+import debugLog from '../libs/log';
+import { PanelContext } from '../context/PanelContext';
+import { usePanelData } from '../hooks/useNavigate';
 
-const InfoPanel = ({ restaurant_id }) => {
+const InfoPanel = () => {
   const [restaurantData, setRestaurantData] = useState(null);
   const [like, setLike] = useState(false);
   const [unlike, setUnlike] = useState(false);
   const [visit, setVisit] = useState(false);
   const [mediaId, setMediaId] = useState(null);
-
-
+  
+  const {restaurant_id} = usePanelData();
 
   useEffect(() => {
     const fetchRestaurant = async () => {

@@ -59,7 +59,7 @@ const MainPanel = () => {
 									city: restaurant.city,
 									img: restaurant.img,
 								}))}
-								onClick={handleMediaClick}
+								onClick={(id) => handleMediaClick(id)}
 							/>
 						))}
 					</Scroller>

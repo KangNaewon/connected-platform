@@ -6,7 +6,9 @@ export const UserProvider = props => {
   const [userInfo, setUserInfo] = useState({
     user_id: '',
     profile_list: [],
-    profile_id: null,
+    profile_id: '',
+    favorite_list: [],
+    visited_list: [],
   });
 
   const setUserID = (id) => {

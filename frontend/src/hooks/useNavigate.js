@@ -15,3 +15,8 @@ export const useNavigate = () => {
 
   return navigate;
 }
+
+export const usePanelData = () => {
+  const { panelData } = useContext(PanelContext);
+  return panelData[panelData.length - 1]?.data || {};
+};
