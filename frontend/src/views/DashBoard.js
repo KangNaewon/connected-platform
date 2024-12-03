@@ -1,5 +1,4 @@
 import {Row, Column, Cell} from '@enact/ui/Layout';
-import { ResourceViewerState } from '../components/ResourceViewer/ResourceViewerState';
 import AreaChart from "../components/Charts/AreaChart";
 import BarGraph from "../components/Charts/BarGraph";
 import LineChart from "../components/Charts/LineChart";
