@@ -13,6 +13,8 @@ import { useUserInfo } from '../context/UserContext';
 import debugLog from '../libs/log';
 import { PanelContext } from '../context/PanelContext';
 import { usePanelData } from '../hooks/useNavigate';
+import { PROJECT_NAME } from '../constants/strings';
+import BackButton from '../components/Buttons/BackButton';
 
 const InfoPanel = () => {
   const [restaurantData, setRestaurantData] = useState(null);
@@ -38,6 +40,12 @@ const InfoPanel = () => {
 
   return (
     <Panel>
+      <Header title={PROJECT_NAME} slotAfter={(
+        <>
+          <BackButton />
+        </>
+      )}
+      />
       <div style={styles.container}>
         <div style={styles.leftDiv}>
           <Scroller>

@@ -111,20 +111,11 @@ export const mockAPI = async (url, method, parameters = {}) => {
     '/profile/{profile_id}': {
       DELETE: {
         message: "Profile deleted successfully"
-      }
-    },
-    '/profile/{profile_id}': {
+      },
       PATCH: {
-          message: 'Profile name updated successfully',
-          modified_profile: { profile_id: "67473b04c12b4df30870272", "profile_name": 'profile_name',
-        }
-    },
-    '/profile/switch/{profile_id}': {
-      POST: {
-        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA4IiwiaWQiOiJrbjEyNSIsImFjdGl2ZV9wcm9maWxlX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA5IiwiaWF0IjoxNzMyNDU5OTExLCJleHAiOjE3MzI0NjM1MTF9.j31IIV02WPlzmd10KqQ1aWAJxgDBE1_Oszy2RVZ6NHo"
-      }
-    },
-    '/profile/{profile_id}': {
+        message: 'Profile name updated successfully',
+        modified_profile: { profile_id: "67473b04c12b4df30870272", "profile_name": 'profile_name',
+      },
       GET: {
         favorites: [
           { restaurant_id: '67473b04c12b4df30870272a', restaurant_name: 'Gourmet Spot' },
@@ -133,6 +124,11 @@ export const mockAPI = async (url, method, parameters = {}) => {
           { restaurant_id: '67473b04c12b4df30870272a', restaurant_name: 'Mosu' },
         ],
       },
+    },
+    '/profile/switch/{profile_id}': {
+      POST: {
+        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA4IiwiaWQiOiJrbjEyNSIsImFjdGl2ZV9wcm9maWxlX2lkIjoiNjc0MzNjOTI5MDI3NTEyOTcwMzA0MzA5IiwiaWF0IjoxNzMyNDU5OTExLCJleHAiOjE3MzI0NjM1MTF9.j31IIV02WPlzmd10KqQ1aWAJxgDBE1_Oszy2RVZ6NHo"
+      }
     },
     '/profile/{profile_id}/{restaurant_id}': {
       GET: {
@@ -143,16 +139,13 @@ export const mockAPI = async (url, method, parameters = {}) => {
     },
     '/profile/{profile_id}/like': {
       POST: { message: "restaurant successfully added to like list" },
-    },
-    '/profile/{profile_id}/like': {
       DELETE: { message: 'restaurant successfully deleted from like list' },
     },
     '/profile/{profile_id}/visit': {
       POST: { message: 'restaurant successfully added to visited list' },
-    },
-    '/profile/{profile_id}/visit': {
       DELETE: { message: 'restaurant successfully deleted from visited list' },
     },
+    
     /* 미확정 Mocks */
     '/profile/{profile_id}/watch-history': {
       POST: { success: true, message: 'Watch history updated' },
