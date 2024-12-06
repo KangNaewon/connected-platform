@@ -1,33 +1,42 @@
-.resourceViewer {
+.dashboardTop{
+  background-color: #2e2e2e;
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  height: 30%;
   width: 100%;
-  height: 100%;
-  padding: 10px;
 }
 
-.resourceColumn {
+.dashboardBottom{
+  background-color: #2e2e2e;
+  padding: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  height: 60%;
   width: 100%;
-  height: 100%;
-  background-color: #1c1c1c;
-  padding: 20px;
+  overflow-y: auto;
 }
 
-.resourceCell {
-  width: 100%;
-  height: 100%;
-  background-color: #d3d3d3;
-  color: #000000; 
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.cpuTitle {
-  display: flex; 
-  align-items: center; 
+.dashboardChart{
+  background-color: #d3d3d3; 
+  flex: 1 1 calc(33.33% - 16px); 
+  height: 100%; 
+  border-radius: 8px;
+  display: flex;
   justify-content: center;
+  align-items: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.headerTitle h1 {
-  font-size: "12px"; 
-  margin: 0;
-  text-align: center;
+.dashboardLineChart{
+  background-color: #d3d3d3; 
+  flex: 1 1 calc(50% - 16px); 
+  height: calc(50% - 16px);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); 
 }

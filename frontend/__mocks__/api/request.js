@@ -98,7 +98,7 @@ export const mockAPI = async (url, method, parameters = {}) => {
       },
       PATCH: {
         message: 'Profile name updated successfully',
-        modified_profile: { profile_id: "67473b04c12b4df30870272", "profile_name": 'profile_name',
+        modified_profile: { profile_id: "67473b04c12b4df30870272", "profile_name": 'profile_name'},
       },
       GET: {
         favorites: [
@@ -153,8 +153,6 @@ export const mockAPI = async (url, method, parameters = {}) => {
         url: 'https://example.com/media/cooking.mp4',
       },
     },
-  }
-  }
   };
 
   await new Promise((resolve) => setTimeout(resolve, 500));
