@@ -1,6 +1,6 @@
 import {Panel, Header} from '@enact/sandstone/Panels';
 
-import css from '../styles/DashBoard.module.less';
+import css from '../styles/Dashboard.module.less';
 import {PROJECT_NAME} from '../constants/strings';
 
 const DashBoard = () => {
