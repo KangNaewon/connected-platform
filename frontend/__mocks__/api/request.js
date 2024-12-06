@@ -130,8 +130,6 @@ export const mockAPI = async (url, method, parameters = {}) => {
     '/profile/{profile_id}/dislike': {
       // Add restaurant to dislike list
       POST: { message: "restaurant successfully added to dislike list" },
-    },
-    '/profile/{profile_id}/dislike': {
       // Remove restaurant from dislike list
       DELETE: { message: 'restaurant successfully deleted from dislike list' },
     },
