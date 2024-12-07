@@ -12,7 +12,7 @@ const HLSVideo = (props) => {
 		if (Hls.isSupported()) {
 			const video = videoRef.current;
 			const hls = new Hls();
-			hls.loadSource(`${baseURL}/${props.src}/master.m3u8`);
+			hls.loadSource(`${baseURL}/media/${props.src}/master.m3u8`);
 			hls.attachMedia(video);
 
 			hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
