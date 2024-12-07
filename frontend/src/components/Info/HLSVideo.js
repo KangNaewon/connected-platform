@@ -1,6 +1,7 @@
 import { useRef, useEffect, useCallback } from 'react';
 import Hls from 'hls.js';
 import ri from '@enact/ui/resolution';
+import { baseURL } from '../../request/request';
 
 const HLSVideo = (props) => {
 	const videoRef = useRef(null);
@@ -11,7 +12,7 @@ const HLSVideo = (props) => {
 		if (Hls.isSupported()) {
 			const video = videoRef.current;
 			const hls = new Hls();
-			hls.loadSource(props.src);
+			hls.loadSource(`${baseURL}/${props.src}/master.m3u8`);
 			hls.attachMedia(video);
 
 			hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {

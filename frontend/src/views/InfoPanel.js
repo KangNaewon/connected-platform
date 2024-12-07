@@ -49,6 +49,9 @@ const InfoPanel = () => {
     fetchRestaurant();
   }, []);
 
+  const mediaClickHandler = (media_id) => {
+    setMediaId(media_id);
+  }
 
   return (
     <Panel>
@@ -80,7 +83,7 @@ const InfoPanel = () => {
           </Scroller>
         </div>
         <div style={styles.rightDiv}>
-          <VideoList mediaList={restaurantData.media} />
+          <VideoList mediaList={restaurantData.media} mediaClickHandler={mediaClickHandler} />
         </div>
       </div>
     </Panel>

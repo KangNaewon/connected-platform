@@ -3,7 +3,7 @@ import { isDevServe } from '../libs/utils';
 import debugLog from '../libs/log';
 import { mockAPI } from '../../__mocks__/api/request';
 
-// axios.defaults.baseURL = '';
+const baseURL = "http://192.168.0.38:3000";
 
 export const request = async (url, method = 'GET', parameters = {}, options = {}, token = null) => {
 
@@ -15,7 +15,7 @@ export const request = async (url, method = 'GET', parameters = {}, options = {}
     }
     debugLog('MakeRequest[I]', token);
 
-    const baseURL = "http://192.168.0.38:3000";
+
     const config = {
       url: baseURL + url,
       method,
@@ -39,3 +39,6 @@ export const request = async (url, method = 'GET', parameters = {}, options = {}
     throw error.response?.data || error.message;
   }
 };
+
+// export baseURL
+export { baseURL };

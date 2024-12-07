@@ -4,7 +4,7 @@ import VirtualList from '@enact/sandstone/VirtualList';
 import ImageItem from '@enact/sandstone/ImageItem';
 import ri from '@enact/ui/resolution';
 
-const VideoList = ({ mediaList = [] }) => {
+const VideoList = ({ mediaList = [], mediaClickHandler }) => {
   const imgSize = {
     width: ri.scale(600),
     height: ri.scale(600),
@@ -36,7 +36,10 @@ const VideoList = ({ mediaList = [] }) => {
       label={mediaList[index].duration}
       src={mediaList[index].thumbnail}
       style={styles.itemStyle} // 스타일 추가
-      onClick={() => console.log('click')} // 클릭 이벤트 추가
+      onClick={() => {
+        mediaClickHandler(mediaList[index].media_id);
+        console.log(mediaList[index].media_id);
+      }} // 클릭 이벤트 추가
     >
       {mediaList[index].title}
     </ImageItem>
