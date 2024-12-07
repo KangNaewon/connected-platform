@@ -1,0 +1,35 @@
+{
+  "wired": {
+      "txPackets": 1200,
+      "rxPackets": 1300,
+      "txErrors": 5,
+      "rxDropped": 10,
+      "rxBytes": 10485760,
+      "txBytes": 8388608,
+      "rxErrors": 3,
+      "txDropped": 2
+  },
+  "sampleInterval": 1000,
+  "subscribed": true,
+  "wan": {
+      "txPackets": 800,
+      "rxPackets": 950,
+      "txErrors": 2,
+      "rxDropped": 4,
+      "rxBytes": 5242880,
+      "txBytes": 4194304,
+      "rxErrors": 1,
+      "txDropped": 1
+  },
+  "wifi": {
+      "txPackets": 1500,
+      "rxPackets": 1700,
+      "txErrors": 7,
+      "rxDropped": 12,
+      "rxBytes": 20971520,
+      "txBytes": 16777216,
+      "rxErrors": 4,
+      "txDropped": 3
+  },
+  "returnValue": true
+}

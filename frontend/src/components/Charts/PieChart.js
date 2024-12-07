@@ -1,47 +1,59 @@
-import kind from '@enact/core/kind';
-import { PieChart as RechartsPieChart, Pie, Cell, Tooltip, XAxis, ResponsiveContainer } from 'recharts';
+import { PieChart as RechartsPieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
+import css from './ChartContainer.module.less';
 
-const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300', '#387908', '#d0ed57', '#8dd1e1'];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
-const PieChart = kind({
-  name: 'PieChart',
+const PieChart = ({label, input}) => {
+  const data = Object.entries(input).map(([key, value]) => ({
+    name: key,
+    value,
+  }));
 
-  render: ({data}) => {
-    const categories = ['user', 'nice', 'system', 'idle', 'iowait', 'irq', 'softirq'];
+  const total = data.reduce((acc, entry) => acc + entry.value, 0);
+  const usage = label == "cpu"
+    ? 100 - input.idle
+    : 100 - input.unused;
 
-    const chartData = categories.map((name, index) => ({
-      name,
-      value: data[index] || 0,
-    }));
-
-    const renderLabel = ({name, x, y}) => (
-      <text x={x} y={y} textAnchor='middle' dominantBaseline='central' style={{fontSize:'1rem'}}>
-        {name}
-      </text>
-    )
-
-    return (
+  return (
+    <div className={css.chartContainer}>
       <ResponsiveContainer>
         <RechartsPieChart>
           <Pie
-            data={chartData}
-            dataKey="value"
-            nameKey="name"
-            cx="40%"
+            data={data}
+            cx="30%"
             cy="50%"
-            outerRadius="60%"
-            label={renderLabel}
-            minAngle={20}
+            innerRadius="80%"
+            outerRadius="100%"
+            paddingAngle={5}
+            dataKey="value"
           >
-            {chartData.map((entry, index) => (
+            {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
           <Tooltip />
+          <text
+            x="80%"
+            y="40%"
+            textAnchor="middle"
+            dominantBaseline="middle"
+            style={{ fontSize: '1.5rem', fontWeight: 'bold' }}
+          >
+            {label}
+          </text>
+          <text
+            x="80%"
+            y="60%"
+            textAnchor="middle"
+            dominantBaseline="middle"
+            style={{ fontSize: '1.5rem', fontWeight: 'bold' }}
+          >
+            {`${usage.toFixed(2)}%`}
+          </text>
         </RechartsPieChart>
       </ResponsiveContainer>
-    )
-  }
-})
+    </div>
+  )
+};
 
 export default PieChart;

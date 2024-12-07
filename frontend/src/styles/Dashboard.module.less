@@ -1,42 +1,56 @@
-.dashboardTop{
-  background-color: #2e2e2e;
-  padding: 16px;
+:root {
+  --padding-size: 32px;
+  --gap-size: 32px;
+  --border-radius: 16px;
+  --box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  --background-dark: #2e2e2e;
+  --background-light: #d3d3d3;
+}
+
+.dashboardTop {
+  background-color: var(--background-dark);
+  padding: var(--padding-size);
+  border-radius: var(--border-radius);
   display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: var(--gap-size);
+  margin-bottom: var(--gap-size);
   height: 30%;
   width: 100%;
 }
 
-.dashboardBottom{
-  background-color: #2e2e2e;
-  padding: 16px;
+.dashboardBottom {
+  background-color: var(--background-dark);
+  padding: var(--padding-size);
+  border-radius: var(--border-radius);
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
+  gap: var(--gap-size);
   height: 60%;
   width: 100%;
-  overflow-y: auto;
 }
 
-.dashboardChart{
-  background-color: #d3d3d3; 
-  flex: 1 1 calc(33.33% - 16px); 
-  height: 100%; 
-  border-radius: 8px;
+.dashboardBottomColum {
+  width: 100%;
+  height: 100%;
+}
+
+.dashboardChart {
+  background-color: var(--background-light);
+  flex: 1 1 calc(33.33% - var(--gap-size));
+  height: 100%;
+  border-radius: var(--border-radius);
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--box-shadow);
 }
 
-.dashboardLineChart{
-  background-color: #d3d3d3; 
-  flex: 1 1 calc(50% - 16px); 
-  height: calc(50% - 16px);
-  border-radius: 8px;
+.dashboardLineChart {
+  background-color: var(--background-light);
+  flex: 1 1 calc(50% - var(--gap-size));
+  height: calc(100% - 16px); /* 특정 높이 조정 */
+  border-radius: var(--border-radius);
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); 
+  box-shadow: var(--box-shadow);
 }
