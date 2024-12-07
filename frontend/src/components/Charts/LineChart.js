@@ -1,46 +1,42 @@
-import kind from '@enact/core/kind';
 import { LineChart as RechartsLineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import css from './ChartContainer.module.less';
 
-const COLORS = {
-  grid: "#cccccc",
-  cpu: "#8884d8",        
-  cpu0: "#82ca9d",       
-  cpu1: "#ffc658",       
-  cpu2: "#ff7300", 
-  cpu3: "#387908", 
-}
+const COLORS = [
+  "#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#387908", 
+];
 
-const LineChart = kind({
-  name: 'LineChart',
+const LineChart = ({label, data}) => {
+  const keys = Object.keys(data[0]);
 
-  render: ({data}) => {
-    const dataKeys = ["cpu", "cpu0", "cpu1", "cpu2", "cpu3"];
-
-    return (
+  return (
+    <div className={css.chartContainer}>
       <ResponsiveContainer>
-        <RechartsLineChart
-          data={data}
-          margin={{top: 20, right: 10, left: 10, bottom: 20}}
-        >
-          <CartesianGrid stroke={COLORS.grid} strokeDasharray="3 3" />
-          <XAxis tick={{ fontSize: 12 }} label={{ value: "Application", position: "insideBottom", fontSize: 14 }} />
-          <YAxis tick={{ fontSize: 12 }} label={{ value: "cpu usage (%)", angle: -90, position: "insideLeft", fontSize: 14 }} />
+        <RechartsLineChart data={data}>
+          <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />
-          <Legend verticalAlign='top' fontSize={12} />
-
-          {dataKeys.map((key) => (
+          {keys.map((key, index) => (
             <Line
               key={key}
               type="monotone"
               dataKey={key}
-              stroke={COLORS[key] || "#000"}
-              name={key}
+              stroke={COLORS[index % COLORS.length]} 
+              name={key} 
             />
           ))}
+          <text
+            x="50%"
+            y="95%"
+            textAnchor="middle"
+            dominantBaseline="middle"
+            style={{ fontSize: '1rem', fontWeight: 'bold' }}
+          >
+            {label}
+          </text>
+          <YAxis/>
         </RechartsLineChart>
       </ResponsiveContainer>
-    );
-  }
-})
+    </div>
+  )
+}
 
 export default LineChart;

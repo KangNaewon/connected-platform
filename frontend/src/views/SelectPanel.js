@@ -45,6 +45,6 @@ const SelectPanel = () => {
 			/>
 		</Panel>
 	)
-}
+};
 
 export default SelectPanel;

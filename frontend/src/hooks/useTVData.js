@@ -2,7 +2,39 @@
 import {useEffect, useRef, useState} from 'react';
 
 import debugLog from '../libs/log';
-import {mem} from '../libs/services';
+import {mem, cnm} from '../libs/services';
+
+export const useMonitorActivity = () => {
+	const ref = useRef(null);
+	const [value, setValue] = useState({return: false});
+
+	useEffect(() => {
+		if (!ref.current) {
+			debugLog('GET_MONITOR_ACTIVITY[R]');
+			ref.current = cnm({
+				method: 'monitorActivity',
+				parameters: {
+					subscribe: true
+				},
+				onSuccess: res => {
+					debugLog('GET_MONITOR_ACTIVITY[S]', res);
+					setValue(res);
+				},
+				onFailure: err => {
+					debugLog('GET_MONITOR_ACTIVITY[F]', err);
+				}
+			});
+		}
+		return () => {
+			if (ref.current) {
+				ref.current.cancel();
+				ref.current = null;
+			}
+		};
+	}, []);
+	
+	return value;
+}
 
 // example:
 //  luna://com.webos.memorymanager/getProcStat '{"subscribe":true}'

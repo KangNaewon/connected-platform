@@ -6,7 +6,7 @@ const BackButton = () => {
 
   return (
     <Button 
-      icon='backspace'
+      icon='arrowhookleft'
       onClick={backHandler}
     />
   )

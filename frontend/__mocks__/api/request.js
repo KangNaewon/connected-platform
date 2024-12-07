@@ -79,8 +79,8 @@ export const mockAPI = async (url, method, parameters = {}) => {
       // 기기에 존재하는 프로필들을 모두 불러온다.
       GET: {
         profiles: [
-          { profile_id: '67473b04c12b4df30870272a', name: 'John Doe' },
-          { profile_id: '67473b04c12b4df30870272a', name: 'Jane Smith' },
+          { profile_id: '67473b04c12b4df30870272a', profile_name: 'John Doe' },
+          { profile_id: '67473b04c12b4df30870272b', profile_name: 'Jane Smith' },
         ],
       },
     },

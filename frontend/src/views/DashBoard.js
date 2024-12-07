@@ -1,79 +1,67 @@
+import {Panel, Header} from '@enact/sandstone/Panels';
 import {Row, Column, Cell} from '@enact/ui/Layout';
-import AreaChart from "../components/Charts/AreaChart";
-import BarGraph from "../components/Charts/BarGraph";
-import LineChart from "../components/Charts/LineChart";
-import PieChart from "../components/Charts/PieChart";
-import css from '../styles/Dashboard.module.less';
 import Loading from '../components/Loading/Loading';
-import { usePopup } from '../components/Popup/usePopup';
-import Popup from '../components/Popup/Popup';
-import { Header, Panel } from '@enact/sandstone/Panels';
-import { PROJECT_NAME } from '../constants/strings';
+import css from '../styles/Dashboard.module.less';
+import {PROJECT_NAME} from '../constants/strings';
 import { useSystemStatistics } from '../hooks/useSystemStatistics';
+import debugLog from '../libs/log';
+import PieChart from '../components/Charts/PieChart';
+import GaugeChart from '../components/Charts/GaugeChart';
+import LineChart from '../components/Charts/LineChart';
+import AreaChart from '../components/Charts/AreaChart';
 import BackButton from '../components/Buttons/BackButton';
 
 const DashBoard = () => {
-  const {cpuTrend, cpuUsage, memTrend, procMem, loading, error} = useSystemStatistics();
-	const { isPopupOpen, handlePopupOpen, handlePopupClose, msg } = usePopup();
 
-  if (loading) {
-    return <Loading />;
-  }
+  const {cpuTrend, memTrend, pktTrend, netTrend, loading, error} = useSystemStatistics();
+  
+  if (loading) return <Loading />;
 
   if (error) {
-    handlePopupOpen('fail to load system resources');
+    debugLog('DashBoard[E]', {});
+    return <div> Fail to Load </div>
   }
+
+  const cpu = cpuTrend[cpuTrend.length - 1];
+  const mem = memTrend[memTrend.length - 1];
+  const pkt = pktTrend[pktTrend.length - 1];
 
   return (
     <Panel>
-      <Header title={PROJECT_NAME} slotAfter={(
-        <>
-          <BackButton />
-        </>
-      )} />
-      <Row className={css.resourceViewer}>
-        <Column className={css.resourceColumn}>
-          <Cell className={css.resourceCell}>
-            {/* line chart of cpu usage with time series */}
-            <LineChart data={cpuTrend} />
+      <Header title={PROJECT_NAME} slotAfter={<><BackButton/></>} />
+      <Column>
+        <Row className={css.dashboardTop}>
+          <Cell className={css.dashboardChart}> 
+            <PieChart label="cpu" input={cpu} /> 
           </Cell>
-          <Cell className={css.resourceCell}>
-            {/* area chart of memory usage with time series */}
-            <AreaChart data={memTrend} />
+          <Cell className={css.dashboardChart}>
+            <PieChart label="memory" input={mem} />
           </Cell>
-        </Column>
-        <Column className={css.resourceColumn}>
-          <Row style={{width: "100%", height: "100%"}}>
-            <Column style={{width: "100%", height: "100%"}}>
-              <Cell style={{width:"100%", height:"50%"}} className={css.resourceCell}>
-                <PieChart data={cpuUsage.cpu0} />
-              </Cell>
-              <Cell style={{width:"100%", height:"50%"}} className={css.resourceCell}>
-                <PieChart data={cpuUsage.cpu1} />
-              </Cell>
-            </Column>
-            <Column style={{width: "100%", height: "100%"}}>
-              <Cell style={{width:"100%", height:"50%"}} className={css.resourceCell}>
-                <PieChart data={cpuUsage.cpu2} />
-              </Cell>
-              <Cell style={{width:"100%", height:"50%"}} className={css.resourceCell}>
-                <PieChart data={cpuUsage.cpu3} />
-              </Cell>
-            </Column>
-          </Row>
-          <Cell className={css.resourceCell}>
-            {/* bar graph of top 5 process */}
-            <BarGraph data={procMem} />
+          <Cell className={css.dashboardChart}>
+            <GaugeChart value={pkt.rxSpeed} max={100} />
           </Cell>
-        </Column>
-      </Row>
-      <Popup 
-        isPopupOpen={isPopupOpen}
-        handlePopupClose={handlePopupClose}
-        msg={msg}
-      />
+        </Row>
+        <Row className={css.dashboardBottom}>
+          <Column style={{width:"100%", height:"100%", gap: "16px"}}>
+            <Cell className={css.dashboardLineChart}>
+              <LineChart label="cpu" data={cpuTrend} /> 
+            </Cell>
+            <Cell className={css.dashboardLineChart}>
+              <AreaChart label="memory" data={memTrend} />
+            </Cell>
+          </Column>
+          <Column style={{width:"100%", height:"100%", gap: "16px"}}>
+            <Cell className={css.dashboardLineChart}>
+              <LineChart label="network speed" data={pktTrend} />
+            </Cell>
+            <Cell className={css.dashboardLineChart}>
+              <LineChart label="error rate" data={netTrend} />
+            </Cell>
+          </Column>
+        </Row>
+      </Column>
+      
     </Panel>
-    
   )
 }
 
