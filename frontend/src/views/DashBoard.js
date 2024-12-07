@@ -9,6 +9,7 @@ import PieChart from '../components/Charts/PieChart';
 import GaugeChart from '../components/Charts/GaugeChart';
 import LineChart from '../components/Charts/LineChart';
 import AreaChart from '../components/Charts/AreaChart';
+import BackButton from '../components/Buttons/BackButton';
 
 const DashBoard = () => {
 
@@ -27,7 +28,7 @@ const DashBoard = () => {
 
   return (
     <Panel>
-      <Header title={PROJECT_NAME} />
+      <Header title={PROJECT_NAME} slotAfter={<><BackButton/></>} />
       <Column>
         <Row className={css.dashboardTop}>
           <Cell className={css.dashboardChart}> 

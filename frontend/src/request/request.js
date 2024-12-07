@@ -9,10 +9,10 @@ export const request = async (url, method = 'GET', parameters = {}, options = {}
 
   const makeRequest = async () => {
 
-    // if (isDevServe()) {
-    //   debugLog("Mock Request[I]", { url, method, parameters });
-    //   return await mockAPI(url, method, parameters);
-    // }
+    if (isDevServe()) {
+      debugLog("Mock Request[I]", { url, method, parameters });
+      return await mockAPI(url, method, parameters);
+    }
     debugLog('MakeRequest[I]', token);
     
     const baseURL = "http://192.168.0.38:3000";
