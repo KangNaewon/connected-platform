@@ -16,7 +16,15 @@ import BackButton from '../components/Buttons/BackButton';
 
 const InfoPanel = () => {
   // For show restaurant data
-  const [restaurantData, setRestaurantData] = useState(null);
+  const [restaurantData, setRestaurantData] = useState({
+    restaurant_name: '',
+    location: '',
+    description: '',
+    price: '',
+    phone: '',
+    type: '',
+    media: [],
+  });
 
   // For show video
   const [mediaId, setMediaId] = useState(null);
@@ -34,13 +42,13 @@ const InfoPanel = () => {
       await request(`/restaurant/${restaurant_id}`, 'GET')
         .catch((err) => console.error(err))
         .then((res) => {
-          console.log(res)
           setRestaurantData(res)
         });
     };
 
     fetchRestaurant();
   }, []);
+
 
   return (
     <Panel>
@@ -72,7 +80,7 @@ const InfoPanel = () => {
           </Scroller>
         </div>
         <div style={styles.rightDiv}>
-          <VideoList />
+          <VideoList mediaList={restaurantData.media} />
         </div>
       </div>
     </Panel>

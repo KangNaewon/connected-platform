@@ -4,43 +4,7 @@ import VirtualList from '@enact/sandstone/VirtualList';
 import ImageItem from '@enact/sandstone/ImageItem';
 import ri from '@enact/ui/resolution';
 
-import test_img from './test_img.png';
-
-/**
- * Each Item in the list should be an object with the following properties:
- * src: the image or thumbnail to display
- * title
- * Duration
- */
-const sampleItem = [
-  {
-    id: 1,
-    src: test_img,
-    title: 'Video 1',
-    label: '3:20',
-  },
-  {
-    id: 2,
-    src: test_img,
-    title: 'Video 2',
-    label: '3:20',
-  },
-  {
-    id: 3,
-    src: test_img,
-    title: 'Video 3',
-    label: '3:20',
-  },
-  {
-    id: 4,
-    src: test_img,
-    title: 'Video 4',
-    label: '3:20',
-  },
-]
-
-
-const VideoList = () => {
+const VideoList = ({ mediaList = [] }) => {
   const imgSize = {
     width: ri.scale(600),
     height: ri.scale(600),
@@ -67,14 +31,16 @@ const VideoList = () => {
 
   const renderItem = useCallback(({ index }) => (
     <ImageItem
-      id={sampleItem[index].id}
-      label={sampleItem[index].label}
-      src={test_img}
+      key={index}
+      id={mediaList[index].media_id}
+      label={mediaList[index].duration}
+      src={mediaList[index].thumbnail}
       style={styles.itemStyle} // 스타일 추가
+      onClick={() => console.log('click')} // 클릭 이벤트 추가
     >
-      {sampleItem[index].title}
+      {mediaList[index].title}
     </ImageItem>
-  ), []);
+  ), [mediaList]);
 
 
   return (
@@ -82,7 +48,7 @@ const VideoList = () => {
       <VirtualList
         verticalScrollbar="hidden"
         itemSize={imgSize.height + 30}
-        dataSize={sampleItem.length}
+        dataSize={mediaList.length}
         itemRenderer={renderItem}
       />
     </div>

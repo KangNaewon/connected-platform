@@ -67,7 +67,6 @@ const styles = {
 };
 
 const Content = ({ name, location, description, price, type, phone }) => {
-    console.log(name, location, description, price, type, phone);
     return (
         <div style={styles.container}>
             <div style={styles.header}>

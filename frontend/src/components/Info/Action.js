@@ -33,7 +33,6 @@ const Action = ({ restaurant_id, profile_id }) => {
                 const res = await request(`/profile/${profile_id}/${restaurant_id}`, 'GET');
 
                 setLike(res.liked);
-                console.log('res.liked', res.liked);
                 setDislike(res.disliked);
                 setVisit(res.visited);
             } catch (error) {
@@ -96,12 +95,6 @@ const Action = ({ restaurant_id, profile_id }) => {
             console.error(error);
         }
     }, [visit, profile_id, restaurant_id]);
-
-
-    console.log('like', like);
-    console.log('dislike', dislike);
-    console.log('visit', visit);
-
 
     return (
         <div style={styles.container}>
