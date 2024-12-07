@@ -1,14 +1,33 @@
+import React, { useEffect } from 'react';
 import { Panel, Header } from '@enact/sandstone/Panels';
-import VideoList from '../components/Info/VideoList';
-import HLSVideo from '../components/Info/HLSVideo';
-import Content from '../components/Info/Content';
 import Scroller from '@enact/sandstone/Scroller';
 import ri from '@enact/ui/resolution';
-
+import { useUserInfo } from '../context/UserContext';
 import { request } from '../request/request';
-import { useEffect, useState } from 'react';
 
 const ProfilePanel = () => {
+	const [favorites, setFavorites] = useState([]);
+	const [visited, setVisited] = useState([]);
+
+	// Get profile_id from UserContext
+	const { userInfo } = useUserInfo();
+	const { profile_id } = userInfo;
+
+	// load liked, visited restaurant list
+	useEffect(() => {
+		const fetchProfile = async () => {
+			await request(`/profile/${profile_id}`, 'GET')
+				.catch((err) => console.error(err))
+				.then((res) => {
+					setFavorites(res.favorites);
+					setVisited(res.visited);
+				});
+		};
+
+		fetchProfile();
+	}, []);
+
+
 	return (
 		<Panel>
 			<Header title="프로필" type="compact" style={styles.headerStyle} />
@@ -29,8 +48,8 @@ const ProfilePanel = () => {
 const styles = {
 	container: {
 		display: 'flex',
-		width: '1920px', // 고정된 너비
-		height: '80vh',
+		width: '100%', // 고정된 너비
+		height: '100vh',
 		padding: '20px',
 		backgroundColor: '#f7f7f7',
 		justifyContent: 'space-between', // 좌우 공간 균등 분배

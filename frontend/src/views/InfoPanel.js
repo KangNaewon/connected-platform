@@ -93,7 +93,7 @@ const InfoPanel = () => {
 const styles = {
   container: {
     display: 'flex',
-    width: '80%', // 고정된 너비
+    width: '100%', // 고정된 너비
     height: '100vh',
     padding: '20px',
     backgroundColor: '#f7f7f7',
