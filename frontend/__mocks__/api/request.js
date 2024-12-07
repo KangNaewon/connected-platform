@@ -98,7 +98,7 @@ export const mockAPI = async (url, method, parameters = {}) => {
       },
       PATCH: {
         message: 'Profile name updated successfully',
-        modified_profile: { profile_id: "67473b04c12b4df30870272", "profile_name": 'profile_name',}
+        modified_profile: { profile_id: "67473b04c12b4df30870272", "profile_name": 'profile_name', }
       },
       GET: {
         favorites: [
@@ -138,7 +138,7 @@ export const mockAPI = async (url, method, parameters = {}) => {
       POST: { message: 'restaurant successfully added to visited list' },
       DELETE: { message: 'restaurant successfully deleted from visited list' },
     },
-    
+
     /* 미확정 Mocks */
     '/profile/{profile_id}/watch-history': {
       POST: { success: true, message: 'Watch history updated' },

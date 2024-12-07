@@ -7,25 +7,29 @@ import Scroller from '@enact/sandstone/Scroller';
 import ri from '@enact/ui/resolution';
 
 import { request } from '../request/request';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useUserInfo } from '../context/UserContext';
-import debugLog from '../libs/log';
-import { PanelContext } from '../context/PanelContext';
 import { usePanelData } from '../hooks/useNavigate';
 import { PROJECT_NAME } from '../constants/strings';
 import BackButton from '../components/Buttons/BackButton';
 
 const InfoPanel = () => {
+  // For show restaurant data
   const [restaurantData, setRestaurantData] = useState(null);
-  const [like, setLike] = useState(false);
-  const [unlike, setUnlike] = useState(false);
-  const [visit, setVisit] = useState(false);
+
+  // For show video
   const [mediaId, setMediaId] = useState(null);
-  
-  const {restaurant_id} = usePanelData();
+
+  // Get restaurant_id from PanelContext
+  const { restaurant_id } = usePanelData();
+
+  // Get profile_id from UserContext
+  const { userInfo } = useUserInfo();
+  const { profile_id } = userInfo;
 
   useEffect(() => {
+    // When user visit this panel, get restaurant data from server
     const fetchRestaurant = async () => {
       await request(`/restaurant/${restaurant_id}`, 'GET')
         .catch((err) => console.error(err))
@@ -52,18 +56,8 @@ const InfoPanel = () => {
             <div style={styles.contentsContainer}>
               <HLSVideo src={mediaId ? mediaId : "dummy"} />
               <Action
-                like={like}
-                unlike={unlike}
-                visit={visit}
-                likeHandler={() => {
-                  setLike(!like)
-                  if (like) setUnlike(false)
-                }}
-                unlikeHandler={() => {
-                  setUnlike(!unlike)
-                  if (unlike) setLike(false)
-                }}
-                visitHandler={() => setVisit(!visit)}
+                restaurant_id={restaurant_id}
+                profile_id={profile_id}
               />
               {restaurantData &&
                 <Content
