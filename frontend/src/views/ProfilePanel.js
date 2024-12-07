@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Panel, Header } from '@enact/sandstone/Panels';
 import Scroller from '@enact/sandstone/Scroller';
 import ri from '@enact/ui/resolution';
 import { useUserInfo } from '../context/UserContext';
 import { request } from '../request/request';
+import BackButton from '../components/Buttons/BackButton';
 
 const ProfilePanel = () => {
 	const [favorites, setFavorites] = useState([]);
@@ -30,7 +31,7 @@ const ProfilePanel = () => {
 
 	return (
 		<Panel>
-			<Header title="프로필" type="compact" style={styles.headerStyle} />
+			<Header title="프로필" type="compact" style={styles.headerStyle} slotAfter={<><BackButton/></>}/>
 			< div style={styles.container}>
 				<div style={styles.leftDiv}>
 					<Scroller>
