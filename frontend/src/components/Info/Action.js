@@ -3,6 +3,7 @@ import ri from '@enact/ui/resolution';
 import { useCallback, useEffect } from 'react';
 import { request } from '../../request/request';
 import { useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
 
 const styles = {
     container: {
@@ -21,16 +22,20 @@ const styles = {
 };
 
 const Action = ({ restaurant_id, profile_id }) => {
+    const { authTokens } = useAuth();
+
     // like, dislike, visit status
     const [like, setLike] = useState(false);
     const [dislike, setDislike] = useState(false);
     const [visit, setVisit] = useState(false);
 
+    console.log("restaurant_id: ", restaurant_id)
+
     // When Action component is rendered, fetch like, dislike, visit status from server
     useEffect(() => {
         const fetchStatus = async () => {
             try {
-                const res = await request(`/profile/${profile_id}/${restaurant_id}`, 'GET');
+                const res = await request(`/profile/${profile_id}/${restaurant_id}`, 'GET', {}, {}, authTokens.access_token);
 
                 setLike(res.liked);
                 setDislike(res.disliked);
@@ -44,57 +49,57 @@ const Action = ({ restaurant_id, profile_id }) => {
     }, [profile_id, restaurant_id]);
 
     // like button handler
-    const likeHandler = useCallback(async () => {
+    const likeHandler = async () => {
         try {
             if (like) {
                 setLike(false); // 상태를 먼저 업데이트
-                await request(`/profile/${profile_id}/like`, 'DELETE', { restaurant_id });
+                await request(`/profile/${profile_id}/like`, 'DELETE', { restaurant_id }, {}, authTokens.access_token);
             } else {
                 setLike(true); // 상태를 먼저 업데이트
                 if (dislike) {
                     setDislike(false); // dislike 상태를 먼저 업데이트
-                    await request(`/profile/${profile_id}/dislike`, 'DELETE', { restaurant_id });
+                    await request(`/profile/${profile_id}/dislike`, 'DELETE', { restaurant_id }, {}, authTokens.access_token);
                 }
-                await request(`/profile/${profile_id}/like`, 'POST', { restaurant_id });
+                await request(`/profile/${profile_id}/like`, 'POST', { restaurant_id }, {}, authTokens.access_token);
             }
         } catch (error) {
             console.error(error);
         }
-    }, [like, dislike, profile_id, restaurant_id]);
+    }
 
     // dislike button handler
-    const dislikeHandler = useCallback(async () => {
+    const dislikeHandler = async () => {
         try {
             if (dislike) {
                 setDislike(false); // 상태를 먼저 업데이트
-                await request(`/profile/${profile_id}/dislike`, 'DELETE', { restaurant_id });
+                await request(`/profile/${profile_id}/dislike`, 'DELETE', { restaurant_id }, {}, authTokens.access_token);
             } else {
                 setDislike(true); // 상태를 먼저 업데이트
                 if (like) {
                     setLike(false); // like 상태를 먼저 업데이트
-                    await request(`/profile/${profile_id}/like`, 'DELETE', { restaurant_id });
+                    await request(`/profile/${profile_id}/like`, 'DELETE', { restaurant_id }, {}, authTokens.access_token);
                 }
-                await request(`/profile/${profile_id}/dislike`, 'POST', { restaurant_id });
+                await request(`/profile/${profile_id}/dislike`, 'POST', { restaurant_id }, {}, authTokens.access_token);
             }
         } catch (error) {
             console.error(error);
         }
-    }, [like, dislike, profile_id, restaurant_id]);
+    }
 
     // visit button handler
-    const visitHandler = useCallback(async () => {
+    const visitHandler = async () => {
         try {
             if (visit) {
                 setVisit(false); // 상태를 먼저 업데이트
-                await request(`/profile/${profile_id}/visit`, 'DELETE', { restaurant_id });
+                await request(`/profile/${profile_id}/visit`, 'DELETE', { restaurant_id }, {}, authTokens.access_token);
             } else {
                 setVisit(true); // 상태를 먼저 업데이트
-                await request(`/profile/${profile_id}/visit`, 'POST', { restaurant_id });
+                await request(`/profile/${profile_id}/visit`, 'POST', { restaurant_id }, {}, authTokens.access_token);
             }
         } catch (error) {
             console.error(error);
         }
-    }, [visit, profile_id, restaurant_id]);
+    }
 
     return (
         <div style={styles.container}>

@@ -6,6 +6,7 @@ import { useUserInfo } from '../context/UserContext';
 import { request } from '../request/request';
 import BackButton from '../components/Buttons/BackButton';
 import NetflixStyleGrid from '../components/Profile/NetflixStyleGrid';
+import { useAuth } from '../context/AuthContext';
 
 const ProfilePanel = () => {
 	const [likes, setlikes] = useState([]);
@@ -15,10 +16,12 @@ const ProfilePanel = () => {
 	const { userInfo } = useUserInfo();
 	const { profile_id } = userInfo;
 
+	const { authTokens } = useAuth();
+
 	// load liked, visited restaurant list
 	useEffect(() => {
 		const fetchProfile = async () => {
-			await request(`/profile/${profile_id}`, 'GET')
+			await request(`/profile/${profile_id}`, 'GET', {}, {}, authTokens.access_token)
 				.catch((err) => console.error(err))
 				.then((res) => {
 					setlikes(res.likes);
@@ -48,7 +51,7 @@ const ProfilePanel = () => {
 const styles = {
 	container: {
 		display: 'flex',
-		width: '100%', // 고정된 너비
+		width: ri.scale(1800),
 		height: '100vh',
 		padding: '20px',
 		backgroundColor: '#f7f7f7',
@@ -57,25 +60,25 @@ const styles = {
 	},
 	leftDiv: {
 		height: '100%',
-		width: '49%', // 너비를 약간 줄여 중앙 공간 확보
+		width: ri.scale(800),
 		backgroundColor: '#fff',
 		border: '2px solid rgba(0, 0, 0, 0.3)',
 		borderRadius: ri.scale(10),
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
-		padding: '100px',
+		padding: ri.scale(30)
 	},
 	rightDiv: {
 		height: '100%',
-		width: '49%', // 너비를 약간 줄여 중앙 공간 확보
+		width: ri.scale(800), // 너비를 약간 줄여 중앙 공간 확보
 		backgroundColor: '#fff',
 		border: '2px solid rgba(0, 0, 0, 0.3)',
 		borderRadius: ri.scale(10),
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
-		padding: '100px',
+		padding: ri.scale(30)
 	},
 	contentsContainer: {
 		margin: 'auto',

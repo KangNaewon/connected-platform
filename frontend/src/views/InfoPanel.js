@@ -15,8 +15,10 @@ import { PROJECT_NAME } from '../constants/strings';
 import BackButton from '../components/Buttons/BackButton';
 import Switch from '@enact/sandstone/Switch';
 import ResourceViewer from '../components/ResourceViewer/ResourceViewer';
+import { useAuth } from '../context/AuthContext';
 
 const InfoPanel = () => {
+  const { authTokens } = useAuth();
   // For show restaurant data
   const [restaurantData, setRestaurantData] = useState({
     restaurant_name: '',
@@ -62,7 +64,7 @@ const InfoPanel = () => {
     <Panel>
       <Header title={PROJECT_NAME} slotAfter={(
         <>
-          <Switch onToggle={() => setToggle((prev) => !prev)}/>
+          <Switch onToggle={() => setToggle((prev) => !prev)} />
           <BackButton />
         </>
       )}
@@ -100,14 +102,14 @@ const InfoPanel = () => {
 const styles = {
   container: {
     display: 'flex',
-    width: '100%', // 고정된 너비
+    width: ri.scale(1800),
     height: '100vh',
     padding: '20px',
     backgroundColor: '#f7f7f7',
   },
   leftDiv: {
     height: '100%',
-    width: '70%',
+    width: ri.scale(1260)
     padding: '10px',
     backgroundColor: '#fff',
     border: '2px solid rgba(0, 0, 0, 0.3)',
@@ -118,7 +120,7 @@ const styles = {
   },
   rightDiv: {
     height: '100%',
-    width: '25%',
+    width: ri.scale(300),
     padding: '10px',
     backgroundColor: '#fff',
     border: '2px solid rgba(0, 0, 0, 0.3)',
