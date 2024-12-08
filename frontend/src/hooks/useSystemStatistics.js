@@ -84,7 +84,6 @@ const extractCpu = (data) => {
   const numbers = values.map((val) => parseInt(val));
 
   const total = numbers.reduce((acc, val) => acc+val, 0);
-  console.log(total);
 
   return {
     user: numbers[0] / total * 100,

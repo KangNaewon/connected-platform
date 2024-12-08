@@ -13,6 +13,8 @@ import { useUserInfo } from '../context/UserContext';
 import { usePanelData } from '../hooks/useNavigate';
 import { PROJECT_NAME } from '../constants/strings';
 import BackButton from '../components/Buttons/BackButton';
+import Switch from '@enact/sandstone/Switch';
+import ResourceViewer from '../components/ResourceViewer/ResourceViewer';
 
 const InfoPanel = () => {
   // For show restaurant data
@@ -25,6 +27,9 @@ const InfoPanel = () => {
     type: '',
     media: [],
   });
+
+  // For toggle
+  const [toggle, setToggle] = useState(false);
 
   // For show video
   const [mediaId, setMediaId] = useState(null);
@@ -57,6 +62,7 @@ const InfoPanel = () => {
     <Panel>
       <Header title={PROJECT_NAME} slotAfter={(
         <>
+          <Switch onToggle={() => setToggle((prev) => !prev)}/>
           <BackButton />
         </>
       )}
@@ -85,6 +91,7 @@ const InfoPanel = () => {
         <div style={styles.rightDiv}>
           <VideoList mediaList={restaurantData.media} mediaClickHandler={mediaClickHandler} />
         </div>
+        {toggle && <ResourceViewer />}
       </div>
     </Panel>
   );
