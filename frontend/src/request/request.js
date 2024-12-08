@@ -9,18 +9,18 @@ export const request = async (url, method = 'GET', parameters = {}, options = {}
 
   const makeRequest = async () => {
 
-    if (isDevServe()) {
-      debugLog("Mock Request[I]", { url, method, parameters });
-      return await mockAPI(url, method, parameters);
-    }
-    debugLog('MakeRequest[I]', token);
+    // if (isDevServe()) {
+    //   debugLog("Mock Request[I]", { url, method, parameters });
+    //   return await mockAPI(url, method, parameters);
+    // }
+    // debugLog('MakeRequest[I]', token);
 
 
     const config = {
       url: baseURL + url,
       method,
-      data: method === 'POST' ? parameters : null,
-      params: method === 'GET' ? parameters : null,
+      data: method === 'POST' || 'DELETE' ? parameters : null,
+      params: method === 'GET' || 'DELETE' || 'POST' ? parameters : null,
       headers: {
         ...(token && { Authorization: `Bearer ${token}` }),
         ...options.headers,

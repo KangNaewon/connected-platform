@@ -1,6 +1,7 @@
 import { VirtualGridList } from '@enact/sandstone/VirtualList';
 import ImageItem from '@enact/sandstone/ImageItem';
 import empty from './e1a75ef0b0e12b29867af0ff160e85ed.png'
+import ri from '@enact/ui/resolution';
 
 /**
  *  restaurant_id: 1,
@@ -32,7 +33,11 @@ const NetflixStyleGrid = ({ items = [] }) => {
                     console.log(restaurant_id);
                 }}
                 style={{
-                    height: '700px', width: (restaurant_name === '' ? '700px' : '500px')
+                    height: '250px',
+                    width: (restaurant_name === '' ? ri.scale(550) : ri.scale(500)),
+                    backgroundColor: 'black',
+                    color: 'white',
+                    borderRadius: ri.scale(30),
                 }}
                 label={restaurant_name}
             >
@@ -44,8 +49,8 @@ const NetflixStyleGrid = ({ items = [] }) => {
         <VirtualGridList
             dataSize={60}
             itemRenderer={renderItem}
-            itemSize={{ minWidth: 500, minHeight: 600 }}
-            spacing={20} // 카드 사이의 간격
+            itemSize={{ minWidth: ri.scale(550), minHeight: ri.scale(600) }}
+            spacing={ri.scale(10)} // 카드 사이의 간격
             direction='vertical'
         />
     )
