@@ -5,9 +5,10 @@ import ri from '@enact/ui/resolution';
 import { useUserInfo } from '../context/UserContext';
 import { request } from '../request/request';
 import BackButton from '../components/Buttons/BackButton';
+import NetflixStyleGrid from '../components/Profile/NetflixStyleGrid';
 
 const ProfilePanel = () => {
-	const [favorites, setFavorites] = useState([]);
+	const [likes, setlikes] = useState([]);
 	const [visited, setVisited] = useState([]);
 
 	// Get profile_id from UserContext
@@ -20,7 +21,7 @@ const ProfilePanel = () => {
 			await request(`/profile/${profile_id}`, 'GET')
 				.catch((err) => console.error(err))
 				.then((res) => {
-					setFavorites(res.favorites);
+					setlikes(res.likes);
 					setVisited(res.visited);
 				});
 		};
@@ -31,15 +32,13 @@ const ProfilePanel = () => {
 
 	return (
 		<Panel>
-			<Header title="프로필" type="compact" style={styles.headerStyle} slotAfter={<><BackButton/></>}/>
-			< div style={styles.container}>
+			<Header title="프로필" type="compact" style={styles.headerStyle} slotAfter={<><BackButton /></>} />
+			<div style={styles.container}>
 				<div style={styles.leftDiv}>
-					<Scroller>
-					</Scroller>
+					<NetflixStyleGrid items={likes} />
 				</div>
 				<div style={styles.rightDiv}>
-					<Scroller>
-					</Scroller>
+					<NetflixStyleGrid items={visited} />
 				</div>
 			</div>
 		</Panel>
@@ -65,6 +64,7 @@ const styles = {
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
+		padding: '100px',
 	},
 	rightDiv: {
 		height: '100%',
@@ -75,6 +75,7 @@ const styles = {
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
+		padding: '100px',
 	},
 	contentsContainer: {
 		margin: 'auto',
