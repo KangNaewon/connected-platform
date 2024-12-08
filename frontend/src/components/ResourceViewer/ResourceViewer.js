@@ -1,40 +1,57 @@
-import { ResourceViewerState } from './ResourceViewerState';
-import AreaChart from "../Charts/AreaChart";
-import BarGraph from "../Charts/BarGraph";
+import { Cell, Column, Row } from "@enact/ui/Layout"
 import LineChart from "../Charts/LineChart";
+import AreaChart from "../Charts/AreaChart";
 import PieChart from "../Charts/PieChart";
-import Loading from '../Loading/Loading';
+import GaugeChart from "../Charts/GaugeChart";
+import css from './ResourceViewer.module.less';
+import Loading from "../Loading/Loading";
+import {useSystemStatistics} from '../../hooks/useSystemStatistics';
+import debugLog from "../../libs/log";
+import { useNavigate } from "../../hooks/useNavigate";
+import { panelName } from "../../constants/panelName";
 
-const ResourceViewer = (handlePopupOpen) => {
-  const { cpuTrend, cpuUsage, memTrend, procMem, loading, error } = ResourceViewerState();
+const ResourceViewer = () => {
+  const {cpuTrend, memTrend, pktTrend, netTrend, loading, error} = useSystemStatistics();
+  const navigate = useNavigate();
 
-  if (loading) {
-    return {
-      charts: [
-        <Loading />
-      ]
-    };
-  }
+  if (loading) return <Loading />;
 
   if (error) {
-    handlePopupOpen('Fail to load system resource');
-    return null;
+    debugLog('DashBoard[E]', {});
+    return <div> Fail to Load </div>
   }
 
-  return {
-    charts: [
-      <LineChart key="lineChart" data={cpuTrend} />, // Line chart of CPU usage
-      <AreaChart key="areaChart" data={memTrend} />, // Area chart of memory usage
-      <BarGraph key="barGraph" data={procMem} />,    // Bar graph of top 5 processes
-      <div key="pieCharts">
-        {/* Pie charts for each CPU */}
-        <PieChart data={cpuUsage.cpu0} />
-        <PieChart data={cpuUsage.cpu1} />
-        <PieChart data={cpuUsage.cpu2} />
-        <PieChart data={cpuUsage.cpu3} />
-      </div>
-    ]
-  };
-};
+  const cpu = cpuTrend[cpuTrend.length - 1];
+  const mem = memTrend[memTrend.length - 1];
+  const pkt = pktTrend[pktTrend.length - 1];
+
+  return (
+    <Column onClick={() => navigate(panelName.dashboard)}>
+      <Row className={css.resourceViewerTop}>
+        <Cell className={css.dashboardChart}> 
+          <PieChart label="cpu" input={cpu} /> 
+        </Cell>
+        <Cell className={css.resourceViewerChart}>
+          <PieChart label="memory" input={mem} />
+        </Cell>
+        <Cell className={css.resourceViewerChart}>
+          <GaugeChart value={pkt.rxSpeed} max={100} />
+        </Cell>
+      </Row>
+      <Cell className={css.resourceViewerLineChart}>
+        <LineChart label="cpu" data={cpuTrend} /> 
+      </Cell>
+      <Cell className={css.resourceViewerLineChart}>
+        <AreaChart label="memory" data={memTrend} />
+      </Cell>
+      <Cell className={css.resourceViewerLineChart}>
+        <LineChart label="network speed" data={pktTrend} />
+      </Cell>
+      <Cell className={css.resourceViewerLineChart}>
+        <LineChart label="error rate" data={netTrend} />
+      </Cell>
+    </Column>
+  )
+}
 
 export default ResourceViewer;
