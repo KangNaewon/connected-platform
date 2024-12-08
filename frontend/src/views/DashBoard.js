@@ -26,6 +26,8 @@ const DashBoard = () => {
   const mem = memTrend[memTrend.length - 1];
   const pkt = pktTrend[pktTrend.length - 1];
 
+  debugLog('DashBoard[I]', {cpu: cpuTrend, mem: memTrend, pkt: pktTrend});
+
   return (
     <Panel>
       <Header title={PROJECT_NAME} slotAfter={<><BackButton/></>} />
