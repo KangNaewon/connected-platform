@@ -5,4 +5,4 @@ export const mem = callInfo => request('luna://com.webos.memorymanager')(callInf
 export const sam = callInfo =>
 	request('luna://com.webos.applicationManager')(callInfo);
 
-export const cnm = callInfo => request('luna://com.webos.connectionmanager')(callInfo);
+export const cnm = callInfo => request('luna://com.webos.service.connectionmanager')(callInfo);

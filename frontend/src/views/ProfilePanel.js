@@ -32,7 +32,7 @@ const ProfilePanel = () => {
 	return (
 		<Panel>
 			<Header title="프로필" type="compact" style={styles.headerStyle} slotAfter={<><BackButton/></>}/>
-			< div style={styles.container}>
+			<div style={styles.container}>
 				<div style={styles.leftDiv}>
 					<Scroller>
 					</Scroller>

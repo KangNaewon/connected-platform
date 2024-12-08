@@ -4,7 +4,7 @@ import { panelName } from "../constants/panelName";
 export const PanelContext = createContext(null);
 
 export const PanelProvider = props => {
-  const initialPanelData = [{ name: panelName.login, data: {} }];
+  const initialPanelData = [{ name: panelName.dashboard, data: {} }];
   const [panelData, setPanelData] = useState(initialPanelData);
 
   return (
