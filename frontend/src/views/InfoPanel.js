@@ -109,7 +109,7 @@ const styles = {
   },
   leftDiv: {
     height: '100%',
-    width: ri.scale(1260)
+    width: ri.scale(1260),
     padding: '10px',
     backgroundColor: '#fff',
     border: '2px solid rgba(0, 0, 0, 0.3)',
