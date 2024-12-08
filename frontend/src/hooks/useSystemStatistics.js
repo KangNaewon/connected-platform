@@ -19,11 +19,11 @@ export const useSystemStatistics = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    if (cpuTrend.length > 0 && memTrend.length > 0 && pktTrend.length > 0 && netTrend.length > 0) {
-      setLoading(false);
-    }
-  }, [cpuTrend, memTrend, pktTrend, netTrend]);
+  // useEffect(() => {
+  //   if (cpuTrend.length > 0 && memTrend.length > 0 && pktTrend.length > 0 && netTrend.length > 0) {
+  //     setLoading(false);
+  //   }
+  // }, [cpuTrend, memTrend, pktTrend, netTrend]);
   
   useEffect(() => {
     const update = () => {
@@ -56,10 +56,12 @@ export const useSystemStatistics = () => {
             rest,
           ]);
         }
+
       } catch (err) {
         debugLog('SYSTEM_STATISTICS[E]', {error: err});
-        setLoading(false);
         setError(true);
+      } finally {
+        setLoading(false);
       }
     };
     

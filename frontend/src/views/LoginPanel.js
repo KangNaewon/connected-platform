@@ -37,7 +37,7 @@ const LoginPanel = () => {
                 type="password"
                 value={state.password}
                 onChange={(e) => setState((prev) => ({...prev, password: e.value}))}
-                placeholder="Enter your Password"
+                placeholder="Enter your PW"
               />
             </Cell>
             <Row align='center'>

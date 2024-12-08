@@ -19,8 +19,8 @@ export const UserProvider = props => {
     setUserInfo((prev) => ({ ...prev, profile_id: id }));
   };
 
-  const setProfileList = (profile_list) => {
-    setUserInfo((prev) => ({ ...prev, profile_list: profile_list }));
+  const setProfileList = (profileList) => {
+    setUserInfo((prev) => ({ ...prev, profile_list: profileList }));
   };
 
   const setFavoriteList = (favorite_list) => {
