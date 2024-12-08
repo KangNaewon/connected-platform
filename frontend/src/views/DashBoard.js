@@ -15,7 +15,9 @@ const DashBoard = () => {
 
   const {cpuTrend, memTrend, pktTrend, netTrend, loading, error} = useSystemStatistics();
   
-  if (loading) return <Loading />;
+  debugLog('DashBoard[I]', {cpu: cpuTrend, mem: memTrend, pkt: pktTrend});
+
+  if (loading || !(cpuTrend.length > 0 && memTrend.length > 0 && pktTrend.length > 0)) return <Loading />;
 
   if (error) {
     debugLog('DashBoard[E]', {});
@@ -40,7 +42,7 @@ const DashBoard = () => {
             <PieChart label="memory" input={mem} />
           </Cell>
           <Cell className={css.dashboardChart}>
-            <GaugeChart value={pkt.rxSpeed} max={100} />
+            <GaugeChart value={pkt.rxSpeed} max={1000} />
           </Cell>
         </Row>
         <Row className={css.dashboardBottom}>

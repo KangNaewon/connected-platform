@@ -14,10 +14,12 @@ const ResourceViewer = () => {
   const {cpuTrend, memTrend, pktTrend, netTrend, loading, error} = useSystemStatistics();
   const navigate = useNavigate();
 
-  if (loading) return <Loading />;
+  debugLog('ResourceViewer[I]', {cpu: cpuTrend, mem: memTrend, pkt: pktTrend});
+
+  if (loading || !(cpuTrend.length > 0 && memTrend.length > 0 && pktTrend.length > 0)) return <Loading />;
 
   if (error) {
-    debugLog('DashBoard[E]', {});
+    debugLog('ResourceViewer[E]', {});
     return <div> Fail to Load </div>
   }
 
@@ -35,7 +37,7 @@ const ResourceViewer = () => {
           <PieChart label="memory" input={mem} />
         </Cell>
         <Cell className={css.resourceViewerChart}>
-          <GaugeChart value={pkt.rxSpeed} max={100} />
+          <GaugeChart value={pkt.rxSpeed} max={1000} />
         </Cell>
       </Row>
       <Cell className={css.resourceViewerLineChart}>
