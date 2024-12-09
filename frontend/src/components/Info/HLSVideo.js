@@ -30,7 +30,7 @@ const HLSVideo = (props) => {
 	return (
 		<div style={styles.videoContainer}>
 			<video ref={videoRef} controls style={styles.video} />
-		</div >
+		</div>
 	);
 };
 
