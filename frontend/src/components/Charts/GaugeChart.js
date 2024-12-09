@@ -6,7 +6,7 @@ const GaugeChart = ({ value, max }) => {
   const angle = (percentage / 100) * 180; // 0~180도 사이의 각도 계산
 
   return (
-    <div className={css.chartContainer} style={{position: 'relative' }}>
+    <div className={css.chartContainer} style={{ position: 'relative' }}>
       {/* SVG */}
       <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%' }}>
         {/* 배경 아크 */}
@@ -44,8 +44,8 @@ const GaugeChart = ({ value, max }) => {
           textAlign: 'center',
         }}
       >
-        <div style={{ fontSize: '1rem', fontWeight: 'bold' }}>Network Speed</div>
-        <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#FF8042' }}>
+        <div style={{ fontSize: '1rem', fontWeight: 'bold', color: '#000' }}>Network Speed</div>
+        <div style={{ fontSize: '1rem', fontWeight: 'bold', color: '#FF8042' }}>
           {value.toFixed(2)} Mbps
         </div>
       </div>

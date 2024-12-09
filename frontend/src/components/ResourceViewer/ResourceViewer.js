@@ -5,16 +5,17 @@ import PieChart from "../Charts/PieChart";
 import GaugeChart from "../Charts/GaugeChart";
 import css from './ResourceViewer.module.less';
 import Loading from "../Loading/Loading";
-import {useSystemStatistics} from '../../hooks/useSystemStatistics';
+import { useSystemStatistics } from '../../hooks/useSystemStatistics';
 import debugLog from "../../libs/log";
 import { useNavigate } from "../../hooks/useNavigate";
 import { panelName } from "../../constants/panelName";
+import Scroller from "@enact/sandstone/Scroller";
 
 const ResourceViewer = () => {
-  const {cpuTrend, memTrend, pktTrend, netTrend, loading, error} = useSystemStatistics();
+  const { cpuTrend, memTrend, pktTrend, netTrend, loading, error } = useSystemStatistics();
   const navigate = useNavigate();
 
-  debugLog('ResourceViewer[I]', {cpu: cpuTrend, mem: memTrend, pkt: pktTrend});
+  debugLog('ResourceViewer[I]', { cpu: cpuTrend, mem: memTrend, pkt: pktTrend });
 
   if (loading || !(cpuTrend.length > 0 && memTrend.length > 0 && pktTrend.length > 0)) return <Loading />;
 
@@ -28,31 +29,27 @@ const ResourceViewer = () => {
   const pkt = pktTrend[pktTrend.length - 1];
 
   return (
-    <Column onClick={() => navigate(panelName.dashboard)}>
-      <Row className={css.resourceViewerTop}>
-        <Cell className={css.dashboardChart}> 
-          <PieChart label="cpu" input={cpu} /> 
-        </Cell>
-        <Cell className={css.resourceViewerChart}>
-          <PieChart label="memory" input={mem} />
-        </Cell>
-        <Cell className={css.resourceViewerChart}>
-          <GaugeChart value={pkt.rxSpeed} max={1000} />
-        </Cell>
-      </Row>
-      <Cell className={css.resourceViewerLineChart}>
-        <LineChart label="cpu" data={cpuTrend} /> 
+    // <Column onClick={() => navigate(panelName.dashboard)} style={{height: '100%', width:'100%'}}>
+    <Column
+      onClick={() => navigate(panelName.dashboard)}
+      style={{
+        height: '100%',
+        width: '100%'
+      }}
+    >
+      <Cell className={css.resourceViewerChart}>
+        <PieChart label="cpu" input={cpu} />
       </Cell>
-      <Cell className={css.resourceViewerLineChart}>
-        <AreaChart label="memory" data={memTrend} />
+      <Cell className={css.resourceViewerChart}>
+        <PieChart label="memory" input={mem} />
       </Cell>
-      <Cell className={css.resourceViewerLineChart}>
-        <LineChart label="network speed" data={pktTrend} />
+      <Cell className={css.resourceViewerChart}>
+        <GaugeChart value={pkt.rxSpeed} max={1000} />
       </Cell>
-      <Cell className={css.resourceViewerLineChart}>
-        <LineChart label="error rate" data={netTrend} />
-      </Cell>
+
     </Column>
+
+
   )
 }
 

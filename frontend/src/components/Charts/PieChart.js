@@ -3,7 +3,7 @@ import css from './ChartContainer.module.less';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
-const PieChart = ({label, input}) => {
+const PieChart = ({ label, input }) => {
   const data = Object.entries(input).map(([key, value]) => ({
     name: key,
     value,
@@ -22,8 +22,8 @@ const PieChart = ({label, input}) => {
             data={data}
             cx="30%"
             cy="50%"
-            innerRadius="80%"
-            outerRadius="100%"
+            innerRadius="70%"
+            outerRadius="90%"
             paddingAngle={5}
             dataKey="value"
           >
@@ -37,7 +37,7 @@ const PieChart = ({label, input}) => {
             y="40%"
             textAnchor="middle"
             dominantBaseline="middle"
-            style={{ fontSize: '1.5rem', fontWeight: 'bold' }}
+            style={{ fontSize: '1rem', fontWeight: 'bold' }}
           >
             {label}
           </text>
@@ -46,7 +46,7 @@ const PieChart = ({label, input}) => {
             y="60%"
             textAnchor="middle"
             dominantBaseline="middle"
-            style={{ fontSize: '1.5rem', fontWeight: 'bold' }}
+            style={{ fontSize: '1rem', fontWeight: 'bold' }}
           >
             {`${usage.toFixed(2)}%`}
           </text>
