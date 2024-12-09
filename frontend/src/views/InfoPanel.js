@@ -69,66 +69,94 @@ const InfoPanel = () => {
         </>
       )}
       />
-      <div style={styles.container}>
-        <div style={styles.leftDiv}>
-          <Scroller>
-            <div style={styles.contentsContainer}>
-              <HLSVideo src={mediaId ? mediaId : "dummy"} />
-              <Action
-                restaurant_id={restaurant_id}
-                profile_id={profile_id}
-              />
-              {restaurantData &&
-                <Content
-                  name={restaurantData.restaurant_name}
-                  location={restaurantData.location}
-                  description={restaurantData.description}
-                  price={restaurantData.price}
-                  phone={restaurantData.phone}
-                  type={restaurantData.type}
-                />}
-            </div>
-          </Scroller>
+      <div style={styles.parentContainer}>
+        <div style={{
+          ...styles.container,
+          width: (toggle ? '80%' : '100%')
+        }}>
+          <div style={
+            {
+              ...styles.leftDiv,
+              width: (toggle ? ri.scale(2000) : ri.scale(2400))
+            }
+          }>
+            <Scroller>
+              <div style={styles.contentsContainer}>
+                <HLSVideo src={mediaId ? mediaId : "dummy"} />
+                <Action
+                  restaurant_id={restaurant_id}
+                  profile_id={profile_id}
+                />
+                {restaurantData &&
+                  <Content
+                    name={restaurantData.restaurant_name}
+                    location={restaurantData.location}
+                    description={restaurantData.description}
+                    price={restaurantData.price}
+                    phone={restaurantData.phone}
+                    type={restaurantData.type}
+                  />}
+              </div>
+            </Scroller>
+          </div>
+          <div style={styles.rightDiv}>
+            <VideoList mediaList={restaurantData.media} mediaClickHandler={mediaClickHandler} />
+          </div>
         </div>
-        <div style={styles.rightDiv}>
-          <VideoList mediaList={restaurantData.media} mediaClickHandler={mediaClickHandler} />
-        </div>
-        {toggle && <ResourceViewer />}
+        {toggle ?
+          (<div style={styles.resourceDiv} >
+            {toggle && <ResourceViewer />}
+          </div>) : (<div />)
+        }
       </div>
     </Panel>
   );
 };
 
 const styles = {
-  container: {
+  parentContainer: {
     display: 'flex',
+    width: '100%',
+    height: ri.scale(750),
+  },
+  container: {
+    height: ri.scale(750),
     width: ri.scale(1800),
-    height: '100vh',
-    padding: '20px',
+    display: 'flex',
     backgroundColor: '#f7f7f7',
+    border: '2px solid rgba(0, 0, 0, 0.3)',
+    borderRadius: ri.scale(10),
+    padding: ri.scale(20),
   },
   leftDiv: {
-    height: '100%',
-    width: ri.scale(1260),
-    padding: '10px',
+    height: ri.scale(730),
     backgroundColor: '#fff',
     border: '2px solid rgba(0, 0, 0, 0.3)',
     borderRadius: ri.scale(10),
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    padding: ri.scale(10),
   },
   rightDiv: {
-    height: '100%',
-    width: ri.scale(300),
-    padding: '10px',
+    height: ri.scale(730),
+    width: ri.scale(450),
     backgroundColor: '#fff',
     border: '2px solid rgba(0, 0, 0, 0.3)',
     borderRadius: ri.scale(10),
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 'auto'
+    margin: '0 auto',
+    padding: ri.scale(10),
+  },
+  resourceDiv: {
+    height: ri.scale(750),
+    width: ri.scale(300),
+    borderRadius: ri.scale(10),
+    padding: ri.scale(20),
+    backgroundColor: '#f7f7f7',
+    marginLeft: ri.scale(30),
   },
   contentsContainer: {
     margin: 'auto',
