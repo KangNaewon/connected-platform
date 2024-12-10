@@ -9,7 +9,7 @@ const SearchBar = ({ setShowSearch, setSearchResult, setSearchList }) => {
   const onComplete = async () => {
     console.log('oncomoplete');
     try {
-      const response = await request(`/restaurant?query=${input}`, "GET");
+      const response = await request(`/restaurant?q=${input}`, "GET");
       debugLog('Search[R]', response);
       setSearchList(response);
       setSearchResult(true);

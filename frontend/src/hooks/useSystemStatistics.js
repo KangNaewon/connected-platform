@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useMonitorActivity, useProcStat, useUnitList } from "./useTVData";
 import debugLog from "../libs/log";
 
-const MAX_N_RESOURE = 16; 
+const MAX_N_RESOURE = 16;
 const SAMPLE_INTERVAL = 1000;
 const TOTAL_MEMORY = 1024;
 
@@ -24,10 +24,10 @@ export const useSystemStatistics = () => {
   //     setLoading(false);
   //   }
   // }, [cpuTrend, memTrend, pktTrend, netTrend]);
-  
+
   useEffect(() => {
     const update = () => {
-      try{
+      try {
         if (procStat.returnValue) {
           const cpu = extractCpu(procStat.stat);
           setCpuTrend((prev) => [
@@ -35,7 +35,7 @@ export const useSystemStatistics = () => {
             cpu,
           ]);
         }
-        
+
         if (unitList.returnValue) {
           const mem = extractMem(unitList);
           setMemTrend((prev) => [
@@ -45,10 +45,10 @@ export const useSystemStatistics = () => {
         }
 
         if (monitorActivity.returnValue) {
-          const {txSpeed, rxSpeed, ...rest} = extractPkt(monitorActivity.wifi);
+          const { txSpeed, rxSpeed, ...rest } = extractPkt(monitorActivity.wifi);
           setPktTrend((prev) => [
             ...prev.slice(-MAX_N_RESOURE + 1),
-            {txSpeed, rxSpeed},
+            { txSpeed, rxSpeed },
           ]);
 
           setNetTrend((prev) => [
@@ -56,15 +56,15 @@ export const useSystemStatistics = () => {
             rest,
           ]);
         }
-        
+
       } catch (err) {
-        debugLog('SYSTEM_STATISTICS[E]', {error: err});
+        debugLog('SYSTEM_STATISTICS[E]', { error: err });
         setError(true);
       } finally {
         setLoading(false);
       }
     };
-    
+
     const interval = setInterval(update, SAMPLE_INTERVAL);
     return () => clearInterval(interval);
 
@@ -93,7 +93,7 @@ const extractCpu = (data) => {
   const [label, ...values] = cpuLine.split(/\s+/);
   const numbers = values.map((val) => parseInt(val));
 
-  const total = numbers.reduce((acc, val) => acc+val, 0);
+  const total = numbers.reduce((acc, val) => acc + val, 0);
 
   return {
     user: numbers[0] / total * 100,
@@ -121,8 +121,8 @@ const extractMem = (data) => {
   const total = used + unused;
 
   return {
-    used: used/total * 100,
-    unused: unused/total * 100,
+    used: used / total * 100,
+    unused: unused / total * 100,
   }
 }
 
@@ -138,25 +138,25 @@ const extractPkt = (data) => {
     };
   }
 
-  const txSpeed = data.txBytes / SAMPLE_INTERVAL / 1000;
-  const rxSpeed = data.rxBytes / SAMPLE_INTERVAL / 1000;
+  const txSpeed = data.txBytes / 1024 / 1024;
+  const rxSpeed = data.rxBytes / 1024 / 1024;
 
   const txErrorRate = data.txPackets
     ? data.txErrors / data.txPackets
     : 0;
-  
+
   const rxErrorRate = data.rxPackets
     ? data.rxErrors / data.rxPackets
     : 0;
-  
+
   const txDropRate = data.txPackets
     ? data.txDropped / data.txPackets
     : 0;
-  
+
   const rxDropRate = data.rxPackets
     ? data.rxDropped / data.rxPackets
     : 0;
-  
+
   return {
     txSpeed,
     rxSpeed,

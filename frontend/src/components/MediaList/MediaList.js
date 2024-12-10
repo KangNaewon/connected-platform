@@ -5,17 +5,17 @@ import ri from '@enact/ui/resolution';
 import css from './MediaList.module.less';
 import { useNavigate } from "../../hooks/useNavigate";
 import { panelName } from "../../constants/panelName";
-import {IconItemBase} from '@enact/sandstone/IconItem';
+import { IconItemBase } from '@enact/sandstone/IconItem';
 import iconMichelin from './iconMichelin.png';
 import iconVip from './iconVip.png';
 
 const ITEM_WIDTH = ri.scale(920);
 const ITEM_HEIGHT = ri.scale(600);
 
-const MediaList = ({category, mediaList, ...rest}) => {
+const MediaList = ({ category, mediaList, ...rest }) => {
   const navigate = useNavigate();
 
-  const renderMediaItem = ({ index, ...props}) => {
+  const renderMediaItem = ({ index, ...props }) => {
     const item = mediaList[index];
 
     const renderIcons = (rating) => {
@@ -39,7 +39,7 @@ const MediaList = ({category, mediaList, ...rest}) => {
             </span>
           </div>
         )}
-        onClick={() => navigate(panelName.info, {restaurant_id: item.restaurant_id})}
+        onClick={() => navigate(panelName.info, { restaurant_id: item.restaurant_id })}
       >
         {item.restaurant_name}
       </ImageItem>
@@ -55,12 +55,12 @@ const MediaList = ({category, mediaList, ...rest}) => {
         verticalScrollbar='hidden'
         horizontalScrollbar='hidden'
         dataSize={mediaList.length}
-        itemSize={{minWidth: ITEM_WIDTH, minHeight: ITEM_HEIGHT}}
+        itemSize={{ minWidth: ITEM_WIDTH, minHeight: ITEM_HEIGHT }}
         itemRenderer={renderMediaItem}
       />
     </div>
   )
-  
+
 }
 
 export default MediaList;

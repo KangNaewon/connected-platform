@@ -2,7 +2,7 @@ import { Panel, Header } from '@enact/sandstone/Panels';
 import Scroller from '@enact/sandstone/Scroller';
 import { Row, Column } from '@enact/ui/Layout';
 import Button from '@enact/sandstone/Button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { PROJECT_NAME } from '../constants/strings';
 import MediaList from '../components/MediaList/MediaList';
 import Loading from '../components/Loading/Loading';
@@ -19,12 +19,9 @@ const MainPanel = () => {
 	const [showSearch, setShowSearch] = useState(false);
 	const [searchList, setSearchList] = useState({});
 	const [searchResult, setSearchResult] = useState(false);
+	const [contentList, setContentList] = useState([]);
 	const { isPopupOpen, handlePopupOpen, handlePopupClose, msg } = usePopup();
 	const navigate = useNavigate();
-
-	const handleMediaClick = (id) => {
-		navigate(panelName.info, { restaurant_id: id });
-	}
 
 	const handleSearchBtn = () => {
 		console.log('handle search button');
@@ -32,25 +29,44 @@ const MainPanel = () => {
 			setShowSearch(true);
 			setSearchResult(false);
 			setSearchList({});
-		} else if (showSearch && searchResult) {
-			setShowSearch(false);
-			setSearchResult(true);
 		}
 	}
 
+	useEffect(() => {
+		if (loading) return;
+
+		if (error) {
+			debugLog('Main[E]', { error: error });
+			handlePopupOpen('Fail to load data');
+			return;
+		}
+
+		if (searchResult && typeof searchList === 'object') {
+			if (searchList.results.length === 0) {
+				setShowSearch(false);
+				setSearchResult(false);
+				handlePopupOpen('No result');
+			} else if (searchList.results.length > 0) {
+				console.log('here');
+				setContentList([
+					{
+						type: '검색결과',
+						restaurants: searchList.results,
+					},
+					...mediaList,
+				]);
+				setShowSearch(false);
+			} else {
+				setContentList(mediaList);
+			}
+		} else {
+			setContentList(mediaList);
+		}
+	}, [loading, error, searchResult, searchList, mediaList]);
+
 	if (loading) return <Loading />;
-	if (error) {
-		debugLog('Main[E]', { error: error });
-		handlePopupOpen('Fail to load data');
-	}
 
-	if (searchResult && typeof searchList === 'object' && searchList.results.length === 0) {
-		setShowSearch(false);
-		setSearchResult(false);
-		handlePopupOpen('No result');
-	}
-
-	debugLog('Main[I]', mediaList);
+	debugLog('Main[I]', contentList);
 
 	return (
 		<Panel>
@@ -67,26 +83,12 @@ const MainPanel = () => {
 			/>
 			<Row style={{ height: '100%' }}>
 				<Column style={{ flexGrow: 1, overflow: 'hidden' }}>
-					{showSearch && (
-						<>
-							{searchResult === false && <Loading />}
-							{searchResult === true && typeof searchList === 'object' && searchList.results.length > 0 && (
-								<MediaList
-									key={"search-list"}
-									category={"result"}
-									mediaList={searchList.results}
-									onClick={(id) => handleMediaClick(id)}
-								/>
-							)}
-						</>
-					)}
 					<Scroller direction='vertical'>
-						{mediaList.map((category, index) => (
+						{contentList.map((category, index) => (
 							<MediaList
 								key={`media-list-${category.type}-${index}`}
 								category={category.type}
 								mediaList={category.restaurants}
-								onClick={(id) => handleMediaClick(id)}
 							/>
 						))}
 					</Scroller>

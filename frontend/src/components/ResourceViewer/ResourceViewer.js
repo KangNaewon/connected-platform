@@ -1,6 +1,4 @@
-import { Cell, Column, Row } from "@enact/ui/Layout"
-import LineChart from "../Charts/LineChart";
-import AreaChart from "../Charts/AreaChart";
+import { Cell, Column } from "@enact/ui/Layout"
 import PieChart from "../Charts/PieChart";
 import GaugeChart from "../Charts/GaugeChart";
 import css from './ResourceViewer.module.less';
@@ -9,7 +7,6 @@ import { useSystemStatistics } from '../../hooks/useSystemStatistics';
 import debugLog from "../../libs/log";
 import { useNavigate } from "../../hooks/useNavigate";
 import { panelName } from "../../constants/panelName";
-import Scroller from "@enact/sandstone/Scroller";
 
 const ResourceViewer = () => {
   const { cpuTrend, memTrend, pktTrend, loading, error } = useSystemStatistics();
@@ -46,9 +43,9 @@ const ResourceViewer = () => {
           chart_left="0%"
           text_width="100%"
           text_height="100%"
-          text_top="30%"
+          text_top="40%"
           text_left="0%"
-          fontSize="0.5rem"
+          fontSize="1rem"
         />
       </Cell>
       <Cell className={css.resourceViewerChart}>
@@ -61,24 +58,24 @@ const ResourceViewer = () => {
           chart_left="0%"
           text_width="100%"
           text_height="100%"
-          text_top="30%"
+          text_top="40%"
           text_left="0%"
-          fontSize="0.5rem"
+          fontSize="1rem"
         />
       </Cell>
       <Cell className={css.resourceViewerChart}>
         <GaugeChart
           value={pkt.rxSpeed}
-          max={3500}
+          max={1500}
           chart_width="100%"
           chart_height="100%"
           chart_left="0%"
           chart_top="0%"
           text_width="100%"
           text_height="100%"
-          text_top="10%"
+          text_top="5%"
           text_left="0%"
-          fontSize="0.5rem"
+          fontSize="1rem"
         />
       </Cell>
 

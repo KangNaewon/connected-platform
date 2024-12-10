@@ -9,7 +9,7 @@ import { useProfileSelect, useProfileAdd, useProfileDelete, useProfileEdit } fro
 import Popup from '../components/Popup/Popup';
 import { usePopup } from '../components/Popup/usePopup';
 import { useUserInfo } from '../context/UserContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProfileEdit from '../hooks/Select/ProfileEdit';
 import Dropdown from '@enact/sandstone/Dropdown';
 
@@ -19,6 +19,7 @@ const SelectPanel = () => {
 	const [addField, setAddField] = useState(false);
 	const [editLoading, setEditLoading] = useState(false);
 	const [selectedProfile, setSelectedProfile] = useState({});
+	const [profiles, setProfiles] = useState([]);
 
 	const { loading, error } = useFetchProfileList();
 	const { isPopupOpen, handlePopupOpen, handlePopupClose, msg } = usePopup();
@@ -27,9 +28,11 @@ const SelectPanel = () => {
 	const handleProfileAdd = useProfileAdd(handlePopupOpen, setAddField, setEditLoading);
 	const handleProfieEdit = useProfileEdit(handlePopupOpen, setEditField, setEditLoading);
 
+
 	const handleSelect = ({ selected }) => {
 		console.log(selected);
-		setSelectedProfile(userInfo.profile_list[selected]);
+		setSelectedProfile(profiles[selected]);
+		console.log(userInfo.profile_list);
 		console.log(selectedProfile);
 	}
 
@@ -40,6 +43,10 @@ const SelectPanel = () => {
 		}
 		action(selectedProfile.profile_id);
 	};
+
+	useEffect(() => {
+		setProfiles(userInfo.profile_list);
+	}, [userInfo.profile_list]);
 
 	if (loading || editLoading) return <Loading />;
 	if (error) {
@@ -59,7 +66,7 @@ const SelectPanel = () => {
 					onSelect={handleSelect}
 					size='large'
 				>
-					{userInfo.profile_list.map((profile) => profile.profile_name)}
+					{profiles.map((profile) => profile.profile_name)}
 
 				</Dropdown>
 				{editField && <ProfileEdit onComplete={handleProfieEdit} oldProfile={selectedProfile.profile_id} />}

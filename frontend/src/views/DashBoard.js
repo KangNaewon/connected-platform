@@ -33,7 +33,7 @@ const DashBoard = () => {
   return (
     <Panel>
       <Header title={PROJECT_NAME} slotAfter={<><BackButton /></>} />
-      <Column style={{ gap: '16px' }}>
+      <Column>
         <Row className={css.dashboardTop}>
           <Cell className={css.dashboardChart}>
             <PieChart label="cpu" input={cpu} />
@@ -42,7 +42,7 @@ const DashBoard = () => {
             <PieChart label="memory" input={mem} />
           </Cell>
           <Cell className={css.dashboardChart}>
-            <GaugeChart value={pkt.rxSpeed} max={3500} />
+            <GaugeChart value={pkt.rxSpeed} max={1500} />
           </Cell>
         </Row>
         <Row className={css.dashboardBottom}>
