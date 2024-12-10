@@ -18,7 +18,7 @@ export const useMonitorActivity = () => {
 				},
 				onSuccess: res => {
 					debugLog('GET_MONITOR_ACTIVITY[S]', res);
-					setValue(res);
+					setValue((prev) => ({ ...prev, ...res }));
 				},
 				onFailure: err => {
 					debugLog('GET_MONITOR_ACTIVITY[F]', err);
@@ -53,7 +53,7 @@ export const useProcStat = () => {
 				},
 				onSuccess: res => {
 					debugLog('GET_PROC_STAT[S]', res);
-					setValue(res);
+					setValue((prev) => ({ ...prev, ...res }));
 				},
 				onFailure: err => {
 					debugLog('GET_PROC_STAT[F]', err);
@@ -86,7 +86,7 @@ export const useUnitList = () => {
 				},
 				onSuccess: res => {
 					debugLog('GET_UNIT_LIST[S]', res);
-					setValue(res);
+					setValue((prev) => ({ ...prev, ...res }));
 				},
 				onFailure: err => {
 					debugLog('GET_UNIT_LIST[F]', err);

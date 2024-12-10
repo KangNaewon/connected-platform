@@ -1,25 +1,18 @@
 import { InputField } from "@enact/sandstone/Input";
 import { useState } from "react";
 import { request } from "../../request/request";
-import { useNavigate } from "../../hooks/useNavigate";
-import { panelName } from "../../constants/panelName";
 import debugLog from "../../libs/log";
 
-const SearchBar = ({setShowSearch}) => {
+const SearchBar = ({ setShowSearch, setSearchResult, setSearchList }) => {
   const [input, setInput] = useState('');
-  const navigate = useNavigate();
 
   const onComplete = async () => {
-    setShowSearch(false);
     console.log('oncomoplete');
     try {
-      const response = await request(`/restaurant/search?query=${input}`);
-      if (response && response.restaurant_id) {
-        debugLog('Search[S]');
-        navigate(panelName.info, {restaurant_id: response.restaurant_id});
-      } else {
-        debugLog('Search[W]: no result');
-      }
+      const response = await request(`/restaurant?query=${input}`, "GET");
+      debugLog('Search[R]', response);
+      setSearchList(response);
+      setSearchResult(true);
     } catch (error) {
       debugLog('Search[E]: search fail');
     };
@@ -30,14 +23,14 @@ const SearchBar = ({setShowSearch}) => {
       onComplete();
     };
   };
-  
+
   return (
-    <InputField 
+    <InputField
       type="text"
       onKeyUp={handleKeyUp}
       onChange={(e) => setInput(e.value)}
       placeholder="Search Restaurant!"
-      onDeactivate={() => setShowSearch(false)}
+    // onDeactivate={() => setShowSearch(false)}
     />
   )
 };

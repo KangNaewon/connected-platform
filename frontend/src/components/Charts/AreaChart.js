@@ -6,7 +6,7 @@ const COLORS = [
 ];
 
 const AreaChart = ({ label, data }) => {
-  const keys = Object.keys(data[0]); 
+  const keys = Object.keys(data[0]);
 
   return (
     <div className={css.chartContainer}>
@@ -22,8 +22,8 @@ const AreaChart = ({ label, data }) => {
               dataKey={key}
               stroke={COLORS[index % COLORS.length]}
               fill={COLORS[index % COLORS.length]}
-              stackId="1" 
-              name={key} 
+              stackId="1"
+              name={key}
             />
           ))}
           <text

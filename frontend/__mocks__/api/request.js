@@ -48,7 +48,14 @@ export const mockAPI = async (url, method, parameters = {}) => {
     '/restaurant': {
       // 레스토랑 검색
       GET: {
-        restaurant_id: 1
+        results: []
+        // results: [{
+        //   "restaurant_id": "674dcae082a4e5e80b2f3481",
+        //   "restaurant_name": "아웃트로 바이 비토",
+        //   "rating": 0,
+        //   "city": "Busan, 대한민국",
+        //   "img": "https://axwwgrkdco.cloudimg.io/v7/__gmpics3__/f2f26d23eff14b1f8ffe816af665f6f8.jpg"
+        // }]
       }
     },
     '/user/login': {
@@ -154,6 +161,7 @@ export const mockAPI = async (url, method, parameters = {}) => {
   };
 
   await new Promise((resolve) => setTimeout(resolve, 500));
+
 
   const queryIdx = url.indexOf('?');
   const baseUrl = queryIdx > -1 ? url.slice(0, queryIdx) : url;

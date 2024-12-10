@@ -2,10 +2,10 @@ import { LineChart as RechartsLineChart, Line, CartesianGrid, XAxis, YAxis, Tool
 import css from './ChartContainer.module.less';
 
 const COLORS = [
-  "#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#387908", 
+  "#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#387908",
 ];
 
-const LineChart = ({label, data}) => {
+const LineChart = ({ label, data }) => {
   const keys = Object.keys(data[0]);
 
   return (
@@ -19,8 +19,8 @@ const LineChart = ({label, data}) => {
               key={key}
               type="monotone"
               dataKey={key}
-              stroke={COLORS[index % COLORS.length]} 
-              name={key} 
+              stroke={COLORS[index % COLORS.length]}
+              name={key}
             />
           ))}
           <text
@@ -32,7 +32,7 @@ const LineChart = ({label, data}) => {
           >
             {label}
           </text>
-          <YAxis/>
+          <YAxis />
         </RechartsLineChart>
       </ResponsiveContainer>
     </div>

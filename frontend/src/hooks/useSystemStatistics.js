@@ -56,7 +56,7 @@ export const useSystemStatistics = () => {
             rest,
           ]);
         }
-
+        
       } catch (err) {
         debugLog('SYSTEM_STATISTICS[E]', {error: err});
         setError(true);
@@ -68,7 +68,7 @@ export const useSystemStatistics = () => {
     const interval = setInterval(update, SAMPLE_INTERVAL);
     return () => clearInterval(interval);
 
-  }, [procStat, unitList, monitorActivity]);
+  }, [procStat.returnValue, unitList.returnValue, monitorActivity.returnValue]);
 
   return {
     cpuTrend,
@@ -81,6 +81,14 @@ export const useSystemStatistics = () => {
 };
 
 const extractCpu = (data) => {
+  if (!Array.isArray(data) || data.length === 0) {
+    return {
+      user: 0,
+      system: 0,
+      idle: 0,
+    };
+  }
+
   const cpuLine = data.find((line) => line.startsWith("cpu "));
   const [label, ...values] = cpuLine.split(/\s+/);
   const numbers = values.map((val) => parseInt(val));
@@ -95,6 +103,12 @@ const extractCpu = (data) => {
 };
 
 const extractMem = (data) => {
+  if (typeof data !== "object" || !data) {
+    return {
+      used: 0,
+      unused: 0,
+    };
+  }
   const used = data.unitList
     .slice(1)
     .map((line) => {
@@ -113,6 +127,17 @@ const extractMem = (data) => {
 }
 
 const extractPkt = (data) => {
+  if (typeof data !== "object" || !data) {
+    return {
+      txSpeed: 0,
+      rxSpeed: 0,
+      txErrorRate: 0,
+      rxErrorRate: 0,
+      txDropRate: 0,
+      rxDropRate: 0,
+    };
+  }
+
   const txSpeed = data.txBytes / SAMPLE_INTERVAL / 1000;
   const rxSpeed = data.rxBytes / SAMPLE_INTERVAL / 1000;
 

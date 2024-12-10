@@ -7,12 +7,13 @@ import { useNavigate } from "../../hooks/useNavigate";
 import { useUserInfo } from "../../context/UserContext";
 
 export const useProfileSelect = (handlePopupOpen) => {
-  const { authTokens, setProfileAccessToken } = useAuth(); 
+  const { authTokens, setProfileAccessToken } = useAuth();
   const navigate = useNavigate();
-  const {setProfileID} = useUserInfo();
+  const { setProfileID } = useUserInfo();
 
   return useCallback(
     async (profileId) => {
+
       try {
         const response = await request(`/profile/switch/${profileId}`, "POST", {}, {}, authTokens.access_token);
 
@@ -23,7 +24,7 @@ export const useProfileSelect = (handlePopupOpen) => {
         navigate(panelName.main, {});
 
       } catch (error) {
-        debugLog("ProfileSelect[E]: failed to switch profile", {error: error});
+        debugLog("ProfileSelect[E]: failed to switch profile", { error: error });
         handlePopupOpen("Invalid Profile")
       }
     },
@@ -32,27 +33,27 @@ export const useProfileSelect = (handlePopupOpen) => {
 };
 
 export const useProfileDelete = (handlePopupOpen) => {
-  const { authTokens } = useAuth(); 
-  const { setProfileList } = useUserInfo(); 
+  const { authTokens } = useAuth();
+  const { userInfo, setProfileList } = useUserInfo();
 
   return useCallback(
     async (profileId) => {
       try {
         const response = await request(
-          `/profile/${profileId}`, 
-          "DELETE", 
-          {}, 
-          {}, 
+          `/profile/${profileId}`,
+          "DELETE",
+          {},
+          {},
           authTokens.access_token
         );
 
         if (response) {
           debugLog("ProfileDelete[I]: deleted profile", response);
 
-          // 성공적으로 삭제 후, 로컬 프로필 목록에서 제거
-          setProfileList((prevList) =>
-            prevList.filter((profile) => profile.profile_id !== profileId)
-          );
+          const updated_profile = userInfo.profile_list.filter((profile) =>
+            profile.profile_id !== profileId
+          )
+          setProfileList(updated_profile);
 
           handlePopupOpen(response.message);
         } else {
@@ -70,10 +71,11 @@ export const useProfileDelete = (handlePopupOpen) => {
 
 export const useProfileAdd = (handlePopupOpen, setAddField) => {
   const { authTokens } = useAuth(); // 인증 토큰 가져오기
-  const { setProfileList } = useUserInfo(); // 프로필 목록 업데이트를 위한 함수
+  const { userInfo, setProfileList } = useUserInfo(); // 프로필 목록 업데이트를 위한 함수
 
   return useCallback(
     async (profileName) => {
+
       try {
         const response = await request(
           "/profile", // 프로필 생성 API
@@ -83,12 +85,13 @@ export const useProfileAdd = (handlePopupOpen, setAddField) => {
           authTokens.access_token
         );
 
-        if (response && response.new_profile) {
+        if (response && response.created_profile) {
           debugLog("ProfileAdd[I]: added new profile", response);
 
-          // 성공적으로 생성 후, 로컬 프로필 목록에 추가
-          setProfileList((prevList) => [...prevList, response.new_profile]);
-        
+
+          const updated_profile = [...userInfo.profile_list, response.created_profile];
+          setProfileList(updated_profile);
+
           handlePopupOpen(response.message);
         } else {
           handlePopupOpen(response.message);
@@ -111,11 +114,11 @@ export const useProfileEdit = (handlePopupOpen, setEditField, setEditLoading) =>
   const profileList = userInfo.profile_list;
 
   return useCallback(
-    async (oldProfile, newProfile) => {
+    async (oldProfileId, newProfile) => {
       setEditLoading(true);
 
       const old_profile = profileList.find(
-        (profile) => profile.profile_name === oldProfile
+        (profile) => profile.profile_id === oldProfileId
       );
       console.log(old_profile);
 
@@ -139,9 +142,9 @@ export const useProfileEdit = (handlePopupOpen, setEditField, setEditLoading) =>
           console.log('old', old_profile);
           console.log('new', response.updated_profile);
 
-          const updated_profile = userInfo.profile_list.map((profile) => 
+          const updated_profile = userInfo.profile_list.map((profile) =>
             profile.profile_id == old_profile.profile_id
-              ? {...profile, ...response.updated_profile}
+              ? { ...profile, ...response.updated_profile }
               : profile
           );
           setProfileList(updated_profile);
