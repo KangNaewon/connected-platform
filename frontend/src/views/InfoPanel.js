@@ -142,7 +142,7 @@ const styles = {
   },
   rightDiv: {
     height: ri.scale(730),
-    width: ri.scale(450),
+    width: ri.scale(400),
     backgroundColor: '#fff',
     border: '2px solid rgba(0, 0, 0, 0.3)',
     borderRadius: ri.scale(10),
