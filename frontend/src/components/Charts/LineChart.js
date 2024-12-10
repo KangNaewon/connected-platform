@@ -28,7 +28,7 @@ const LineChart = ({ label, data }) => {
             y="95%"
             textAnchor="middle"
             dominantBaseline="middle"
-            style={{ fontSize: '0.5rem', fontWeight: 'bold' }}
+            style={{ fontSize: '1rem', fontWeight: 'bold' }}
           >
             {label}
           </text>

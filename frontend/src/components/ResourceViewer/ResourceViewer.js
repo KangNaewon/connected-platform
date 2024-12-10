@@ -12,7 +12,7 @@ import { panelName } from "../../constants/panelName";
 import Scroller from "@enact/sandstone/Scroller";
 
 const ResourceViewer = () => {
-  const { cpuTrend, memTrend, pktTrend, netTrend, loading, error } = useSystemStatistics();
+  const { cpuTrend, memTrend, pktTrend, loading, error } = useSystemStatistics();
   const navigate = useNavigate();
 
   debugLog('ResourceViewer[I]', { cpu: cpuTrend, mem: memTrend, pkt: pktTrend });
@@ -29,7 +29,6 @@ const ResourceViewer = () => {
   const pkt = pktTrend[pktTrend.length - 1];
 
   return (
-    // <Column onClick={() => navigate(panelName.dashboard)} style={{height: '100%', width:'100%'}}>
     <Column
       onClick={() => navigate(panelName.dashboard)}
       style={{
@@ -38,13 +37,49 @@ const ResourceViewer = () => {
       }}
     >
       <Cell className={css.resourceViewerChart}>
-        <PieChart label="cpu" input={cpu} />
+        <PieChart
+          label="cpu"
+          input={cpu}
+          chart_width="100%"
+          chart_height="100%"
+          chart_top="0%"
+          chart_left="0%"
+          text_width="100%"
+          text_height="100%"
+          text_top="30%"
+          text_left="0%"
+          fontSize="0.5rem"
+        />
       </Cell>
       <Cell className={css.resourceViewerChart}>
-        <PieChart label="memory" input={mem} />
+        <PieChart
+          label="memory"
+          input={mem}
+          chart_width="100%"
+          chart_height="100%"
+          chart_top="0%"
+          chart_left="0%"
+          text_width="100%"
+          text_height="100%"
+          text_top="30%"
+          text_left="0%"
+          fontSize="0.5rem"
+        />
       </Cell>
       <Cell className={css.resourceViewerChart}>
-        <GaugeChart value={pkt.rxSpeed} max={1000} />
+        <GaugeChart
+          value={pkt.rxSpeed}
+          max={3500}
+          chart_width="100%"
+          chart_height="100%"
+          chart_left="0%"
+          chart_top="0%"
+          text_width="100%"
+          text_height="100%"
+          text_top="10%"
+          text_left="0%"
+          fontSize="0.5rem"
+        />
       </Cell>
 
     </Column>
