@@ -25,9 +25,9 @@ const VideoList = ({ mediaList = [], mediaClickHandler }) => {
       borderRadius: '10px',
       border: '2px solid rgba(0, 0, 0, 0.3)',
       boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
-      overflow: 'hidden',
     },
   };
+
 
   const renderItem = useCallback(({ index }) => (
     <ImageItem
@@ -38,10 +38,10 @@ const VideoList = ({ mediaList = [], mediaClickHandler }) => {
       style={styles.itemStyle} // 스타일 추가
       onClick={() => {
         mediaClickHandler(mediaList[index].media_id);
-        console.log(mediaList[index].media_id);
       }} // 클릭 이벤트 추가
     >
-      {mediaList[index].title}
+      {/* {mediaList[index].title} */}
+      {mediaList[index].thumbnail}
     </ImageItem>
   ), [mediaList]);
 

@@ -50,6 +50,8 @@ const InfoPanel = () => {
         .catch((err) => console.error(err))
         .then((res) => {
           setRestaurantData(res)
+          if (res.media.length > 0)
+            setMediaId(res.media[0].media_id);
         });
     };
 
@@ -73,7 +75,7 @@ const InfoPanel = () => {
         <div style={styles.leftDiv}>
           <Scroller>
             <div style={styles.contentsContainer}>
-              <HLSVideo src={mediaId ? mediaId : "dummy"} />
+              <HLSVideo src={mediaId} />
               <Action
                 restaurant_id={restaurant_id}
                 profile_id={profile_id}

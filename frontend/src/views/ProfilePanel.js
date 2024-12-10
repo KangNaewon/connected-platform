@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Panel, Header } from '@enact/sandstone/Panels';
-import Scroller from '@enact/sandstone/Scroller';
 import ri from '@enact/ui/resolution';
 import { useUserInfo } from '../context/UserContext';
 import { request } from '../request/request';
@@ -30,18 +29,23 @@ const ProfilePanel = () => {
 		};
 
 		fetchProfile();
-	}, []);
-
+	}, [profile_id, authTokens]);
 
 	return (
 		<Panel>
-			<Header title="프로필" type="compact" style={styles.headerStyle} slotAfter={<><BackButton/></>}/>
+			<Header title="프로필" type="compact" style={styles.headerStyle} slotAfter={<><BackButton /></>} />
 			<div style={styles.container}>
 				<div style={styles.leftDiv}>
-					<NetflixStyleGrid items={likes} />
+					<div style={styles.sectionContainer}>
+						<h1 style={styles.sectionTitle}>좋아요</h1>
+						<NetflixStyleGrid items={likes} />
+					</div>
 				</div>
 				<div style={styles.rightDiv}>
-					<NetflixStyleGrid items={visited} />
+					<div style={styles.sectionContainer}>
+						<h1 style={styles.sectionTitle}>방문한 식당</h1>
+						<NetflixStyleGrid items={visited} />
+					</div>
 				</div>
 			</div>
 		</Panel>
@@ -55,7 +59,7 @@ const styles = {
 		height: '100vh',
 		padding: '20px',
 		backgroundColor: '#f7f7f7',
-		justifyContent: 'space-between', // 좌우 공간 균등 분배
+		justifyContent: 'space-between',
 		borderRadius: ri.scale(10),
 	},
 	leftDiv: {
@@ -65,32 +69,37 @@ const styles = {
 		border: '2px solid rgba(0, 0, 0, 0.3)',
 		borderRadius: ri.scale(10),
 		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-		padding: ri.scale(30)
+		flexDirection: 'column',
+		alignItems: 'flex-start',
+		padding: ri.scale(20),
+		paddingTop: 0,
 	},
 	rightDiv: {
 		height: '100%',
-		width: ri.scale(800), // 너비를 약간 줄여 중앙 공간 확보
+		width: ri.scale(800),
 		backgroundColor: '#fff',
 		border: '2px solid rgba(0, 0, 0, 0.3)',
 		borderRadius: ri.scale(10),
 		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-		padding: ri.scale(30)
+		flexDirection: 'column',
+		alignItems: 'flex-start',
+		padding: ri.scale(20),
+		paddingTop: 0,
 	},
-	contentsContainer: {
-		margin: 'auto',
-		marginTop: '20px',
-		marginBottom: '50px',
-		width: '95%',
+	sectionContainer: {
+		width: '100%',
+		height: '100%',
+	},
+	sectionTitle: {
+		marginTop: ri.scale(30),
+		marginBottom: ri.scale(40),
+		fontSize: ri.scale(50),
+		fontWeight: 'bold',
+		color: 'black',
 	},
 	headerStyle: {
 		marginBottom: -ri.scale(50)
 	}
-}
+};
 
-
-
-export default ProfilePanel
+export default ProfilePanel;
