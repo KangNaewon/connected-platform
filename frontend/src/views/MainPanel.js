@@ -40,7 +40,6 @@ const MainPanel = () => {
 			handlePopupOpen('Fail to load data');
 			return;
 		}
-
 		if (searchResult && typeof searchList === 'object') {
 			if (searchList.results.length === 0) {
 				setShowSearch(false);
@@ -62,7 +61,8 @@ const MainPanel = () => {
 		} else {
 			setContentList(mediaList);
 		}
-	}, [loading, error, searchResult, searchList, mediaList]);
+	}, [searchResult, searchList, mediaList]);
+
 
 	if (loading) return <Loading />;
 

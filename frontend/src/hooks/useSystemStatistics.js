@@ -1,86 +1,6 @@
-import { useEffect, useState } from "react";
-import { useMonitorActivity, useProcStat, useUnitList } from "./useTVData";
-import debugLog from "../libs/log";
+export const extractCpu = (data) => {
+  // const data = procStat.stat;
 
-const MAX_N_RESOURE = 16;
-const SAMPLE_INTERVAL = 1000;
-const TOTAL_MEMORY = 1024;
-
-export const useSystemStatistics = () => {
-  const procStat = useProcStat();
-  const unitList = useUnitList();
-  const monitorActivity = useMonitorActivity();
-
-  const [cpuTrend, setCpuTrend] = useState([]);
-  const [memTrend, setMemTrend] = useState([]);
-  const [pktTrend, setPktTrend] = useState([]);
-  const [netTrend, setNetTrend] = useState([]);
-
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  // useEffect(() => {
-  //   if (cpuTrend.length > 0 && memTrend.length > 0 && pktTrend.length > 0 && netTrend.length > 0) {
-  //     setLoading(false);
-  //   }
-  // }, [cpuTrend, memTrend, pktTrend, netTrend]);
-
-  useEffect(() => {
-    const update = () => {
-      try {
-        if (procStat.returnValue) {
-          const cpu = extractCpu(procStat.stat);
-          setCpuTrend((prev) => [
-            ...prev.slice(-MAX_N_RESOURE + 1),
-            cpu,
-          ]);
-        }
-
-        if (unitList.returnValue) {
-          const mem = extractMem(unitList);
-          setMemTrend((prev) => [
-            ...prev.slice(-MAX_N_RESOURE + 1),
-            mem,
-          ]);
-        }
-
-        if (monitorActivity.returnValue) {
-          const { txSpeed, rxSpeed, ...rest } = extractPkt(monitorActivity.wifi);
-          setPktTrend((prev) => [
-            ...prev.slice(-MAX_N_RESOURE + 1),
-            { txSpeed, rxSpeed },
-          ]);
-
-          setNetTrend((prev) => [
-            ...prev.slice(-MAX_N_RESOURE + 1),
-            rest,
-          ]);
-        }
-
-      } catch (err) {
-        debugLog('SYSTEM_STATISTICS[E]', { error: err });
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    const interval = setInterval(update, SAMPLE_INTERVAL);
-    return () => clearInterval(interval);
-
-  }, [procStat.returnValue, unitList.returnValue, monitorActivity.returnValue]);
-
-  return {
-    cpuTrend,
-    memTrend,
-    pktTrend,
-    netTrend,
-    loading,
-    error,
-  };
-};
-
-const extractCpu = (data) => {
   if (!Array.isArray(data) || data.length === 0) {
     return {
       user: 0,
@@ -102,13 +22,14 @@ const extractCpu = (data) => {
   }
 };
 
-const extractMem = (data) => {
+export const extractMem = (data) => {
   if (typeof data !== "object" || !data) {
     return {
       used: 0,
       unused: 0,
     };
   }
+
   const used = data.unitList
     .slice(1)
     .map((line) => {
@@ -126,7 +47,7 @@ const extractMem = (data) => {
   }
 }
 
-const extractPkt = (data) => {
+export const extractPkt = (data) => {
   if (typeof data !== "object" || !data) {
     return {
       txSpeed: 0,
@@ -138,8 +59,8 @@ const extractPkt = (data) => {
     };
   }
 
-  const txSpeed = data.txBytes / 1024 / 1024;
-  const rxSpeed = data.rxBytes / 1024 / 1024;
+  const txSpeed = data.txBytes * 8 / 1000000;
+  const rxSpeed = data.rxBytes * 8 / 1000000;
 
   const txErrorRate = data.txPackets
     ? data.txErrors / data.txPackets
