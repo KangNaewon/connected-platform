@@ -1,5 +1,6 @@
 import { PieChart as RechartsPieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import css from './ChartContainer.module.less';
+import { useEffect } from 'react';
 
 const COLORS = ['#FFD275', '#7DCE82', '#55A8FD', '#FF7A7A'];
 
@@ -24,6 +25,11 @@ const PieChart = ({
     name: key,
     value,
   }));
+
+  useEffect(() => {
+    const intervalId = setInterval(1000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   const usage = label === "cpu"
     ? 100 - input.idle
