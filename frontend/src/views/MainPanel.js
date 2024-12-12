@@ -13,6 +13,7 @@ import Popup from '../components/Popup/Popup';
 import { usePopup } from '../components/Popup/usePopup';
 import { useNavigate } from '../hooks/useNavigate';
 import { panelName } from '../constants/panelName';
+import BackButton from '../components/Buttons/BackButton';
 
 const MainPanel = () => {
 	const { mediaList, loading, error } = useFetchData();
@@ -78,6 +79,7 @@ const MainPanel = () => {
 						<Button icon='search' size='small' onClick={handleSearchBtn} />
 						<Button icon='profile' size='small' onClick={() => navigate(panelName.profile, {})} />
 						<Button icon='dashboard1' size='small' onClick={() => navigate(panelName.dashboard, {})} />
+						<BackButton />
 					</>
 				)}
 			/>
