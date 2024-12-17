@@ -3,6 +3,6 @@
 **/.DS_Store
 **/.conda
 **/*.ipk
-.env
+**/.env
 **/videos/
 node_modules/
