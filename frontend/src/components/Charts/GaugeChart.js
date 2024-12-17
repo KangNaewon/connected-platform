@@ -15,7 +15,7 @@ const GaugeChart = ({
   fontSize = "1rem"
 }) => {
   const percentage = Math.min((value / max) * 100, 100); // 현재 속도를 백분율로 변환
-  const angle = (percentage / 100) * 180; // 0~180도 사이의 각도 계산
+  const angle = (percentage / 100) * 180 - 90; // 0~180도 사이의 각도 계산
 
   return (
     <div className={css.chartContainer} >
